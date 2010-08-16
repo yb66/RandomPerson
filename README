@@ -1,0 +1,5 @@
+A port to Ruby of Perl's Data::RandomPerson.
+
+http://search.cpan.org/~peterhi/Data-RandomPerson-0.4/
+
+Initially just the Names portion.
