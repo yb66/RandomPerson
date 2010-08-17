@@ -6,7 +6,7 @@ module RandomPerson
     include Names
           
       TITLES = %w(Mr. Dr. Mrs. Ms. Miss )
-      TITLES_ratiod = [ 0...48, 48...51, 51...53, 53...82, 82..100]
+      TITLES_ratiod = [ 0..47, 48..50, 51..52, 53..81, 82..99]
       def execute( person, &format)
               
         if person.age < 17
@@ -14,8 +14,8 @@ module RandomPerson
           return 'Mr.'
         end
           
-        r = rand(50)
-        r += 48 if person.gender == 'f'
+        r = rand(51) #0..50
+        r += 49 if person.gender == 'f' #give 50% chance of being a Dr
 
         i = TITLES_ratiod.index_in_range( r )
         return TITLES[i]

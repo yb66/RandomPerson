@@ -32,7 +32,7 @@ module RandomPerson
           
         person.last = choice.last.execute( person ) #lastname, 
         person.prefix = choice.prefix.execute( person ) #title 
-#         person.suffix = choice.suffix.execute( person )
+        person.suffix = choice.suffix.execute( person ) #suffix
         
         person
       }
