@@ -9,13 +9,13 @@ module RandomPerson
       TITLES_ratiod = [ 0...48, 48...51, 51...53, 53...82, 82..100]
       def execute( person, &format)
               
-        if age < 17
-          return 'Miss' if gender == 'f'
+        if person.age < 17
+          return 'Miss' if person.gender == 'f'
           return 'Mr.'
         end
           
         r = rand(50)
-        r += 48 if gender == 'f'
+        r += 48 if person.gender == 'f'
 
         i = TITLES_ratiod.index_in_range( r )
         return TITLES[i]

@@ -5,8 +5,6 @@ require 'person'
 
 module RandomPerson
 
-
-  
   class Generator
   
     attr_reader :generators
@@ -33,20 +31,14 @@ module RandomPerson
           choice.femalefirst.execute( person )
           
         person.last = choice.last.execute( person ) #lastname, 
-#         person.prefix = @prefix.execute( person ) #title 
-#         person.suffix = @suffix.execute( person )
+        person.prefix = choice.prefix.execute( person ) #title 
+#         person.suffix = choice.suffix.execute( person )
         
         person
       }
       
       @generators << f
     end
-          
-
-
-    
-
-      
     
     class << self
     

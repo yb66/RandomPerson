@@ -5,7 +5,7 @@ module RandomPerson
 
   class Choice
     
-    attr_accessor :malefirst, :femalefirst, :last, :gender_ratio, :age_lower, :age_upper, :dob #,:age_ratio
+    attr_accessor :malefirst, :femalefirst, :last, :gender_ratio, :age_lower, :age_upper, :dob, :prefix #, :suffix #,:age_ratio
     
     def available_classes
       @@available_classes
@@ -51,6 +51,7 @@ module RandomPerson
         addklass( fn, %w{ Male First } )
         addklass( fn, %w{ Female First } )
         addklass( fn, %w{ Last } )
+        addklass( fn, %w{ Prefix } )
       end
     end
     
