@@ -2,7 +2,7 @@
 
 module RandomPerson
 
-  class WesternSuffix
+  class AmericanSuffix
   
     
     
