@@ -24,12 +24,13 @@ module RandomPerson
     attr_accessor :formats, :formats_ratiod
     
     def execute( person, format=nil )
-      f = @formats[:double_barrelled] if @formats.length > 1
-      
-      r = rand(@formats_ratiod.last.end)
-      i = @formats_ratiod.index_in_range( r )
-      f = @formats.by_index(i).last
-      
+      if @formats.length > 1
+        r = rand(@formats_ratiod.last.end)
+        i = @formats_ratiod.index_in_range( r )
+        f = @formats.by_index(i).last
+      else
+        f = @formats[:double_barrelled]
+      end
       Names.execute( NAMES, f )
     end 
 
