@@ -29,7 +29,7 @@ module RandomPerson
         if person.gender == 'm'   
           person.first = choice.malefirst.execute( person ) unless choice.malefirst.nil?
         else
-          choice.femalefirst.execute( person ) unless choice.femalefirst.nil?
+          person.first = choice.femalefirst.execute( person ) unless choice.femalefirst.nil?
         end
           
         person.last = choice.last.execute( person ) unless choice.last.nil?#lastname, 
