@@ -10,7 +10,7 @@ module RandomPerson
       :double_barrelled_hyphenated=> ->(n)   { n.rand + '-' + n.rand },
      }
      
-    def Names.execute( person, names, &format )
+    def Names.execute( person, names, format )
       format = FORMATS[:single] if format.nil?
       # puts format.inspect
       format.( names )
