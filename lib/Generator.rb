@@ -25,14 +25,16 @@ module RandomPerson
           :age => age,
           :dob => Generator.pick_dob( age )
         )
+        
+        if person.gender == 'm'   
+          person.first = choice.malefirst.execute( person ) unless choice.malefirst.nil?
+        else
+          choice.femalefirst.execute( person ) unless choice.femalefirst.nil?
+        end
           
-        person.first = person.gender == 'm' ?
-          choice.malefirst.execute( person ) :
-          choice.femalefirst.execute( person )
-          
-        person.last = choice.last.execute( person ) #lastname, 
-        person.prefix = choice.prefix.execute( person ) #title 
-        person.suffix = choice.suffix.execute( person ) #suffix
+        person.last = choice.last.execute( person ) unless choice.last.nil?#lastname, 
+        person.prefix = choice.prefix.execute( person ) unless person.prefix.nil? #title 
+        person.suffix = choice.suffix.execute( person ) unless person.suffix.nil?#suffix
         
         person
       }
