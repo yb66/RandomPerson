@@ -157,7 +157,7 @@ Behind the scenes, ratios like this [1,3] are converted to an array of ranges li
 In the EnglishLast.rb file:
 @formats_ratiod = [ (0..96), (97..99) ]
 
-This says that the chances of a name being single barrelled is 97%, and double barrelled is 2%. I made up those figures from my own experience, but if you disagree with either the ratios or the formatting then you can change it. Either directly in the file or while running the code. It's your choice. Just make sure the numbers are right, length of arrays should be the same ( e.g. four formatting options should have a ratio with four parts like [a,b,c,d]) or it will break.
+This says that the chances of a name being single barrelled is 97%, and double barrelled is 3%. I made up those figures from my own experience, but if you disagree with either the ratios or the formatting then you can change it. Either directly in the file or while running the code. It's your choice. Just make sure the numbers are right, length of arrays should be the same ( e.g. four formatting options should have a ratio with four parts like [a,b,c,d]) or it will break.
 
 PREFIXES AND SUFFIXES
 
