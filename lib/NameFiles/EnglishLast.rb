@@ -23,7 +23,7 @@ module RandomPerson
     def execute( person, format=nil )
       r = rand(@formats_ratiod.last.end)
       i = @formats_ratiod.index_in_range( r )
-      Names.execute( NAMES, @formats.by_index(i)   )
+      Names.execute( NAMES, @formats.by_index(i).last   )
     end 
 
 
