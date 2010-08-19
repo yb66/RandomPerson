@@ -9,7 +9,7 @@ module RandomPerson
     SUFFIX = [ 'Jr.', ''] + %w( I II III IV V Sr. )
     SUFFIX_ratiod = [ 0, 1..93, 94, 95, 96, 97, 98, 99]
     
-    def execute( person, &format)
+    def execute( person, format=nil)
         
         r = rand(99)      
         if person.age > 17

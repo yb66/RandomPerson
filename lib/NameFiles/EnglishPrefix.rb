@@ -7,7 +7,8 @@ module RandomPerson
           
       TITLES = %w(Mr. Dr. Mrs. Ms. Miss )
       TITLES_ratiod = [ 0..47, 48..50, 51..52, 53..81, 82..99]
-      def execute( person, &format)
+      
+      def execute( person, format=nil)
               
         if person.age < 17
           return 'Miss' if person.gender == 'f'

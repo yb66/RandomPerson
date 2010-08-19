@@ -7,8 +7,8 @@ module RandomPerson
   class AmericanMaleFirst
     include Names
 
-    def execute( person, &format )
-      Names.execute( person, NAMES )
+    def execute( person, format=nil )
+      Names.execute( NAMES )
     end 
       
 #     def names( ) NAMES; end
