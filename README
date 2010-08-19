@@ -3,3 +3,36 @@ A port to Ruby of Perl's Data::RandomPerson.
 http://search.cpan.org/~peterhi/Data-RandomPerson-0.4/
 
 Initially just the Names portion.
+
+
+Usage:
+
+For example, to generate 1000 random people with Spanish names, between the ages of 16 and 35 with a ratio of 3 males to every 5 females:
+
+Load all the files (once this is a gem this can be ignored):
+irb -r Generator.rb -r Choice.rb -r Person.rb -r extensions/Date.rb -r extensions/Array.rb -r extensions/Enumerable.rb -r extensions/Kernel.rb -r extensions/Set.rb -r extensions/Hash.rb --noinspect
+
+choice = RandomPerson::Choice.new( {gender_ratio: [3,5] , age_lower:16, age_upper:35 } )
+
+choice.add_Spanish
+
+g = RandomPerson::Generator.new
+
+g.make_generator choice
+
+people = [ ]
+
+1000.times { people << g.generators[0].call }
+
+10.times { |i| puts "#{people[i].first} #{people[i].last} age: #{people[i].age} born: #{people[i].dob.strftime("%d-%b-%Y")}" }
+
+Bartolomé Andrés de Elixaeberna age: 20 born: 28-Apr-1990
+Fabiana Cordero Balmaceda age: 21 born: 14-Jun-1989
+Jorge Alas Albarracin age: 29 born: 16-Apr-1981
+Eufemia Berlanga de Sergi age: 33 born: 25-Jan-1977
+David Puig Villaroel age: 19 born: 17-Apr-1991
+Alba Henchoz de Hurtado age: 30 born: 14-Feb-1980
+Natalia Jara de Guevara age: 33 born: 28-Jul-1977
+Tito Cresaco Campo age: 20 born: 14-Feb-1990
+Susana Pitillas de Vaime age: 32 born: 12-Aug-1978
+Gustavo Hierro Carbajal y Plazas age: 31 born: 08-Feb-1979
