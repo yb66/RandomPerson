@@ -15,7 +15,7 @@ module RandomPerson
         :double_barrelled    => ->(n){ n.rand + ' ' + n.rand },
        }
        
-      @formats_ratiod = [ (0..49, 50..99) ]
+      @formats_ratiod = [ 0..49, 50..99 ]
     end
      
     attr_accessor :formats, :formats_ratiod
