@@ -33,7 +33,7 @@ module RandomPerson #namespace
       presto = [ ]
       
       while l > 0
-        b = nil
+        # b = nil
         upper = m - l
         if l == 1
           b = upper
