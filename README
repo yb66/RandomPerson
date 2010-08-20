@@ -114,6 +114,10 @@ _and_
 
 always begin with *add_*
 
+_and_
+
+make sure each word is capitalised, add_male will actually pick up Fe_male_ whereas Female and Male will get what you want.
+
 If you want EnglishLast names loaded:
 
   choice.add_English_Last
