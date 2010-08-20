@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby -wKU
 
-require 'extensions/date'
+require 'date'
 require 'person'
 
 module RandomPerson
