@@ -15,6 +15,19 @@ And I'm a masochist.
 It also has unicode characters, so it'll give your database a real test.
 
 
+==Installation:
+
+You'll need at least Ruby v1.9.1
+
+Get the public key from http://github.com/yb66/RandomPerson/blob/master/gem-public_cert.pem and do:
+
+  gem cert --add /path/to/public_cert.pem
+  
+then install it:
+
+  gem install randomperson -P HighSecurity
+  
+
 ==USAGE (STOP SHOUTING!):
 
 So, to generate 1000 random people with Spanish names, between the ages of 16 and 35 with a ratio of 3 males to every 5 females:
