@@ -2,7 +2,7 @@ require 'rake'
 require 'echoe'
 # require 'rake/testtask'
 
-Echoe.new('randomperson', '0.0.1') do |p|
+Echoe.new('randomperson', '0.0.2') do |p|
   p.description    = "A gem for generating random persons"
   p.url            = "http://github.com/yb66/RandomPerson"
   p.author         = "Iain Barnett"
