@@ -1,7 +1,9 @@
 Manifest
 README
 Rakefile
+gem-public_cert.pem
 lib/Choice.rb
+lib/CommonFormatsFirstName.rb
 lib/Generator.rb
 lib/NameFiles/AmericanLast.rb
 lib/NameFiles/AmericanMaleFirst.rb
@@ -11,9 +13,13 @@ lib/NameFiles/BasqueLast.rb
 lib/NameFiles/EnglishFemaleFirst.rb
 lib/NameFiles/EnglishLast.rb
 lib/NameFiles/EnglishPrefix.rb
+lib/NameFiles/EnglishSuffix.rb
 lib/NameFiles/SpanishFemaleFirst.rb
 lib/NameFiles/SpanishLast.rb
 lib/NameFiles/SpanishMaleFirst.rb
+lib/NameFiles/SwedishFemaleFirst.rb
+lib/NameFiles/SwedishLast.rb
+lib/NameFiles/SwedishMaleFirst.rb
 lib/NameFiles/ThaiFirst.rb
 lib/NameFiles/ThaiRomanisedFemaleFirst.rb
 lib/NameFiles/ThaiRomanisedLast.rb
@@ -28,4 +34,5 @@ lib/ext/Hash.rb
 lib/ext/Kernel.rb
 lib/ext/Set.rb
 lib/randomperson.rb
+randomperson.gemspec
 t/Generator.t
