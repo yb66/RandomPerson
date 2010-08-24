@@ -1,8 +1,5 @@
 #!/usr/bin/env ruby -wKU
 
-require 'date'
-require 'person'
-
 module RandomPerson
 
   class Generator
