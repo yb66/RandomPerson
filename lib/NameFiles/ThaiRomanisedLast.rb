@@ -11,6 +11,7 @@ module RandomPerson
        }
        
       @formats_ratiod = [ 0..49, 50..99 ]
+      setupnames
     end
 
     def setupnames

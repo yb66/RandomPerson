@@ -4,8 +4,6 @@ README
 Rakefile
 gem-public_cert.pem
 lib/Choice.rb
-lib/CommonFormatsFirstName.rb
-lib/Formatter.rb
 lib/Generator.rb
 lib/Name.rb
 lib/NameFiles/AmericanLast.rb

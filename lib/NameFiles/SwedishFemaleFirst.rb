@@ -12,6 +12,7 @@ module RandomPerson
        }
        
       @formats_ratiod = [ (0..99)]
+      setupnames
     end
      
 
