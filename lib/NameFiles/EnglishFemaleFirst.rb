@@ -2,17 +2,20 @@
 
 module RandomPerson
 
-  require 'Names'
+  class EnglishFemaleFirst < Name
+  
+    def initialize
+      @formats = {
+        :single =>                      ->(n)   { n.rand },
+       }
+       
+      @formats_ratiod = [ (0..99) ]
+      setupnames
+    end
 
-  class EnglishFemaleFirst
-    include Names
-
-    def execute( person, format=nil )
-      Names.execute( NAMES )
-    end 
-
-    # def names( ) NAMES; end
-      
-    NAMES = %w{ aimee aleksandra alice alicia allison alyssa amy andrea angel angela ann anna anne annie ashley barbara beatrice beth betty brenda brooke candace cara caren carol caroline carolyn carrie cassandra catherine charlotte chrissy christen christina christine christy claire claudia courtney crystal cynthia dana danielle deanne deborah deirdre denise diane dianne dorothy eileen elena elizabeth emily erica erin frances gina giulietta heather helen jane janet janice jenna jennifer jessica joanna joyce julia juliana julie justine kara karen katharine katherine kathleen kathryn katrina kelly kerry kim kimberly kristen kristina kristine laura laurel lauren laurie leah linda lisa lori marcia margaret maria marie marina marisa martha mary maya melanie melissa michelle monica nancy natalie nicole nina pamela patricia rachel rebecca renee sandra sara sharon sheri shirley sonia stefanie stephanie susan suzanne sylvia tamara tara tatiana terri theresa tiffany tracy valerie veronica vicky vivian wendy }
+    def setupnames      
+      @names = %w{ Aimee Aleksandra Alice Alicia Allison Alyssa Amy Andrea Angel Angela Ann Anna Anne Annie Ashley Barbara Beatrice Beth Betty Brenda Brooke Candace Cara Caren Carol Caroline Carolyn Carrie Cassandra Catherine Charlotte Chrissy Christen Christina Christine Christy Claire Claudia Courtney Crystal Cynthia Dana Danielle Deanne Deborah Deirdre Denise Diane Dianne Dorothy Eileen Elena Elizabeth Emily Erica Erin Frances Gina Giulietta Heather Helen Jane Janet Janice Jenna Jennifer Jessica Joanna Joyce Julia Juliana Julie Justine Kara Karen Katharine Katherine Kathleen Kathryn Katrina Kelly Kerry Kim Kimberly Kristen Kristina Kristine Laura Laurel Lauren Laurie Leah Linda Lisa Lori Marcia Margaret Maria Marie Marina Marisa Martha Mary Maya Melanie Melissa Michelle Monica Nancy Natalie Nicole Nina Pamela Patricia Rachel Rebecca Renee Sandra Sara Sharon Sheri Shirley Sonia Stefanie Stephanie Susan Suzanne Sylvia Tamara Tara Tatiana Terri Theresa Tiffany Tracy Valerie Veronica Vicky Vivian Wendy }
+    end
+    
   end
 end

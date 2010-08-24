@@ -87,7 +87,7 @@ module RandomPerson
   
 
     def reset
-      @generator = [ ] 
+      @generators = [ ] 
     end
 
 

@@ -28,7 +28,7 @@ module RandomPerson
       
       patterns.each do |pat|
         full_pattern = File.join( lib_dir, 'NameFiles', pat )
-        puts full_pattern
+        # puts full_pattern
         Dir.glob( full_pattern ).each do |file|    
 #           require file
           @@available_classes << file
