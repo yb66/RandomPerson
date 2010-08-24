@@ -15,11 +15,10 @@ Echoe.new('randomperson', '0.0.3') do |p|
   p.require_signed = true
 end
 
-# task :default => [:test_units]
-# 
+
 # desc "Run basic tests"
-# Rake::TestTask.new("test_units") { |t|
-#   t.pattern = 't/*.t'
-#   t.verbose = true
-#   t.warning = true
-# }
+Rake::TestTask.new("test_units") { |t|
+  t.pattern = 't/*.t'
+  t.verbose = true
+  t.warning = true
+}

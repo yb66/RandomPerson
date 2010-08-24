@@ -1,9 +1,6 @@
-#!/usr/bin/env ruby -wKU
-
 module RandomPerson
-  require 'Names'
-  class AmericanSuffix
-    include Names
+
+  class AmericanSuffix < Name
     
     def initialize
       @names = [ 'Jr.', ''] + %w( I II III IV V Sr. )

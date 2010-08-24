@@ -1,6 +1,3 @@
-#!/usr/bin/env ruby -wKU
-
-require 'set'
 module RandomPerson
 
   class Choice

@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby -wKU
-
 module RandomPerson
 
   class WelshMaleFirst < Name

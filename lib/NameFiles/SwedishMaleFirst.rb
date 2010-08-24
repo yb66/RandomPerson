@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby -wKU
 # coding: utf-8
 
 module RandomPerson
