@@ -2,8 +2,10 @@ require 'rake'
 require 'echoe'
 # require 'rake/testtask'
 
+lib_dir = File.expand_path('lib')
+test_dir = File.expand_path('t')
 
-Echoe.new('randomperson', '0.0.3') do |p|
+Echoe.new('randomperson', '0.0.5') do |p|
   p.description    = "A gem for generating random persons"
   p.url            = "http://github.com/yb66/RandomPerson"
   p.author         = "Iain Barnett"
@@ -17,7 +19,8 @@ end
 
 
 # desc "Run basic tests"
-Rake::TestTask.new("test_units") { |t|
+Rake::TestTask.new("test") { |t|
+  t.libs = [lib_dir, test_dir]
   t.pattern = 't/*.t'
   t.verbose = true
   t.warning = true

@@ -1,3 +1,7 @@
+v0.0.5 Moved into new dir structure to avoid filename collisions in LOAD_PATH
+
+v0.0.4 Removed shebangs and requires that were causing warnings. Added reset methods to Choice.
+
 v0.0.3. Fixed some silly bugs within NameFiles
 
 v0.0.2. Added support for Welsh, Scottish and Swedish names
