@@ -2,7 +2,7 @@
 
 module RandomPerson
 
-  class EnglishPrefix < Name
+  class BritishPrefix < Name
           
     def initialize
        

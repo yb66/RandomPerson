@@ -2,10 +2,11 @@
 
 module RandomPerson
 
-  class EnglishSuffix < Name
+  class BritishSuffix < Name
     
     def initialize
       @formats = {
+      
        }
        
       @formats_ratiod = [ 0, 1, 2, 3, 4, 5, 6..18, 98, 99]
