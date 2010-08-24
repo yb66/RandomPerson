@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby -wKU
 
 require 'generator'
+# require 'choice'
 require 'test/unit'
 
 class TestTask < Test::Unit::TestCase
@@ -33,17 +34,29 @@ class TestTask < Test::Unit::TestCase
     assert_equal( RandomPerson::Generator.pick_gender([0,10]), 'f' )
   end
   
-  def test_pick_age
-    n = 1000
-    while n > 0
-      r1 = rand(100)
-      r2 = rand(100) + r1
-      age = RandomPerson::Generator.pick_age(r1, r2)
-      assert_not_nil( age )
-      assert( r1..r2, age )
-      n = n - 1
-    end
+  def test_reset
+    choice = RandomPerson::Choice.new
+    choice2 = RandomPerson::Choice.new
+    g = RandomPerson::Generator.new
+    g.make_generator choice
+    g.make_generator choice2
+    assert_equal( 2, g.generators.length )
+    g.reset
+    assert_equal( 2, g.generators.length )
+    assert( g.generators.empty? )
   end
+  
+#   def test_pick_age
+#     n = 1000
+#     while n > 0
+#       r1 = rand(100)
+#       r2 = rand(100) + r1
+#       age = RandomPerson::Generator.pick_age(r1, r2)
+#       assert_not_nil( age )
+#       assert( r1..r2, age )
+#       n = n - 1
+#     end
+#   end
   
   def test_pick_dob
     n = 1000

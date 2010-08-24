@@ -2,6 +2,7 @@ require 'rake'
 require 'echoe'
 # require 'rake/testtask'
 
+
 Echoe.new('randomperson', '0.0.2') do |p|
   p.description    = "A gem for generating random persons"
   p.url            = "http://github.com/yb66/RandomPerson"
@@ -11,6 +12,7 @@ Echoe.new('randomperson', '0.0.2') do |p|
   p.development_dependencies = []
   p.runtime_dependencies = []
   p.ruby_version   = ">= 1.9.1"
+  p.require_signed = true
 end
 
 # task :default => [:test_units]

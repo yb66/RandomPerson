@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Randomperson</title>
+
+	<link type="text/css" media="screen" href="rdoc.css" rel="stylesheet" />
+
+	<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/thickbox-compressed.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/darkfish.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body class="indexpage">
+
+	
+	<h1>Randomperson</h1>
+
+	
+	<div id="main">
+		
+<p>
+A port to Ruby of Perl&#8217;s Data::RandomPerson.
+</p>
+<p>
+<a
+href="http://search.cpan.org/~peterhi/Data-RandomPerson-0.4/">search.cpan.org/~peterhi/Data-RandomPerson-0.4/</a>
+</p>
+<p>
+Initially just the Names portion. In fact, probably just that. I&#8217;m
+not a masochist. Well, just a bit.
+</p>
+<h2>Why did I write this?</h2>
+<p>
+Because the Faker library and a few of the other random ones are very good,
+but they don&#8217;t have the precision I needed. I wanted believable male
+names between a certain age range for a football game I was writing.
+Producing names like Mrs Albert Wiggins wasn&#8217;t really going to cut
+it.
+</p>
+<p>
+And I&#8217;m a masochist.
+</p>
+<p>
+It also has unicode characters, so it&#8217;ll give your database a real
+test.
+</p>
+<h2>Installation:</h2>
+<p>
+You&#8217;ll need at least Ruby v1.9.1
+</p>
+<p>
+Get the public key from <a
+href="http://github.com/yb66/RandomPerson/blob/master/gem-public_cert.pem">github.com/yb66/RandomPerson/blob/master/gem-public_cert.pem</a>
+and do:
+</p>
+<pre>
+  gem cert --add /path/to/public_cert.pem
+  
+</pre>
+<p>
+then install it:
+</p>
+<pre>
+  gem install randomperson -P HighSecurity
+  
+</pre>
+<h2>USAGE (STOP SHOUTING!):</h2>
+<p>
+So, to generate 1000 random people with Spanish names, between the ages of
+16 and 35 with a ratio of 3 males to every 5 females:
+</p>
+<pre>
+  require 'randomperson'
+
+  choice = RandomPerson::Choice.new( {gender_ratio: [3,5] , age_lower:16, age_upper:35 } )
+
+  choice.add_Spanish
+  
+  g = RandomPerson::Generator.new
+  
+  g.make_generator choice
+  
+  people = [ ]
+  
+  1000.times { people &lt;&lt; g.generators[0].call }
+  
+  10.times { |i| puts &quot;#{people[i].first} #{people[i].last} age: #{people[i].age} born: #{people[i].dob.strftime(&quot;%d-%b-%Y&quot;)}&quot; }
+
+  Bartolomé Andrés de Elixaeberna age: 20 born: 28-Apr-1990
+  Fabiana Cordero Balmaceda age: 21 born: 14-Jun-1989
+  Jorge Alas Albarracin age: 29 born: 16-Apr-1981
+  Eufemia Berlanga de Sergi age: 33 born: 25-Jan-1977
+  David Puig Villaroel age: 19 born: 17-Apr-1991
+  Alba Henchoz de Hurtado age: 30 born: 14-Feb-1980
+  Natalia Jara de Guevara age: 33 born: 28-Jul-1977
+  Tito Cresaco Campo age: 20 born: 14-Feb-1990
+  Susana Pitillas de Vaime age: 32 born: 12-Aug-1978
+  Gustavo Hierro Carbajal y Plazas age: 31 born: 08-Feb-1979
+</pre>
+<p>
+Here&#8217;s an example using the Thai Romanised data:
+</p>
+<pre>
+  choice = RandomPerson::Choice.new
+  choice.add_Thai_Romanised
+  g = RandomPerson::Generator.new
+  g.make_generator choice 
+  people = [ ]
+  10.times { people &lt;&lt; g.generators[0].call }
+  10.times { |i| puts &quot;#{people[i].first} #{people[i].last} age: #{people[i].age} born: #{people[i].dob.strftime(&quot;%d-%b-%Y&quot;)}&quot; }
+  
+  Yongchaiyuth Sripituksakul Puntasrima age: 39 born: 29-Mar-1971
+  Sri-Patana Wattanasin age: 77 born: 04-Feb-1933
+  Wattana Rojjanasukchai age: 7 born: 27-Jun-2003
+  Ban Sukbunsung age: 85 born: 07-Sep-1925
+  Daeng Prasongsanti age: 65 born: 27-Mar-1945
+  Proi Paowsong Sriwarunyu age: 60 born: 06-May-1950
+  Ban Yongjaiyut age: 4 born: 06-Nov-2006
+  Siam Narkhirunkanok age: 15 born: 12-Aug-1995
+  Tong Punyawong Kadesadayurat age: 64 born: 01-Sep-1946
+  Sarai Wattanapanit Maneerattana age: 44 born: 21-Dec-1966
+</pre>
+<h2>CHOICE</h2>
+<p>
+The choice class sets the parameters that will be used to generate people.
+</p>
+<pre>
+  choice = RandomPerson::Choice.new
+</pre>
+<p>
+is the same as
+</p>
+<pre>
+  choice = RandomPerson::Choice.new( gender_ratio:[1,1] , age_lower: 0, age_upper: 100 )
+</pre>
+<p>
+So you&#8217;d end up with a population of roughly 50:50 male/female with
+ages from 0 to 100 years.
+</p>
+<h2>LOADING NAMEFILES</h2>
+<pre>
+  choice.add_Spanish_Female would just load the SpanishFemaleFirst into choice.female
+  
+  choice.add_Spanish would load:
+    SpanishFemaleFirst into choice.female
+    SpanishMaleFirst into choice.male
+    SpanishLast into choice.last
+</pre>
+<p>
+etc etc
+</p>
+<pre>
+  
+</pre>
+<p>
+or you can do things the old fashioned way
+</p>
+<pre>
+  require 'namefiles/spanishfemalefirst' #obviously you need to use the path from where you are or where the script will run from
+  
+  choice.female = RandomPerson::SpanishFemaleFirst.new
+</pre>
+<p>
+The rule is, put_underscores_between_the_important_words
+</p>
+<p>
+<em>and</em>
+</p>
+<p>
+always begin with <b>add_</b>
+</p>
+<p>
+<em>and</em>
+</p>
+<p>
+make sure each word is capitalised, add_male will actually pick up Fe_male_
+whereas Female and Male will get what you want.
+</p>
+<p>
+If you want EnglishLast names loaded:
+</p>
+<pre>
+  choice.add_English_Last
+</pre>
+<p>
+All English files:
+</p>
+<pre>
+  choice.add_English
+</pre>
+<p>
+English males:
+</p>
+<pre>
+  choice.add_English_Male
+</pre>
+<p>
+Do you see how this is working? If you need to check what&#8217;s loaded,
+have a look in the instance variables of choice (or whatever you named your
+Choice instance):
+</p>
+<pre>
+  choice.male
+  choice.female
+  choice.last
+  choice.prefix
+  choice.suffix
+</pre>
+<h2>RATIOS VS ODDS</h2>
+<p>
+The default gender ratio is 1:1. The male part is the left side (or
+Array#first), the female is the right side (or Array#last). All ratios are
+given as an array i.e. [1,1] or [3,2]
+</p>
+<p>
+A ratio of 1:1 will not necessarily give you a population with exactly half
+male, half female. The ratio is the odds of getting that. So a ratio of
+[1,3] will give a 25% chance of producing a male and a 75% chance of being
+a female.
+</p>
+<p>
+If you wish to have an exact ratio within the population then create two
+choices each with a 0% chance of producing the other. For example:
+</p>
+<pre>
+  men = RandomPerson::Choice.new( gender_ratio:[1,0] )
+  women = RandomPerson::Choice.new( gender_ratio:[0,1] )
+  ...more code here...
+  g.make_generator men # pushes the generator onto @generators in 0 position
+  g.make_generator women # pushes the generator onto @generators in 1 position
+  25.times { people &lt;&lt; g.generators[0].call }
+  75.times { people &lt;&lt; g.generators[1].call }
+</pre>
+<p>
+This would give you a population of 25 males and 75 females. Which sounds
+great unless you really think about it.
+</p>
+<h2>FORMATTING</h2>
+<p>
+Each culture has it&#8217;s own conventions around names. This makes
+sticking some monolithic algorithm in the centre of the code to sort out
+how names should be displayed impossible, so each data file describes how
+it thinks the names should be formatted.
+</p>
+<p>
+For example, in the EnglishLast.rb file:
+</p>
+<pre>
+  @formats = {
+          :single =&gt;                      -&gt;(n)   { n.rand },
+          :double_barrelled_hyphenated=&gt; -&gt;(n)   { n.rand + '-' + n.rand },
+         }
+       
+</pre>
+<p>
+This tells us that there are two ways of formatting last names defined in
+the file. All formats are described as lambda functions in a hash, the key
+being a description of what it&#8217;s trying to achieve.
+</p>
+<h2>BIT MORE ON RATIOS</h2>
+<p>
+Behind the scenes, ratios like this [1,3] are converted to an array of
+ranges like this [0..24, 25..99], called ratiod. Just so you know for this
+next bit.
+</p>
+<p>
+In the EnglishLast.rb file:
+</p>
+<pre>
+  @formats_ratiod = [ (0..96), (97..99) ]
+</pre>
+<p>
+This says that the chances of a name being single barrelled is 97%, and
+double barrelled is 3%. I made up those figures from my own experience, but
+if you disagree with either the ratios or the formatting then you can
+change it. Either directly in the file or while running the code.
+It&#8217;s your choice. Just make sure the numbers are right, length of
+arrays should be the same ( e.g. four formatting options should have a
+ratio with four parts like [a,b,c,d]) or it will break.
+</p>
+<h2>PREFIXES AND SUFFIXES</h2>
+<p>
+Each generator starts by producing a person with a gender, an age and a
+date of birth. These are then passed on to the subsequent name portions so
+that a male always gets a male name and a male prefix (if you&#8217;ve
+specified a prefix file).
+</p>
+<p>
+Suffix files will also (I hope) do a bit of checking at what&#8217;s
+already been set, so you won&#8217;t get Dr. Bobby Horliton PhD, as it
+should be either Dr. or PhD (apparently). Stuff like that should get
+caught.
+</p>
+<h2>ADDING YOUR OWN NAMEFILES</h2>
+<p>
+My suggestion is to find the type of name that is closest (if you&#8217;re
+looking for Spanishy names then look at the Spanish files as they&#8217;ll
+have similar formatting rules there for free...) and copy and paste it in
+to a new one. It&#8217;s easier that way.
+</p>
+<h2>ACCURACY OF NAMES AND RATIOS</h2>
+<p>
+I&#8217;ve taken bits and pieces from wherever I could get them, so if you
+see something is wrong then either let me know or produce a patch.
+I&#8217;ve no idea what the process is for that on GitHub but I&#8217;m
+sure there&#8217;s a tutorial if you look for it. I&#8217;ll also add you
+name to this readme, and worldly fame will be yours.
+</p>
+<h2>TODO:</h2>
+<p>
+There&#8217;s lots to do. Lot of repetition and ugly bits here and there,
+but it works so I&#8217;ll get round to it when I can.
+</p>
+<h2>THANKS GO TO</h2>
+<p>
+Peter Hickman for writing the original library in Perl that inspired this
+on in Ruby.
+</p>
+<p>
+My good friend Johan Bergsten for helping me out with the Swedish names.
+</p>
+<h2>THE END UNLESS YOU WANT TO READ THE LICENCE</h2>
+<p>
+*Iain Barnett*
+</p>
+<h2>LICENCE:</h2>
+<p>
+It&#8217;s an MIT Licence, I didn&#8217;t take any code from the Perl one
+just names and a slight idea on how to structure things, so this
+ain&#8217;t gonna be under the GPL. MIT is better anyway ;)
+</p>
+<pre>
+ Copyright (c) 2010 Iain Barnett
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the &quot;Software&quot;), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
+</pre>
+<p>
+In other words, be good.
+</p>
+
+	</div>
+	
+
+	
+	
+	<h2>Files</h2>
+	<ul>
+		
+			<li class="file"><a href="CHANGELOG.html">CHANGELOG</a></li>
+		
+			<li class="file"><a href="README.html">README</a></li>
+		
+	</ul>
+	
+
+	<h2 id="classes">Classes/Modules</h2>
+	<ul>
+		
+		<li class="module"><a href="RandomPerson.html">RandomPerson</a></li>
+		
+		<li class="class"><a href="RandomPerson/AmericanLast.html">RandomPerson::AmericanLast</a></li>
+		
+		<li class="class"><a href="RandomPerson/AmericanMaleFirst.html">RandomPerson::AmericanMaleFirst</a></li>
+		
+		<li class="class"><a href="RandomPerson/AmericanSuffix.html">RandomPerson::AmericanSuffix</a></li>
+		
+		<li class="class"><a href="RandomPerson/AnyLast.html">RandomPerson::AnyLast</a></li>
+		
+		<li class="class"><a href="RandomPerson/BasqueLast.html">RandomPerson::BasqueLast</a></li>
+		
+		<li class="class"><a href="RandomPerson/BritishPrefix.html">RandomPerson::BritishPrefix</a></li>
+		
+		<li class="class"><a href="RandomPerson/BritishSuffix.html">RandomPerson::BritishSuffix</a></li>
+		
+		<li class="class"><a href="RandomPerson/Choice.html">RandomPerson::Choice</a></li>
+		
+		<li class="class"><a href="RandomPerson/EnglishFemaleFirst.html">RandomPerson::EnglishFemaleFirst</a></li>
+		
+		<li class="class"><a href="RandomPerson/EnglishLast.html">RandomPerson::EnglishLast</a></li>
+		
+		<li class="class"><a href="RandomPerson/EnglishMaleFirst.html">RandomPerson::EnglishMaleFirst</a></li>
+		
+		<li class="class"><a href="RandomPerson/FirstName.html">RandomPerson::FirstName</a></li>
+		
+		<li class="class"><a href="RandomPerson/Formatter.html">RandomPerson::Formatter</a></li>
+		
+		<li class="class"><a href="RandomPerson/Generator.html">RandomPerson::Generator</a></li>
+		
+		<li class="class"><a href="RandomPerson/Name.html">RandomPerson::Name</a></li>
+		
+		<li class="module"><a href="RandomPerson/Names.html">RandomPerson::Names</a></li>
+		
+		<li class="class"><a href="RandomPerson/Person.html">RandomPerson::Person</a></li>
+		
+		<li class="module"><a href="RandomPerson/Ratio.html">RandomPerson::Ratio</a></li>
+		
+		<li class="class"><a href="RandomPerson/ScottishFemaleFirst.html">RandomPerson::ScottishFemaleFirst</a></li>
+		
+		<li class="class"><a href="RandomPerson/ScottishLast.html">RandomPerson::ScottishLast</a></li>
+		
+		<li class="class"><a href="RandomPerson/ScottishMaleFirst.html">RandomPerson::ScottishMaleFirst</a></li>
+		
+		<li class="class"><a href="RandomPerson/SpanishFemaleFirst.html">RandomPerson::SpanishFemaleFirst</a></li>
+		
+		<li class="class"><a href="RandomPerson/SpanishLast.html">RandomPerson::SpanishLast</a></li>
+		
+		<li class="class"><a href="RandomPerson/SpanishMaleFirst.html">RandomPerson::SpanishMaleFirst</a></li>
+		
+		<li class="class"><a href="RandomPerson/SwedishFemaleFirst.html">RandomPerson::SwedishFemaleFirst</a></li>
+		
+		<li class="class"><a href="RandomPerson/SwedishLast.html">RandomPerson::SwedishLast</a></li>
+		
+		<li class="class"><a href="RandomPerson/SwedishMaleFirst.html">RandomPerson::SwedishMaleFirst</a></li>
+		
+		<li class="class"><a href="RandomPerson/ThaiRomanisedFemaleFirst.html">RandomPerson::ThaiRomanisedFemaleFirst</a></li>
+		
+		<li class="class"><a href="RandomPerson/ThaiRomanisedLast.html">RandomPerson::ThaiRomanisedLast</a></li>
+		
+		<li class="class"><a href="RandomPerson/ThaiRomanisedMaleFirst.html">RandomPerson::ThaiRomanisedMaleFirst</a></li>
+		
+		<li class="class"><a href="RandomPerson/WelshFemaleFirst.html">RandomPerson::WelshFemaleFirst</a></li>
+		
+		<li class="class"><a href="RandomPerson/WelshLast.html">RandomPerson::WelshLast</a></li>
+		
+		<li class="class"><a href="RandomPerson/WelshMaleFirst.html">RandomPerson::WelshMaleFirst</a></li>
+		
+		<li class="class"><a href="Array.html">Array</a></li>
+		
+		<li class="class"><a href="Date.html">Date</a></li>
+		
+		<li class="module"><a href="Enumerable.html">Enumerable</a></li>
+		
+		<li class="class"><a href="Hash.html">Hash</a></li>
+		
+		<li class="module"><a href="Kernel.html">Kernel</a></li>
+		
+		<li class="class"><a href="Set.html">Set</a></li>
+		
+	</ul>
+
+	<h2 id="methods">Methods</h2>
+	<ul>
+		
+			<li><a href="Date.html#method-c-days_in_month">::days_in_month &mdash; Date</a></li>
+		
+			<li><a href="RandomPerson/Names.html#method-c-execute">::execute &mdash; RandomPerson::Names</a></li>
+		
+			<li><a href="RandomPerson/WelshMaleFirst.html#method-c-new">::new &mdash; RandomPerson::WelshMaleFirst</a></li>
+		
+			<li><a href="RandomPerson/SwedishFemaleFirst.html#method-c-new">::new &mdash; RandomPerson::SwedishFemaleFirst</a></li>
+		
+			<li><a href="RandomPerson/ThaiRomanisedLast.html#method-c-new">::new &mdash; RandomPerson::ThaiRomanisedLast</a></li>
+		
+			<li><a href="RandomPerson/FirstName.html#method-c-new">::new &mdash; RandomPerson::FirstName</a></li>
+		
+			<li><a href="RandomPerson/SpanishMaleFirst.html#method-c-new">::new &mdash; RandomPerson::SpanishMaleFirst</a></li>
+		
+			<li><a href="RandomPerson/Formatter.html#method-c-new">::new &mdash; RandomPerson::Formatter</a></li>
+		
+			<li><a href="RandomPerson/ThaiRomanisedMaleFirst.html#method-c-new">::new &mdash; RandomPerson::ThaiRomanisedMaleFirst</a></li>
+		
+			<li><a href="RandomPerson/SpanishLast.html#method-c-new">::new &mdash; RandomPerson::SpanishLast</a></li>
+		
+			<li><a href="RandomPerson/Generator.html#method-c-new">::new &mdash; RandomPerson::Generator</a></li>
+		
+			<li><a href="RandomPerson/WelshFemaleFirst.html#method-c-new">::new &mdash; RandomPerson::WelshFemaleFirst</a></li>
+		
+			<li><a href="RandomPerson/SpanishFemaleFirst.html#method-c-new">::new &mdash; RandomPerson::SpanishFemaleFirst</a></li>
+		
+			<li><a href="RandomPerson/WelshLast.html#method-c-new">::new &mdash; RandomPerson::WelshLast</a></li>
+		
+			<li><a href="RandomPerson/ScottishMaleFirst.html#method-c-new">::new &mdash; RandomPerson::ScottishMaleFirst</a></li>
+		
+			<li><a href="RandomPerson/ThaiRomanisedFemaleFirst.html#method-c-new">::new &mdash; RandomPerson::ThaiRomanisedFemaleFirst</a></li>
+		
+			<li><a href="RandomPerson/ScottishLast.html#method-c-new">::new &mdash; RandomPerson::ScottishLast</a></li>
+		
+			<li><a href="RandomPerson/SwedishMaleFirst.html#method-c-new">::new &mdash; RandomPerson::SwedishMaleFirst</a></li>
+		
+			<li><a href="RandomPerson/AmericanLast.html#method-c-new">::new &mdash; RandomPerson::AmericanLast</a></li>
+		
+			<li><a href="RandomPerson/ScottishFemaleFirst.html#method-c-new">::new &mdash; RandomPerson::ScottishFemaleFirst</a></li>
+		
+			<li><a href="RandomPerson/AmericanMaleFirst.html#method-c-new">::new &mdash; RandomPerson::AmericanMaleFirst</a></li>
+		
+			<li><a href="RandomPerson/SwedishLast.html#method-c-new">::new &mdash; RandomPerson::SwedishLast</a></li>
+		
+			<li><a href="RandomPerson/AmericanSuffix.html#method-c-new">::new &mdash; RandomPerson::AmericanSuffix</a></li>
+		
+			<li><a href="RandomPerson/Person.html#method-c-new">::new &mdash; RandomPerson::Person</a></li>
+		
+			<li><a href="RandomPerson/AnyLast.html#method-c-new">::new &mdash; RandomPerson::AnyLast</a></li>
+		
+			<li><a href="RandomPerson/EnglishMaleFirst.html#method-c-new">::new &mdash; RandomPerson::EnglishMaleFirst</a></li>
+		
+			<li><a href="RandomPerson/EnglishFemaleFirst.html#method-c-new">::new &mdash; RandomPerson::EnglishFemaleFirst</a></li>
+		
+			<li><a href="RandomPerson/EnglishLast.html#method-c-new">::new &mdash; RandomPerson::EnglishLast</a></li>
+		
+			<li><a href="RandomPerson/BritishPrefix.html#method-c-new">::new &mdash; RandomPerson::BritishPrefix</a></li>
+		
+			<li><a href="RandomPerson/Choice.html#method-c-new">::new &mdash; RandomPerson::Choice</a></li>
+		
+			<li><a href="RandomPerson/BritishSuffix.html#method-c-new">::new &mdash; RandomPerson::BritishSuffix</a></li>
+		
+			<li><a href="RandomPerson/BasqueLast.html#method-c-new">::new &mdash; RandomPerson::BasqueLast</a></li>
+		
+			<li><a href="RandomPerson/Generator.html#method-c-pick_age">::pick_age &mdash; RandomPerson::Generator</a></li>
+		
+			<li><a href="RandomPerson/Generator.html#method-c-pick_dob">::pick_dob &mdash; RandomPerson::Generator</a></li>
+		
+			<li><a href="RandomPerson/Generator.html#method-c-pick_gender">::pick_gender &mdash; RandomPerson::Generator</a></li>
+		
+			<li><a href="RandomPerson/Generator.html#method-c-ratiod">::ratiod &mdash; RandomPerson::Generator</a></li>
+		
+			<li><a href="RandomPerson/Choice.html#method-i-addklass">#addklass &mdash; RandomPerson::Choice</a></li>
+		
+			<li><a href="RandomPerson/Choice.html#method-i-available_classes">#available_classes &mdash; RandomPerson::Choice</a></li>
+		
+			<li><a href="Hash.html#method-i-by_index">#by_index &mdash; Hash</a></li>
+		
+			<li><a href="Set.html#method-i-classify_true">#classify_true &mdash; Set</a></li>
+		
+			<li><a href="RandomPerson/AmericanSuffix.html#method-i-execute">#execute &mdash; RandomPerson::AmericanSuffix</a></li>
+		
+			<li><a href="RandomPerson/BritishPrefix.html#method-i-execute">#execute &mdash; RandomPerson::BritishPrefix</a></li>
+		
+			<li><a href="RandomPerson/Name.html#method-i-execute">#execute &mdash; RandomPerson::Name</a></li>
+		
+			<li><a href="RandomPerson/BritishSuffix.html#method-i-execute">#execute &mdash; RandomPerson::BritishSuffix</a></li>
+		
+			<li><a href="RandomPerson/FirstName.html#method-i-execute">#execute &mdash; RandomPerson::FirstName</a></li>
+		
+			<li><a href="RandomPerson/Formatter.html#method-i-formats">#formats &mdash; RandomPerson::Formatter</a></li>
+		
+			<li><a href="RandomPerson/Formatter.html#method-i-formats%3D">#formats= &mdash; RandomPerson::Formatter</a></li>
+		
+			<li><a href="Array.html#method-i-index_in_range">#index_in_range &mdash; Array</a></li>
+		
+			<li><a href="RandomPerson/Choice.html#method-i-load_names">#load_names &mdash; RandomPerson::Choice</a></li>
+		
+			<li><a href="RandomPerson/Generator.html#method-i-make_generator">#make_generator &mdash; RandomPerson::Generator</a></li>
+		
+			<li><a href="RandomPerson/Choice.html#method-i-method_missing">#method_missing &mdash; RandomPerson::Choice</a></li>
+		
+			<li><a href="RandomPerson/Ratio.html#method-i-ordmag">#ordmag &mdash; RandomPerson::Ratio</a></li>
+		
+			<li><a href="RandomPerson/Ratio.html#method-i-presto_rangio">#presto_rangio &mdash; RandomPerson::Ratio</a></li>
+		
+			<li><a href="Kernel.html#method-i-qualified_const_get">#qualified_const_get &mdash; Kernel</a></li>
+		
+			<li><a href="Array.html#method-i-rand">#rand &mdash; Array</a></li>
+		
+			<li><a href="RandomPerson/Ratio.html#method-i-rangio">#rangio &mdash; RandomPerson::Ratio</a></li>
+		
+			<li><a href="RandomPerson/Generator.html#method-i-reset">#reset &mdash; RandomPerson::Generator</a></li>
+		
+			<li><a href="RandomPerson/ScottishLast.html#method-i-setupnames">#setupnames &mdash; RandomPerson::ScottishLast</a></li>
+		
+			<li><a href="RandomPerson/SpanishMaleFirst.html#method-i-setupnames">#setupnames &mdash; RandomPerson::SpanishMaleFirst</a></li>
+		
+			<li><a href="RandomPerson/ThaiRomanisedLast.html#method-i-setupnames">#setupnames &mdash; RandomPerson::ThaiRomanisedLast</a></li>
+		
+			<li><a href="RandomPerson/SpanishLast.html#method-i-setupnames">#setupnames &mdash; RandomPerson::SpanishLast</a></li>
+		
+			<li><a href="RandomPerson/ThaiRomanisedMaleFirst.html#method-i-setupnames">#setupnames &mdash; RandomPerson::ThaiRomanisedMaleFirst</a></li>
+		
+			<li><a href="RandomPerson/SpanishFemaleFirst.html#method-i-setupnames">#setupnames &mdash; RandomPerson::SpanishFemaleFirst</a></li>
+		
+			<li><a href="RandomPerson/WelshFemaleFirst.html#method-i-setupnames">#setupnames &mdash; RandomPerson::WelshFemaleFirst</a></li>
+		
+			<li><a href="RandomPerson/ScottishMaleFirst.html#method-i-setupnames">#setupnames &mdash; RandomPerson::ScottishMaleFirst</a></li>
+		
+			<li><a href="RandomPerson/WelshLast.html#method-i-setupnames">#setupnames &mdash; RandomPerson::WelshLast</a></li>
+		
+			<li><a href="RandomPerson/ThaiRomanisedFemaleFirst.html#method-i-setupnames">#setupnames &mdash; RandomPerson::ThaiRomanisedFemaleFirst</a></li>
+		
+			<li><a href="RandomPerson/WelshMaleFirst.html#method-i-setupnames">#setupnames &mdash; RandomPerson::WelshMaleFirst</a></li>
+		
+			<li><a href="RandomPerson/EnglishMaleFirst.html#method-i-setupnames">#setupnames &mdash; RandomPerson::EnglishMaleFirst</a></li>
+		
+			<li><a href="RandomPerson/EnglishLast.html#method-i-setupnames">#setupnames &mdash; RandomPerson::EnglishLast</a></li>
+		
+			<li><a href="RandomPerson/SwedishLast.html#method-i-setupnames">#setupnames &mdash; RandomPerson::SwedishLast</a></li>
+		
+			<li><a href="RandomPerson/EnglishFemaleFirst.html#method-i-setupnames">#setupnames &mdash; RandomPerson::EnglishFemaleFirst</a></li>
+		
+			<li><a href="RandomPerson/BasqueLast.html#method-i-setupnames">#setupnames &mdash; RandomPerson::BasqueLast</a></li>
+		
+			<li><a href="RandomPerson/AnyLast.html#method-i-setupnames">#setupnames &mdash; RandomPerson::AnyLast</a></li>
+		
+			<li><a href="RandomPerson/AmericanMaleFirst.html#method-i-setupnames">#setupnames &mdash; RandomPerson::AmericanMaleFirst</a></li>
+		
+			<li><a href="RandomPerson/SwedishFemaleFirst.html#method-i-setupnames">#setupnames &mdash; RandomPerson::SwedishFemaleFirst</a></li>
+		
+			<li><a href="RandomPerson/AmericanLast.html#method-i-setupnames">#setupnames &mdash; RandomPerson::AmericanLast</a></li>
+		
+			<li><a href="RandomPerson/SwedishMaleFirst.html#method-i-setupnames">#setupnames &mdash; RandomPerson::SwedishMaleFirst</a></li>
+		
+			<li><a href="RandomPerson/ScottishFemaleFirst.html#method-i-setupnames">#setupnames &mdash; RandomPerson::ScottishFemaleFirst</a></li>
+		
+	</ul>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+</body>
+</html>

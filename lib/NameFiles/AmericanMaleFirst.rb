@@ -14,7 +14,7 @@ module RandomPerson
     end
       
     def setupnames
-      NAMES = %w{ aaron adam adrian alan alejandro alex allen andrew andy anthony art arthur barry bart ben benjamin bill bobby brad bradley brendan brett brian bruce bryan carlos chad charles chris christopher chuck clay corey craig dan daniel darren dave david dean dennis denny derek don doug duane edward eric eugene evan frank fred gary gene george gordon greg harry henry hunter ivan jack james jamie jason jay jeff jeffrey jeremy jim joe joel john jonathan joseph justin keith ken kevin larry logan marc mark matt matthew michael mike nat nathan patrick paul perry peter philip phillip randy raymond ricardo richard rick rob robert rod roger ross ruben russell ryan sam scot scott sean shaun stephen steve steven stewart stuart ted thomas tim toby todd tom troy victor wade walter wayne william }
+      NAMES = %w{ Aaron Adam Adrian Alan Alejandro Alex Allen Andrew Andy Anthony Art Arthur Barry Bart Ben Benjamin Bill Bobby Brad Bradley Brendan Brett Brian Bruce Bryan Carlos Chad Charles Chris Christopher Chuck Clay Corey Craig Dan Daniel Darren Dave David Dean Dennis Denny Derek Don Doug Duane Edward Eric Eugene Evan Frank Fred Gary Gene George Gordon Greg Harry Henry Hunter Ivan Jack James Jamie Jason Jay Jeff Jeffrey Jeremy Jim Joe Joel John Jonathan Joseph Justin Keith Ken Kevin Larry Logan Marc Mark Matt Matthew Michael Mike Nat Nathan Patrick Paul Perry Peter Philip Phillip Randy Raymond Ricardo Richard Rick Rob Robert Rod Roger Ross Ruben Russell Ryan Sam Scot Scott Sean Shaun Stephen Steve Steven Stewart Stuart Ted Thomas Tim Toby Todd Tom Troy Victor Wade Walter Wayne William }
     end
     
   end

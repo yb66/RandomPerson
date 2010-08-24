@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Class: RandomPerson::Generator</title>
+
+	<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+
+	<script src="../js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="class">
+
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="../index.html">Home</a>
+          <a href="../index.html#classes">Classes</a>
+          <a href="../index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="../lib/Generator_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/Generator.rb">lib/Generator.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+			<div id="parent-class-section" class="section">
+				<h3 class="section-header">Parent</h3>
+				
+				<p class="link">Object</p>
+				
+			</div>
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-c-new">::new</a></li>
+					
+					<li><a href="#method-c-pick_age">::pick_age</a></li>
+					
+					<li><a href="#method-c-pick_dob">::pick_dob</a></li>
+					
+					<li><a href="#method-c-pick_gender">::pick_gender</a></li>
+					
+					<li><a href="#method-c-ratiod">::ratiod</a></li>
+					
+					<li><a href="#method-i-make_generator">#make_generator</a></li>
+					
+					<li><a href="#method-i-reset">#reset</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="../CHANGELOG.html">CHANGELOG</a></li>
+				
+					<li class="file"><a href="../README.html">README</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="../images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="../RandomPerson.html">RandomPerson</a></li>
+				
+					<li><a href="../RandomPerson/AmericanLast.html">RandomPerson::AmericanLast</a></li>
+				
+					<li><a href="../RandomPerson/AmericanMaleFirst.html">RandomPerson::AmericanMaleFirst</a></li>
+				
+					<li><a href="../RandomPerson/AmericanSuffix.html">RandomPerson::AmericanSuffix</a></li>
+				
+					<li><a href="../RandomPerson/AnyLast.html">RandomPerson::AnyLast</a></li>
+				
+					<li><a href="../RandomPerson/BasqueLast.html">RandomPerson::BasqueLast</a></li>
+				
+					<li><a href="../RandomPerson/BritishPrefix.html">RandomPerson::BritishPrefix</a></li>
+				
+					<li><a href="../RandomPerson/BritishSuffix.html">RandomPerson::BritishSuffix</a></li>
+				
+					<li><a href="../RandomPerson/Choice.html">RandomPerson::Choice</a></li>
+				
+					<li><a href="../RandomPerson/EnglishFemaleFirst.html">RandomPerson::EnglishFemaleFirst</a></li>
+				
+					<li><a href="../RandomPerson/EnglishLast.html">RandomPerson::EnglishLast</a></li>
+				
+					<li><a href="../RandomPerson/EnglishMaleFirst.html">RandomPerson::EnglishMaleFirst</a></li>
+				
+					<li><a href="../RandomPerson/FirstName.html">RandomPerson::FirstName</a></li>
+				
+					<li><a href="../RandomPerson/Formatter.html">RandomPerson::Formatter</a></li>
+				
+					<li><a href="../RandomPerson/Generator.html">RandomPerson::Generator</a></li>
+				
+					<li><a href="../RandomPerson/Name.html">RandomPerson::Name</a></li>
+				
+					<li><a href="../RandomPerson/Names.html">RandomPerson::Names</a></li>
+				
+					<li><a href="../RandomPerson/Person.html">RandomPerson::Person</a></li>
+				
+					<li><a href="../RandomPerson/Ratio.html">RandomPerson::Ratio</a></li>
+				
+					<li><a href="../RandomPerson/ScottishFemaleFirst.html">RandomPerson::ScottishFemaleFirst</a></li>
+				
+					<li><a href="../RandomPerson/ScottishLast.html">RandomPerson::ScottishLast</a></li>
+				
+					<li><a href="../RandomPerson/ScottishMaleFirst.html">RandomPerson::ScottishMaleFirst</a></li>
+				
+					<li><a href="../RandomPerson/SpanishFemaleFirst.html">RandomPerson::SpanishFemaleFirst</a></li>
+				
+					<li><a href="../RandomPerson/SpanishLast.html">RandomPerson::SpanishLast</a></li>
+				
+					<li><a href="../RandomPerson/SpanishMaleFirst.html">RandomPerson::SpanishMaleFirst</a></li>
+				
+					<li><a href="../RandomPerson/SwedishFemaleFirst.html">RandomPerson::SwedishFemaleFirst</a></li>
+				
+					<li><a href="../RandomPerson/SwedishLast.html">RandomPerson::SwedishLast</a></li>
+				
+					<li><a href="../RandomPerson/SwedishMaleFirst.html">RandomPerson::SwedishMaleFirst</a></li>
+				
+					<li><a href="../RandomPerson/ThaiRomanisedFemaleFirst.html">RandomPerson::ThaiRomanisedFemaleFirst</a></li>
+				
+					<li><a href="../RandomPerson/ThaiRomanisedLast.html">RandomPerson::ThaiRomanisedLast</a></li>
+				
+					<li><a href="../RandomPerson/ThaiRomanisedMaleFirst.html">RandomPerson::ThaiRomanisedMaleFirst</a></li>
+				
+					<li><a href="../RandomPerson/WelshFemaleFirst.html">RandomPerson::WelshFemaleFirst</a></li>
+				
+					<li><a href="../RandomPerson/WelshLast.html">RandomPerson::WelshLast</a></li>
+				
+					<li><a href="../RandomPerson/WelshMaleFirst.html">RandomPerson::WelshMaleFirst</a></li>
+				
+					<li><a href="../Array.html">Array</a></li>
+				
+					<li><a href="../Date.html">Date</a></li>
+				
+					<li><a href="../Enumerable.html">Enumerable</a></li>
+				
+					<li><a href="../Hash.html">Hash</a></li>
+				
+					<li><a href="../Kernel.html">Kernel</a></li>
+				
+					<li><a href="../Set.html">Set</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="class">RandomPerson::Generator</h1>
+
+		<div id="description">
+			
+		</div>
+
+		<!-- Constants -->
+		
+
+		<!-- Attributes -->
+		
+		<div id="attribute-method-details" class="method-section section">
+			<h3 class="section-header">Attributes</h3>
+
+			
+			<div id="generators-attribute-method" class="method-detail">
+				<a name="generators"></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">generators</span><span
+						class="attribute-access-type">[R]</span>
+				</div>
+
+				<div class="method-description">
+				
+				
+				
+				</div>
+			</div>
+			
+		</div>
+		
+
+		<!-- Methods -->
+		
+		<div id="public-class-method-details" class="method-section section">
+			<h3 class="section-header">Public Class Methods</h3>
+
+		
+			<div id="new-method" class="method-detail ">
+				<a name="method-c-new"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">new</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="new-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/Generator.rb, line 12</span>
+12:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
+13:       <span class="ruby-ivar">@generators</span> = [ ] 
+14:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="pick-age-method" class="method-detail ">
+				<a name="method-c-pick_age"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">pick_age</span><span
+						class="method-args">( lower=0, upper=100 )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="pick-age-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/Generator.rb, line 71</span>
+71:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pick_age</span>( <span class="ruby-identifier">lower</span>=<span class="ruby-value">0</span>, <span class="ruby-identifier">upper</span>=<span class="ruby-value">100</span> )
+72:         <span class="ruby-identifier">age</span> = <span class="ruby-identifier">rand</span>(<span class="ruby-identifier">upper</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">lower</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">lower</span>
+73:       <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="pick-dob-method" class="method-detail ">
+				<a name="method-c-pick_dob"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">pick_dob</span><span
+						class="method-args">( y=16 )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="pick-dob-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/Generator.rb, line 75</span>
+75:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pick_dob</span>( <span class="ruby-identifier">y</span>=<span class="ruby-value">16</span> )
+76:         <span class="ruby-identifier">year</span>  = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">year</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">y</span>
+77:         <span class="ruby-identifier">month</span> = <span class="ruby-identifier">rand</span>(<span class="ruby-value">12</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>;
+78:         <span class="ruby-identifier">day</span>   = <span class="ruby-identifier">rand</span>( <span class="ruby-constant">Date</span>.<span class="ruby-identifier">days_in_month</span>( <span class="ruby-identifier">year</span>, <span class="ruby-identifier">month</span> ) ) <span class="ruby-operator">+</span> <span class="ruby-value">1</span> 
+79:         <span class="ruby-constant">Time</span>.<span class="ruby-identifier">local</span>( <span class="ruby-identifier">year</span>, <span class="ruby-identifier">month</span>, <span class="ruby-identifier">day</span> )
+80:       <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="pick-gender-method" class="method-detail ">
+				<a name="method-c-pick_gender"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">pick_gender</span><span
+						class="method-args">( ratio=[1,1] )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="pick-gender-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/Generator.rb, line 58</span>
+58:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pick_gender</span>( <span class="ruby-identifier">ratio</span>=[<span class="ruby-value">1</span>,<span class="ruby-value">1</span>] ) <span class="ruby-comment cmt">#male first</span>
+59:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ratio</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
+60:           <span class="ruby-keyword kw">return</span> <span class="ruby-value str">'f'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ratio</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+61:           <span class="ruby-keyword kw">return</span> <span class="ruby-value str">'m'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ratio</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> 
+62:         <span class="ruby-keyword kw">end</span>
+63:         <span class="ruby-identifier">rat</span> = <span class="ruby-identifier">ratiod</span>( <span class="ruby-identifier">ratio</span> )
+64:         <span class="ruby-identifier">r</span> = <span class="ruby-identifier">rand</span>(<span class="ruby-identifier">rat</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">last</span>)
+65:         <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">r</span>
+66:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">rat</span>[<span class="ruby-value">0</span>] <span class="ruby-keyword kw">then</span> <span class="ruby-value str">'m'</span>
+67:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">rat</span>[<span class="ruby-value">1</span>] <span class="ruby-keyword kw">then</span> <span class="ruby-value str">'f'</span>
+68:         <span class="ruby-keyword kw">end</span>
+69:       <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="ratiod-method" class="method-detail ">
+				<a name="method-c-ratiod"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">ratiod</span><span
+						class="method-args">( ratio=[1,1] )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+create a ratio that is made up of ranges to help hit with multiple valued
+ratios
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="ratiod-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/Generator.rb, line 49</span>
+49:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ratiod</span>( <span class="ruby-identifier">ratio</span>=[<span class="ruby-value">1</span>,<span class="ruby-value">1</span>] )
+50:         <span class="ruby-identifier">sum</span> = <span class="ruby-identifier">ratio</span>.<span class="ruby-identifier">reduce</span>(<span class="ruby-value">:+</span>) <span class="ruby-comment cmt">#sum</span>
+51:         <span class="ruby-identifier">mult</span> = <span class="ruby-value">100</span>.<span class="ruby-identifier">divmod</span>( <span class="ruby-identifier">sum</span> ).<span class="ruby-identifier">first</span> <span class="ruby-comment cmt">#get a bigger spread of numbers</span>
+52:         <span class="ruby-identifier">ratio</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span> * <span class="ruby-identifier">mult</span> }
+53:         <span class="ruby-identifier">new_ratio</span> = <span class="ruby-identifier">ratio</span>.<span class="ruby-identifier">inject</span>([<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">0</span>]) {<span class="ruby-operator">|</span><span class="ruby-identifier">acc</span>,<span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">acc</span> <span class="ruby-operator">+</span> [<span class="ruby-identifier">acc</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">...</span> (<span class="ruby-identifier">n</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">acc</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">last</span>)] }
+54:         <span class="ruby-identifier">new_ratio</span>.<span class="ruby-identifier">shift</span> <span class="ruby-comment cmt">#get rid of 0..0</span>
+55:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">new_ratio</span>
+56:       <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="make-generator-method" class="method-detail ">
+				<a name="method-i-make_generator"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">make_generator</span><span
+						class="method-args">( choice )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+build a choice generator
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="make-generator-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/Generator.rb, line 18</span>
+18:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">make_generator</span>( <span class="ruby-identifier">choice</span> )
+19:     <span class="ruby-identifier">f</span> = <span class="ruby-operator">-</span><span class="ruby-operator">&gt;</span> {
+20:         <span class="ruby-identifier">g</span> = <span class="ruby-constant">Generator</span>.<span class="ruby-identifier">pick_gender</span>( <span class="ruby-identifier">choice</span>.<span class="ruby-identifier">gender_ratio</span> )
+21:         <span class="ruby-identifier">age</span> = <span class="ruby-constant">Generator</span>.<span class="ruby-identifier">pick_age</span>( <span class="ruby-identifier">choice</span>.<span class="ruby-identifier">age_lower</span>, <span class="ruby-identifier">choice</span>.<span class="ruby-identifier">age_upper</span>)
+22:         
+23:         <span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>(
+24:           <span class="ruby-value">:gender</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-identifier">g</span>, 
+25:           <span class="ruby-value">:age</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">age</span>,
+26:           <span class="ruby-value">:dob</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Generator</span>.<span class="ruby-identifier">pick_dob</span>( <span class="ruby-identifier">age</span> )
+27:         )
+28:         
+29:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">person</span>.<span class="ruby-identifier">gender</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'m'</span>   
+30:           <span class="ruby-identifier">person</span>.<span class="ruby-identifier">first</span> = <span class="ruby-identifier">choice</span>.<span class="ruby-identifier">malefirst</span>.<span class="ruby-identifier">execute</span>( <span class="ruby-identifier">person</span> ) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">choice</span>.<span class="ruby-identifier">malefirst</span>.<span class="ruby-identifier">nil?</span>
+31:         <span class="ruby-keyword kw">else</span>
+32:           <span class="ruby-identifier">person</span>.<span class="ruby-identifier">first</span> = <span class="ruby-identifier">choice</span>.<span class="ruby-identifier">femalefirst</span>.<span class="ruby-identifier">execute</span>( <span class="ruby-identifier">person</span> ) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">choice</span>.<span class="ruby-identifier">femalefirst</span>.<span class="ruby-identifier">nil?</span>
+33:         <span class="ruby-keyword kw">end</span>
+34:           
+35:         <span class="ruby-identifier">person</span>.<span class="ruby-identifier">last</span> = <span class="ruby-identifier">choice</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">execute</span>( <span class="ruby-identifier">person</span> ) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">choice</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">nil?</span><span class="ruby-comment cmt">#lastname, </span>
+36:         <span class="ruby-identifier">person</span>.<span class="ruby-identifier">prefix</span> = <span class="ruby-identifier">choice</span>.<span class="ruby-identifier">prefix</span>.<span class="ruby-identifier">execute</span>( <span class="ruby-identifier">person</span> ) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">person</span>.<span class="ruby-identifier">prefix</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-comment cmt">#title </span>
+37:         <span class="ruby-identifier">person</span>.<span class="ruby-identifier">suffix</span> = <span class="ruby-identifier">choice</span>.<span class="ruby-identifier">suffix</span>.<span class="ruby-identifier">execute</span>( <span class="ruby-identifier">person</span> ) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">person</span>.<span class="ruby-identifier">suffix</span>.<span class="ruby-identifier">nil?</span><span class="ruby-comment cmt">#suffix</span>
+38:         
+39:         <span class="ruby-identifier">person</span>
+40:       }
+41:       
+42:       <span class="ruby-ivar">@generators</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">f</span>
+43:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="reset-method" class="method-detail ">
+				<a name="method-i-reset"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">reset</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="reset-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/Generator.rb, line 89</span>
+89:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reset</span>
+90:       <span class="ruby-ivar">@generators</span> = [ ] 
+91:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+
