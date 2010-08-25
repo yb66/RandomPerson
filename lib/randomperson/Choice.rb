@@ -19,22 +19,16 @@ module RandomPerson
     end
     
     def load_names( patterns=['*.rb'] )
-      # puts "patterns: #{patterns}"
-      # available_files = [ ]
       lib_dir = File.dirname(__FILE__)
-      
       patterns.each do |pat|
-        full_pattern = File.join( lib_dir, 'NameFiles', pat )
-        # puts full_pattern
-        Dir.glob( full_pattern ).each do |file|    
-#           require file
+        full_pattern = File.join( lib_dir, 'Names', pat )
+        Dir.glob( full_pattern ).each do |file|
           @@available_classes << file
         end
       end
     end
     
     # tribe, gender, position
-    #English_males
     def method_missing( name, *args )
       return super( name, *args ) unless name.to_s =~ /^add/  
       words = name.to_s.split( "_" )
@@ -45,6 +39,7 @@ module RandomPerson
       cs.each do |c|
         require c
         fn = File.basename( c, File.extname( c ) ) #remove the extension
+        fn = 'RandomPerson::Names::' + fn
         addklass( fn, %w{ Male First } )
         addklass( fn, %w{ Female First } )
         addklass( fn, %w{ Last } )

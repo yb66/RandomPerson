@@ -2,12 +2,15 @@
 
 #require all the scaffolding
 
-HERE = File.dirname(__FILE__)
+require 'randomperson/ext/Array.rb'
+require 'randomperson/ext/Date.rb'
+require 'randomperson/ext/Enumerable.rb'
+require 'randomperson/ext/Hash.rb'
+require 'randomperson/ext/Kernel.rb'
+require 'randomperson/ext/Set.rb'
 
-Dir.glob( File.join( HERE, 'ext', '*.rb' ) ).each do |file|
-  require file
-end
-
-Dir.glob( File.join( HERE, '*.rb' ) ).each do |file|
-  require file 
-end
+require 'randomperson/choice.rb'
+require 'randomperson/generator.rb'
+require 'randomperson/name.rb'
+require 'randomperson/person.rb'
+#require 'randomperson/ratio.rb'
