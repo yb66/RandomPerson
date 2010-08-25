@@ -11,6 +11,9 @@ lib/randomperson/Names/AmericanFemaleFirst.rb
 lib/randomperson/Names/AmericanLast.rb
 lib/randomperson/Names/AmericanMaleFirst.rb
 lib/randomperson/Names/AmericanSuffix.rb
+lib/randomperson/Names/AncientGreekFemaleFirst.rb
+lib/randomperson/Names/AncientGreekLast.rb
+lib/randomperson/Names/AncientGreekMaleFirst.rb
 lib/randomperson/Names/AnyLast.rb
 lib/randomperson/Names/BasqueLast.rb
 lib/randomperson/Names/BritishPrefix.rb
