@@ -10,7 +10,7 @@ module RandomPerson
         i = @formats_ratiod.index_in_range( r )
         f = @formats.by_index(i).last
       else
-        f = @formats[:single]
+        f = @formats.first
       end
       f.( @names )
     end 
