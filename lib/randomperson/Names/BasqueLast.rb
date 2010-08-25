@@ -7,7 +7,7 @@ module RandomPerson
     
       def initialize
         @formats = {
-          :double_barrelled    => ->(n){ n.rand + ' ' + n.rand },
+          :double_barrelled => ->(n){ n.rand + ' ' + n.rand },
          }
          
         @formats_ratiod = [ 0..99 ]
