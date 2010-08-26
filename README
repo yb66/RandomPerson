@@ -138,6 +138,25 @@ Do you see how this is working? If you need to check what's loaded, have a look 
   choice.last
   choice.prefix
   choice.suffix
+  
+==NEGATIONS
+
+Sometimes you'll want to load something but not another, you can do this by prepending _not_ to the things you don't want. For example, to get the Thai names that are in Thai script and not romanised:
+
+  choice = RandomPerson::Choice.new
+  choice.add_Thai_notRomanised
+  
+or
+
+  choice.add_Thai_notRomanised_notFemale
+
+to also get rid of the female names.
+  
+This is an experimental thing. Seems to work, but may change. You cannot do this (at the moment)
+
+  choice.notRomanised_add_Thai
+  
+*Always begin with add_*
 
 ==RATIOS VS ODDS
 

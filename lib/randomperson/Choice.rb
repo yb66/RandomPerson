@@ -33,8 +33,20 @@ module RandomPerson
       return super( name, *args ) unless name.to_s =~ /^add/  
       words = name.to_s.split( "_" )
       words.shift #get rid of the "add"
+      
+      #get the negations prepended with "not", then lop it off"
+      nots = words.select{ |w| w =~ /^not/ }.map {|s| s[3..-1] }
+      #get just the positives
+      words.reject! {|w| w =~ /^not/ }
+      
       #TODO: check the beginning of each word has an uc letter
-      cs = words.map { |word| @@available_classes.classify_true(word) }.fold(:&)
+      
+      #get a set of nots
+      n = nots.map{|word| @@available_classes.classify_true(word)}.fold(:&)
+      #get a set of wanteds
+      cs = words.map{|word| @@available_classes.classify_true(word)}.fold(:&)
+      
+      cs = cs - n unless n.nil? #remove nots from wanteds
       
       cs.each do |c|
         require c
