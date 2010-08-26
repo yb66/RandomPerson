@@ -7,6 +7,8 @@ module RandomPerson
         @formats = {
           :single =>                      ->(n)   { n.rand },
           :double_barrelled_hyphenated => ->(n)   { n.rand + '-' + n.rand },
+          :de => ->(n)   { 'de ' + n.rand },
+          :du => ->(n)   { 'du ' + n.rand },
          }
          
         @formats_ratiod = [ (0..96), (97..99) ]
