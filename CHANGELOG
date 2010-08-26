@@ -1,3 +1,5 @@
+v0.0.8 Added French names. Added Thai script names, unfortunately the last names are places as couldn't get a proper list. Added a negation for the add_ method, see README
+
 v0.0.7  All Basque names added.
 
 v0.0.6 Added ancient Greek names. Improved default method call for formats.
