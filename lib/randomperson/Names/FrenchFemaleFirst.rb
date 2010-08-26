@@ -9,7 +9,7 @@ module RandomPerson
           :double_barrelled_hyphenated => ->(n)   { n.rand + '-' + n.rand },
          }
          
-        @formats_ratiod = [ 0..49, 65..99 ]
+        @formats_ratiod = [ 0..70, 71..99 ]
         setupnames
       end
         
