@@ -49,6 +49,14 @@ class TestTask < Test::Unit::TestCase
     assert_nil choice.gender_ratio
     assert_nil choice.age_lower
     assert_nil choice.age_upper
+    
+    
+    choice2 = RandomPerson::Choice.new( gender_ratio:[10,1], age_lower: 25, age_upper: 105 )
+    choice2.reset_parameters
+    
+    assert_nil choice2.gender_ratio
+    assert_nil choice2.age_lower
+    assert_nil choice2.age_upper
   end
 
 
