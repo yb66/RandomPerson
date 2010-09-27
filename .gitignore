@@ -8,3 +8,5 @@
 *.rar
 *.tar
 *.zip
+pkg
+rdoc
