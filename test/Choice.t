@@ -42,7 +42,14 @@ class TestTask < Test::Unit::TestCase
     assert_equal 105, choice5.age_upper
   end
   
-  
+  def test_reset_parameters
+    choice = RandomPerson::Choice.new
+    choice.reset_parameters
+    
+    assert_nil choice.gender_ratio
+    assert_nil choice.age_lower
+    assert_nil choice.age_upper
+  end
 
 
 end
