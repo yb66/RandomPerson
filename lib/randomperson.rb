@@ -2,6 +2,9 @@
 
 #require all the scaffolding
 
+require 'set'
+require 'date'
+
 require 'randomperson/ext/Array.rb'
 require 'randomperson/ext/Date.rb'
 require 'randomperson/ext/Enumerable.rb'
