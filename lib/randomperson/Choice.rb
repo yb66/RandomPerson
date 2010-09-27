@@ -25,7 +25,7 @@ require 'set'
       patterns.each do |pat|
         full_pattern = File.join( lib_dir, 'Names', pat )
         Dir.glob( full_pattern ).each do |file|
-          @@available_classes << file
+          @@available_classes << file unless @@available_classes.include? file
         end
       end
     end
