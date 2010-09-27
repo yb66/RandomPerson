@@ -53,4 +53,5 @@ lib/randomperson/ext/Enumerable.rb
 lib/randomperson/ext/Hash.rb
 lib/randomperson/ext/Kernel.rb
 lib/randomperson/ext/Set.rb
-t/Generator.t
+test/Generator.t
+test/Choice.t
