@@ -4,7 +4,7 @@ require 'set'
 
   class Choice
     
-    attr_accessor :malefirst, :femalefirst, :last, :gender_ratio, :age_lower, :age_upper, :dob, :prefix, :suffix #,:age_ratio
+    attr_accessor :malefirst, :femalefirst, :last, :gender_ratio, :age_lower, :age_upper, :prefix, :suffix #,:age_ratio
     
     def available_classes
       @@available_classes
@@ -86,7 +86,6 @@ require 'set'
     
     #set the age and gender parameters for this instance to nil
     def reset_parameters
-      @dob = nil
       @age_upper = nil
       @age_lower = nil
       @gender_ratio  = nil
