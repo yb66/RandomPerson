@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby -wKU
-
 class Array
 
   def index_in_range( n )

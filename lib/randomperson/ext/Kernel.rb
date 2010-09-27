@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby -wKU
-
 module Kernel
   def qualified_const_get(str)
     path = str.to_s.split('::')
