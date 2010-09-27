@@ -1,5 +1,7 @@
 *.old
 
+*.gem
+
 *.7z
 *.dmg
 *.gz
