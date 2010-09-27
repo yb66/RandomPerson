@@ -1,10 +1,5 @@
-#!/usr/bin/env ruby -wKU
-
-# require 
-# require 'choice'
 require 'test/unit'
 require 'generator'
-# require 'choice'
 
 class TestTask < Test::Unit::TestCase
 
@@ -14,6 +9,18 @@ class TestTask < Test::Unit::TestCase
 
   # def teardown
   # end
+  
+#   def test_return_person
+#     choice = RandomPerson::Choice.new( {gender_ratio: [3,5] , age_lower:16, age_upper:35 } )
+
+#     choice.add_English
+#     
+#     g = RandomPerson::Generator.new
+#     
+#     g.make_generator choice
+#     
+#     people = [ ]
+#   end
    
 #   def test_load_names
 # #     assert_equal(@task1.from, 'iain')
@@ -60,9 +67,9 @@ class TestTask < Test::Unit::TestCase
 #     end
 #   end
   
-  def test_pick_dob
-    assert(true)
-  end
+#   def test_pick_dob
+#     assert(true)
+#   end
 #     n = 1000
 #     while n > 0
 #       r1 = rand(100)
