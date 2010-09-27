@@ -1,5 +1,7 @@
 module RandomPerson
 
+require 'set'
+
   class Choice
     
     attr_accessor :malefirst, :femalefirst, :last, :gender_ratio, :age_lower, :age_upper, :dob, :prefix, :suffix #,:age_ratio
