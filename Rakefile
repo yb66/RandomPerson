@@ -9,8 +9,8 @@ ext_dir = File.expand_path('lib/randomperson/ext')
 
 # desc "Run basic tests"
 Rake::TestTask.new("test") do |t|
-  t.libs = [lib_dir, test_dir, app_dir]
-  t.pattern = 'test/*.t'
+  t.libs = [ext_dir,lib_dir, test_dir, app_dir]
+  t.pattern = 'test/test_*.rb'
   t.verbose = true
   t.warning = true
 end
