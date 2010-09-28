@@ -3,6 +3,22 @@ require 'date'
 require_relative '../lib/randomperson/ext/Date.rb'
 require_relative '../lib/randomperson/Generator.rb'
 
+require 'set'
+require_relative '../lib/randomperson/ext/Set.rb'
+require_relative '../lib/randomperson/ext/Enumerable.rb'
+require_relative '../lib/randomperson/ext/Kernel.rb'
+require_relative '../lib/randomperson/Name.rb'
+require_relative '../lib/randomperson/Names/AmericanFemaleFirst.rb'
+require_relative '../lib/randomperson/Names/AmericanMaleFirst.rb'
+require_relative '../lib/randomperson/Names/AmericanLast.rb'
+require_relative '../lib/randomperson/Names/BritishPrefix.rb'
+require_relative '../lib/randomperson/Names/BritishSuffix.rb'
+require_relative '../lib/randomperson/Choice.rb'
+
+require_relative '../lib/randomperson/ext/Array.rb'
+require_relative '../lib/randomperson/ext/Hash.rb'
+require_relative '../lib/randomperson/Person.rb'
+
 
 class TestTask < Test::Unit::TestCase
 
@@ -13,18 +29,32 @@ class TestTask < Test::Unit::TestCase
   # def teardown
   # end
   
-#   def test_return_person
-#     choice = RandomPerson::Choice.new( {gender_ratio: [3,5] , age_lower:16, age_upper:35 } )
 
-#     choice.add_English
-#     
-#     g = RandomPerson::Generator.new
-#     
-#     g.make_generator choice
-#     
-#     people = [ ]
-#   end
 
+  def test_make_generator
+    
+    choice = RandomPerson::Choice.new
+    choice.add_American
+    choice.add_British
+    
+    g = RandomPerson::Generator.new
+    
+    assert g.generators.empty?
+    
+    g.make_generator choice
+    
+    assert_not_nil g.generators
+    assert_equal 1, g.generators.length
+    
+    assert_instance_of RandomPerson::Person, g.generators[0].call
+    
+    people = [ ]
+    
+    10000.times { people << g.generators[0].call }
+    
+    assert_nil people.uniq!
+    
+  end
 
   def test_ratiod
     assert_kind_of Array, RandomPerson::Generator.ratiod( [1,1] ) 
