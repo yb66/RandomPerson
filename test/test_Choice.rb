@@ -7,6 +7,8 @@ require_relative '../lib/randomperson/Name.rb'
 require_relative '../lib/randomperson/Names/AmericanFemaleFirst.rb'
 require_relative '../lib/randomperson/Names/AmericanMaleFirst.rb'
 require_relative '../lib/randomperson/Names/AmericanLast.rb'
+require_relative '../lib/randomperson/Names/BritishPrefix.rb'
+require_relative '../lib/randomperson/Names/BritishSuffix.rb'
 require_relative '../lib/randomperson/Choice.rb'
 
 
@@ -50,9 +52,7 @@ class TestTask < Test::Unit::TestCase
     assert_equal 105, choice5.age_upper
   end
   
-#   def test_reset_names
-#     
-#   end
+
 
   #this is a test for method_missing add_NAME method
   def test_add_NAME
@@ -61,16 +61,23 @@ class TestTask < Test::Unit::TestCase
     assert_nil choice.malefirst
     assert_nil choice.femalefirst
     assert_nil choice.last
+    assert_nil choice.prefix
+    assert_nil choice.suffix
     
     choice.add_American
+    choice.add_British
     
     assert_not_nil choice.malefirst
     assert_not_nil choice.femalefirst
     assert_not_nil choice.last
+    assert_not_nil choice.prefix
+    assert_not_nil choice.suffix
     
     assert_instance_of RandomPerson::Names::AmericanMaleFirst, choice.malefirst
     assert_instance_of RandomPerson::Names::AmericanFemaleFirst, choice.femalefirst
     assert_instance_of RandomPerson::Names::AmericanLast, choice.last
+    assert_instance_of RandomPerson::Names::BritishPrefix, choice.prefix
+    assert_instance_of RandomPerson::Names::BritishSuffix, choice.suffix
   end
   
   def test_load_names
