@@ -64,7 +64,7 @@ module RandomPerson
       end
 
       def pick_age( lower=0, upper=100 )
-        age = rand(upper - lower) + lower
+        age =  rand(upper - lower).to_i + lower 
       end
       
       def pick_dob( y=16 )
