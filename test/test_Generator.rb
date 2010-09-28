@@ -22,18 +22,13 @@ class TestTask < Test::Unit::TestCase
 #     
 #     people = [ ]
 #   end
-   
-#   def test_load_names
-# #     assert_equal(@task1.from, 'iain')
-# #     assert_kind_of(@task1.added, Time)
-#     assert_equal
-#   end
 
-#   def test_ratiod
-#     assert_kind_of( RandomPerson::Generator.ratiod( [1,1] ), Array )
-#     assert_kind_of( RandomPerson::Generator.ratiod([1,1]).first, Range )
-#     assert_equal( RandomPerson::Generator.ratiod([1,3]).first.end, 25 )
-#   end
+
+  def test_ratiod
+    assert_kind_of Array, RandomPerson::Generator.ratiod( [1,1] ) 
+    assert_kind_of Range, RandomPerson::Generator.ratiod([1,1]).first
+    assert_equal 25, RandomPerson::Generator.ratiod([1,3]).first.end
+  end
 
   def test_pick_gender
     assert_not_nil RandomPerson::Generator.pick_gender()
