@@ -2,6 +2,11 @@ require 'test/unit'
 require 'set'
 require_relative '../lib/randomperson/ext/Set.rb'
 require_relative '../lib/randomperson/ext/Enumerable.rb'
+require_relative '../lib/randomperson/ext/Kernel.rb'
+require_relative '../lib/randomperson/Name.rb'
+require_relative '../lib/randomperson/Names/AmericanFemaleFirst.rb'
+require_relative '../lib/randomperson/Names/AmericanMaleFirst.rb'
+require_relative '../lib/randomperson/Names/AmericanLast.rb'
 require_relative '../lib/randomperson/Choice.rb'
 
 
@@ -50,13 +55,23 @@ class TestTask < Test::Unit::TestCase
 #   end
 
   #this is a test for method_missing add_NAME method
-#   def test_add_NAME
-#   
-#     choice = RandomPerson::Choice.new
-#     choice.add_American
-#     
-#     assert_not_nil choice.male_first
-#   end
+  def test_add_NAME
+  
+    choice = RandomPerson::Choice.new
+    assert_nil choice.malefirst
+    assert_nil choice.femalefirst
+    assert_nil choice.last
+    
+    choice.add_American
+    
+    assert_not_nil choice.malefirst
+    assert_not_nil choice.femalefirst
+    assert_not_nil choice.last
+    
+    assert_instance_of RandomPerson::Names::AmericanMaleFirst, choice.malefirst
+    assert_instance_of RandomPerson::Names::AmericanFemaleFirst, choice.femalefirst
+    assert_instance_of RandomPerson::Names::AmericanLast, choice.last
+  end
   
   def test_load_names
     choice = RandomPerson::Choice.new
