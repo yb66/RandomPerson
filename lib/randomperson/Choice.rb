@@ -1,7 +1,5 @@
 module RandomPerson
 
-require 'set'
-
   class Choice
     
     attr_accessor :malefirst, :femalefirst, :last, :gender_ratio, :age_lower, :age_upper, :prefix, :suffix #,:age_ratio
@@ -10,6 +8,7 @@ require 'set'
       @@available_classes
     end
     
+
     @@available_classes = Set.new
     
     def initialize( h={} )
@@ -18,6 +17,7 @@ require 'set'
       @age_upper = h[:age_upper] || 100
 
       load_names
+      
     end
     
     def load_names( patterns=['*.rb'] )
