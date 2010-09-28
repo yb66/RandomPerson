@@ -2,7 +2,7 @@ require 'test/unit'
 require 'set'
 require_relative '../lib/randomperson/ext/Set.rb'
 require_relative '../lib/randomperson/ext/Enumerable.rb'
-require 'choice'
+require_relative '../lib/randomperson/Choice.rb'
 
 
 
