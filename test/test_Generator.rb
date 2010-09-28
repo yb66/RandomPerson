@@ -51,17 +51,17 @@ class TestTask < Test::Unit::TestCase
 #     assert( g.generators.empty? )
   end
   
-#   def test_pick_age
-#     n = 1000
-#     while n > 0
-#       r1 = rand(100)
-#       r2 = rand(100) + r1
-#       age = RandomPerson::Generator.pick_age(r1, r2)
-#       assert_not_nil( age )
-#       assert( r1..r2, age )
-#       n = n - 1
-#     end
-#   end
+  def test_pick_age
+    n = 2000
+    while n > 0
+      r1 = rand(100)
+      r2 = rand(100) + r1
+      age = RandomPerson::Generator.pick_age(r1, r2)
+      assert_not_nil age 
+      assert( r2 >= age && age >= r1, "age #{age} r1 #{r1} r2 #{r2}" ) 
+      n = n - 1
+    end
+  end
   
 #   def test_pick_dob
 #     assert(true)
