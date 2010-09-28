@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby -wKU
-
 #require all the scaffolding
 
 require 'set'
