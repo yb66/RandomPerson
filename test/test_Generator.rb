@@ -1,5 +1,6 @@
 require 'test/unit'
-require 'generator'
+require_relative '../lib/randomperson/Generator.rb'
+
 
 class TestTask < Test::Unit::TestCase
 
