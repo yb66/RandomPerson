@@ -1,4 +1,6 @@
 require 'test/unit'
+require 'date'
+require_relative '../lib/randomperson/ext/Date.rb'
 require_relative '../lib/randomperson/Generator.rb'
 
 
@@ -63,23 +65,17 @@ class TestTask < Test::Unit::TestCase
     end
   end
   
-#   def test_pick_dob
-#     assert(true)
-#   end
-#     n = 1000
-#     while n > 0
-#       r1 = rand(100)
-#       dob = RandomPerson::Generator.pick_dob(r1)
-#       # assert_kind_of(dob, Time)
-#       # assert_not_nil( dob )
-#       # assert_equal( dob.year, Time.now.year - r1 )
-#       n = n - 1
-#     end
-#   end
+  def test_pick_dob
+    n = 1000
+    while n > 0
+      r1 = rand(100)
+      dob = RandomPerson::Generator.pick_dob(r1)
+      assert_not_nil dob 
+      assert_kind_of Time, dob
+      assert_equal Time.now.year - r1, dob.year
+      n = n - 1
+    end
+  end
   
-#   def test_read_initialvalues_failure
-# #     assert_not_equal(@task1.from , "jane")
-# #     assert_not_nil(@task2.unique_id)
-#   end
   
 end
