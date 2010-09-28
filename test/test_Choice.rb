@@ -1,6 +1,9 @@
 require 'test/unit'
-require 'choice'
 require 'set'
+require_relative '../lib/randomperson/ext/Set.rb'
+require_relative '../lib/randomperson/ext/Enumerable.rb'
+require 'choice'
+
 
 
 class TestTask < Test::Unit::TestCase
@@ -42,12 +45,27 @@ class TestTask < Test::Unit::TestCase
     assert_equal 105, choice5.age_upper
   end
   
+#   def test_reset_names
+#     
+#   end
+
+  #this is a test for method_missing add_NAME method
+#   def test_add_NAME
+#   
+#     choice = RandomPerson::Choice.new
+#     choice.add_American
+#     
+#     assert_not_nil choice.male_first
+#   end
+  
   def test_load_names
     choice = RandomPerson::Choice.new
     assert_not_nil choice.available_classes
     
-    
     len = choice.available_classes.length
+    
+    
+    assert_not_equal 0, len
     
     choice2 = RandomPerson::Choice.new( gender_ratio:[10,1], age_lower: 25, age_upper: 105 )
     
@@ -57,6 +75,7 @@ class TestTask < Test::Unit::TestCase
     assert_equal len, choice2.available_classes.length
     
   end
+  
   
   def test_reset_parameters
     choice = RandomPerson::Choice.new
