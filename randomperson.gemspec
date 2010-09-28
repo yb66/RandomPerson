@@ -16,4 +16,6 @@ Gem::Specification.new do |s|
   s.homepage       = "http://github.com/yb66/RandomPerson"
   s.email          = "iainspeed @nospam@ gmail.com"
   s.test_files     = Dir.glob('test/*.t')
+  s.signing_key    = ENV['HOME'] + '/.ssh/gem-private_key.pem'
+  s.cert_chain     = [ENV['HOME'] + '/.ssh/gem-public_cert.pem']
 end
