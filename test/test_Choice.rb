@@ -52,7 +52,27 @@ class TestTask < Test::Unit::TestCase
     assert_equal 105, choice5.age_upper
   end
   
-
+  def test_reset_names
+    
+    choice = RandomPerson::Choice.new
+    choice.add_American
+    choice.add_British
+    
+    assert_not_nil choice.malefirst
+    assert_not_nil choice.femalefirst
+    assert_not_nil choice.last
+    assert_not_nil choice.prefix
+    assert_not_nil choice.suffix
+    
+    choice.reset_names
+    
+    assert_nil choice.malefirst
+    assert_nil choice.femalefirst
+    assert_nil choice.last
+    assert_nil choice.prefix
+    assert_nil choice.suffix
+   
+  end
 
   #this is a test for method_missing add_NAME method
   def test_add_NAME
