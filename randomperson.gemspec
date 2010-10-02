@@ -6,7 +6,10 @@ $:.unshift lib unless $:.include?(lib)
 Gem::Specification.new do |s|
   s.name           = "randomperson"
   s.summary        = "A gem for generating random persons :)"
-  s.version        = "0.0.10"
+  s.description = <<-EOF
+    RandomPerson is a port to Ruby of Perl's Data::RandomPerson. Use it to generate random persons given various parameters, such as country, age and gender ratio.
+  EOF
+  s.version        = "0.0.11"
   s.platform       = Gem::Platform::RUBY
   s.require_paths  << 'ext'
   s.required_ruby_version    = ">= 1.9.1"
