@@ -13,7 +13,7 @@ module RandomPerson
       end
         
       def setupnames
-        @names = %w{ Juhani Johannes Olavi Antero Tapani Kalevi Tapio Matti Mikael Ilmari }
+        @names = %w{ Antero Ilmari Johannes Juhani Kalevi Matti Mikael Olavi Tapani Tapio }
       end
     end    
   end

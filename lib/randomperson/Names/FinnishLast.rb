@@ -13,7 +13,7 @@ module RandomPerson
       end  
       
       def setupnames
-        @names = %w( Korhonen Virtanen Nieminen Mäkinen Mäkelä Hämäläinen Laine Koskinen Heikkinen Järvinen )
+        @names = %w( Heikkinen Hämäläinen Järvinen Korhonen Koskinen Laine Mäkelä Mäkinen Nieminen Virtanen )
       end
       
     end 
