@@ -28,8 +28,8 @@ module RandomPerson
         end
           
         person.last = choice.last.execute( person ) unless choice.last.nil?#lastname, 
-        person.prefix = choice.prefix.execute( person ) unless person.prefix.nil? #title 
-        person.suffix = choice.suffix.execute( person ) unless person.suffix.nil?#suffix
+        person.prefix = choice.prefix.execute( person ) unless choice.prefix.nil? #title 
+        person.suffix = choice.suffix.execute( person ) unless choice.suffix.nil?#suffix
         
         person
       }
