@@ -8,20 +8,20 @@ module RandomPerson
         
          }
          
-        @formats_ratiod = [ 0, 1, 2, 3, 4, 5, 6..18, 98, 99]
+        @formats_ratiod = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9..59, 59..159]
         
-        @names = %w( OBE, MBE, GBE, KBE, DBE, CBE, JP, GM, BSc, BA )
+        @names = %w( OBE, MBE, GBE, KBE, DBE, CBE, JP, GM, PhD BSc, BA )
       end
       
       def execute( person )
-          
-          r = rand(99)      
-          if person.age > 17
-            r += 1 #Jr can't happen
-          end
-                
+        retval = nil
+        r = rand(999)      
+        unless person.age < 17 #sorry kids, but you ain't gonna get these
           i = @formats_ratiod.index_in_range( r )
-          return @names[i]
+          retval = @names[i] unless i.nil?
+        end
+
+        return retval 
       end
     end      
   end 

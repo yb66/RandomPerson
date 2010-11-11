@@ -1,3 +1,5 @@
+# coding: utf-8
+
 module RandomPerson
   module Names
 
@@ -14,7 +16,7 @@ module RandomPerson
               
         if person.age < 17
           return 'Miss' if person.gender == 'f'
-          return 'Mr.'
+          return 'Mr'
         end
           
         r = rand(51) #0..50

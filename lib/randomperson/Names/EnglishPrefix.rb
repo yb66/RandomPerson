@@ -1,22 +1,20 @@
-# coding: utf-8
-
 module RandomPerson
   module Names
 
-    class FinnishPrefix < Name
+    class EnglishPrefix < Name
             
       def initialize
          
-        @formats_ratiod = [ 0..47, 48..50, 51..69, 70..99]
+        @formats_ratiod = [ 0..47, 48..50, 51..70, 71..87, 88..99]
         
-        @names = %w(herra Dr rouva neiti)
+        @names = %w(Mr Dr Mrs Ms Miss )
       end
       
       def execute( person )
               
         if person.age < 17
-          return @names[3] if person.gender == 'f'
-          return @names[0]
+          return 'Miss' if person.gender == 'f'
+          return 'Mr'
         end
           
         r = rand(51) #0..50
