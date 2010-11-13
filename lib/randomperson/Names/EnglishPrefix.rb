@@ -5,7 +5,7 @@ module RandomPerson
             
       def initialize
          
-        @formats_ratiod = [ 0..47, 48..50, 51..70, 71..87, 88..99]
+        @formats_ratiod = [ 0..47, 48..49, 50..70, 71..87, 88..99]
         
         @names = %w(Mr Dr Mrs Ms Miss )
       end
