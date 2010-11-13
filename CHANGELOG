@@ -1,3 +1,5 @@
+v0.0.17 Added Spanish prefixes. Improved ratios for prefixes to make chance of Dr equal between genders.
+
 v0.0.16 Added English, Scottish and Welsh prefixes for convenience.
 
 v0.0.15 Bugfix: prefix and suffix should now work. Finnish names have utf8 sign so should work. Added utf8 to all Name files, just in case. Fixed some nasty copy and paste errors with prefixes.
