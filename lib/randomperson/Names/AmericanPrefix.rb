@@ -17,8 +17,7 @@ module RandomPerson
           return 'Mr.'
         end
           
-        r = rand(51) #0..50
-        r += 49 if person.gender == 'f' #give 50% chance of being a Dr
+        r = rand(100) #0..99
   
         i = @formats_ratiod.index_in_range( r )
         return @names[i]
