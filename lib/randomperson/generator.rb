@@ -1,7 +1,10 @@
 module RandomPerson
 
   class Generator
-  
+    
+    require_relative './choice.rb'
+    require_relative './person.rb'
+    
     attr_reader :generators
    
     def initialize
