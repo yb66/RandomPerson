@@ -9,7 +9,7 @@ require_relative '../lib/randomperson/Names/AmericanMaleFirst.rb'
 require_relative '../lib/randomperson/Names/AmericanLast.rb'
 require_relative '../lib/randomperson/Names/BritishPrefix.rb'
 require_relative '../lib/randomperson/Names/BritishSuffix.rb'
-require_relative '../lib/randomperson/Choice.rb'
+require_relative '../lib/randomperson/choice.rb'
 
 
 

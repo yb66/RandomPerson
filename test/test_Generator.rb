@@ -1,7 +1,7 @@
 require 'test/unit'
 require 'date'
 require_relative '../lib/randomperson/ext/Date.rb'
-require_relative '../lib/randomperson/Generator.rb'
+require_relative '../lib/randomperson/generator.rb'
 
 require 'set'
 require_relative '../lib/randomperson/ext/Set.rb'
@@ -13,11 +13,11 @@ require_relative '../lib/randomperson/Names/AmericanMaleFirst.rb'
 require_relative '../lib/randomperson/Names/AmericanLast.rb'
 require_relative '../lib/randomperson/Names/BritishPrefix.rb'
 require_relative '../lib/randomperson/Names/BritishSuffix.rb'
-require_relative '../lib/randomperson/Choice.rb'
+require_relative '../lib/randomperson/choice.rb'
 
 require_relative '../lib/randomperson/ext/Array.rb'
 require_relative '../lib/randomperson/ext/Hash.rb'
-require_relative '../lib/randomperson/Person.rb'
+require_relative '../lib/randomperson/person.rb'
 
 
 class TestTask < Test::Unit::TestCase
