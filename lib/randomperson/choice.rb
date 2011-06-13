@@ -11,7 +11,10 @@ module RandomPerson
     
 
     @@available_classes = Set.new
-    
+
+    # Initialize the class with the parameters for the population you want.
+    # @example 
+    #   choice = RandomPerson::Choice.new( {gender_ratio: [3,5] , age_lower:16, age_upper:35 } )
     def initialize( h={} )
       @gender_ratio = h[:gender_ratio] || [1,1] #default
       @age_lower = h[:age_lower] || 0

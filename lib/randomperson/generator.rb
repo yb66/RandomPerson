@@ -7,12 +7,18 @@ module RandomPerson
     
     attr_reader :generators
    
+    # Sets up a list of generators
+    # @example 
+    #   g = RandomPerson::Generator.new
     def initialize
       @generators = [ ] 
     end
 
     
-    #build a choice generator
+    # Build a choice generator
+    # @param [RandomPerson::Choice] choice A Choice object.
+    # @example 
+    #   g.make_generator choice
     def make_generator( choice )
     f = -> {
         g = Generator.pick_gender( choice.gender_ratio )
