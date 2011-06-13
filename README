@@ -208,6 +208,60 @@ Suffix files will also (I hope) do a bit of checking at what's already been set,
 
 My suggestion is to find the type of name that is closest (if you're looking for Spanishy names then look at the Spanish files as they'll have similar formatting rules there for free...) and copy and paste it in to a new one. It's easier that way.
 
+These are current name files in the library:
+
+AmericanFemaleFirst
+AmericanLast
+AmericanMaleFirst
+AmericanPrefix
+AmericanSuffix
+AncientGreekFemaleFirst
+AncientGreekLast
+AncientGreekMaleFirst
+AnyLast
+BasqueFemaleFirst
+BasqueLast
+BasqueMaleFirst
+BritishPrefix
+BritishSuffix
+EnglishFemaleFirst
+EnglishLast
+EnglishMaleFirst
+EnglishPrefix
+FinnishFemaleFirst
+FinnishLast
+FinnishMaleFirst
+FinnishPrefix
+FrenchFemaleFirst
+FrenchLast
+FrenchMaleFirst
+GermanFemaleFirst
+GermanLast
+GermanMaleFirst
+ScottishFemaleFirst
+ScottishLast
+ScottishMaleFirst
+ScottishPrefix
+SpanishFemaleFirst
+SpanishLast
+SpanishMaleFirst
+SpanishPrefix
+SwedishFemaleFirst
+SwedishLast
+SwedishMaleFirst
+ThaiFemaleFirst
+ThaiFirst
+ThaiLast
+ThaiMaleFirst
+ThaiRomanisedFemaleFirst
+ThaiRomanisedLast
+ThaiRomanisedMaleFirst
+WelshFemaleFirst
+WelshLast
+WelshMaleFirst
+WelshPrefix
+
+
 ==ACCURACY OF NAMES AND RATIOS
 
 I've taken bits and pieces from wherever I could get them, so if you see something is wrong then either let me know or produce a patch. I've no idea what the process is for that on GitHub but I'm sure there's a tutorial if you look for it. I'll also add you name to this readme, and worldly fame will be yours.
