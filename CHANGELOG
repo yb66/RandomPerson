@@ -1,3 +1,5 @@
+v0.0.18 Improved documentation a bit. Changed some filenames to fix a problem with case sensitivity on some systems.
+
 v0.0.17 Added Spanish prefixes. Improved ratios for prefixes to make chance of Dr equal between genders.
 
 v0.0.16 Added English, Scottish and Welsh prefixes for convenience.
