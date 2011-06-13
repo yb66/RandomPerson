@@ -6,6 +6,7 @@ module RandomPerson
   require 'set'
   require 'date'
   
+  require_relative './randomperson/version.rb'
   require_relative './randomperson/ext/Array.rb'
   require_relative './randomperson/ext/Date.rb'
   require_relative './randomperson/ext/Enumerable.rb'

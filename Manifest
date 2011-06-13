@@ -68,3 +68,4 @@ randomperson.gemspec
 README
 test/test_Choice.rb
 test/test_Generator.rb
+lib/randomperson/version.rb
