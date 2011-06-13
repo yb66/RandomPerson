@@ -28,7 +28,7 @@ then install it:
   gem install randomperson -P HighSecurity
   
 
-==USAGE (STOP SHOUTING!):
+==USAGE:
 
 So, to generate 1000 random people with Spanish names, between the ages of 16 and 35 with a ratio of 3 males to every 5 females:
 
