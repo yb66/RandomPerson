@@ -1,7 +1,6 @@
 # encoding: UTF-8
 module RandomPerson
 
-  VERSION = "0.0.18"
   #require all the scaffolding
   
   require 'set'
