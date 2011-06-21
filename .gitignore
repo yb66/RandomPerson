@@ -1,4 +1,6 @@
 *.old
+.rvmrc
+*.tmproj
 
 *.gem
 
