@@ -1,8 +1,11 @@
 module RandomPerson
 
-  class Choice
+  class Demographic
     require 'set'
     
+    # the name of this demographic
+    attr_accessor :name
+
     attr_accessor :malefirst, :femalefirst, :last, :gender_ratio, :age_lower, :age_upper, :prefix, :suffix #,:age_ratio
     
     def available_classes
@@ -14,14 +17,19 @@ module RandomPerson
 
     # Initialize the class with the parameters for the population you want.
     # @example 
-    #   choice = RandomPerson::Choice.new( {gender_ratio: [3,5] , age_lower:16, age_upper:35 } )
-    def initialize( h={} )
-      @gender_ratio = h[:gender_ratio] || [1,1] #default
-      @age_lower = h[:age_lower] || 0
-      @age_upper = h[:age_upper] || 100
+    #   demographic = RandomPerson::Demographic.new( {gender_ratio: [3,5] , age_lower:16, age_upper:35 } )
+    def initialize( name=nil, opts={} )
+      if name.kind_of? Hash
+        opts = name
+        name = nil
+      end
+      @name = name
+      @gender_ratio = opts[:gender_ratio] || [1,1] #default
+      @age_lower = opts[:age_lower] || 0
+      @age_upper = opts[:age_upper] || 115
+      
 
       load_names
-      
     end
     
     def load_names( patterns=['*.rb'] )
@@ -101,7 +109,7 @@ module RandomPerson
 #         i = rat.index_in_range( r )
 #         puts "i: #{i}"
 #         
-#         person = @choices[i].call
+#         person = @demographics[i].call
 #         puts person.inspect
 #         @people << person 
 #         n -= 1
