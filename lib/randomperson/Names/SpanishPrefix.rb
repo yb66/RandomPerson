@@ -25,7 +25,6 @@ module RandomPerson
           r = rand(50) #0..99
           r += 50 if person.gender == "f"
           i = @formats_ratiod.index_in_range( r )
-          puts "r: #{r} i: #{i}"
           @names[i]
         end
         
