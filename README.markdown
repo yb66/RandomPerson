@@ -21,27 +21,27 @@ You'll need at least Ruby v1.9.1
 
 Get the public key from http://github.com/yb66/RandomPerson/blob/master/gem-public_cert.pem and do:
 
-  gem cert --add /path/to/wherever/you/downloaded/this/to/public_cert.pem
+		gem cert --add /path/to/wherever/you/downloaded/this/to/public_cert.pem
   
 then install it:
 
-  gem install randomperson -P HighSecurity
+		gem install randomperson -P HighSecurity
   
 
 ## USAGE:
 
 So, to generate 1000 random people with Spanish names, between the ages of 16 and 35 with a ratio of 3 males to every 5 females:
 
-  require 'randomperson'
+		require 'randomperson'
 
-  r = RandomPerson() # don't forget the brackets!
-  
-  r.demographic("Spain").add_Spanish( {gender_ratio: [3,5] , age_lower:16, age_upper:35 } )
+		r = RandomPerson() # don't forget the brackets!
 
-  people = [ ]
-  1000.times { people << r.generate }
-  
-  10.times { |i| puts "#{people[i].first} #{people[i].last} age: #{people[i].age} born: #{people[i].dob.strftime("%d-%b-%Y")}" }
+		r.demographic("Spain").add_Spanish( {gender_ratio: [3,5] , age_lower:16, age_upper:35 } )
+
+		people = [ ]
+		1000.times { people << r.generate }
+
+		10.times { |i| puts "#{people[i].first} #{people[i].last} age: #{people[i].age} born: #{people[i].dob.strftime("%d-%b-%Y")}" }
 
   Bartolomé Andrés de Elixaeberna age: 20 born: 28-Apr-1990  
   Fabiana Cordero Balmaceda age: 21 born: 14-Jun-1989  
@@ -56,10 +56,10 @@ So, to generate 1000 random people with Spanish names, between the ages of 16 an
 
 Here's an example using the Thai Romanised data:
 
-  r.demographic("Thai").add_Thai_Romanised  
-  people = [ ]
-  10.times { people << r.generate( "Thai") }
-  10.times { |i| puts "#{people[i].first} #{people[i].last} age: #{people[i].age} born: #{people[i].dob.strftime("%d-%b-%Y")}" }
+		r.demographic("Thai").add_Thai_Romanised  
+		people = [ ]
+		10.times { people << r.generate( "Thai") }
+		10.times { |i| puts "#{people[i].first} #{people[i].last} age: #{people[i].age} born: #{people[i].dob.strftime("%d-%b-%Y")}" }
   
   Yongchaiyuth Sripituksakul Puntasrima age: 39 born: 29-Mar-1971  
   Sri-Patana Wattanasin age: 77 born: 04-Feb-1933  
