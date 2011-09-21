@@ -6,6 +6,11 @@ http://search.cpan.org/~peterhi/Data-RandomPerson-0.4/
 
 Make sure you're reading the right version of the docs to go with your library! This was my first Ruby library and right now I'm in the process of rewriting it. (If you're reading this on Github look for the "Switch Tags" above to get the right version.)
 
+## QUICK NOTE!
+
+This was the first Ruby library I wrote. I'm slowly adding specs and improving the code now I've half an idea of what I should be doing, but I'd really, *really* appreciate it that if you do see something is wrong or doesn't work for you or you've an idea for improvement **let me know**. Wow, Github makes this so easy, just go for it! I'll be happy to help and happy for the help.
+
+
 ## Why did I write this?
 
 Because the Faker library and a few of the other random ones are very good, but they don't have the precision I needed. I wanted believable male names between a certain age range for a football game I was writing. Producing names like Mrs Albert Wiggins wasn't really going to cut it.
@@ -215,6 +220,8 @@ Suffix files will also (I hope) do a bit of checking at what's already been set,
 ## ADDING YOUR OWN NAMEFILES
 
 My suggestion is to find the type of name that is closest (if you're looking for Spanishy names then look at the Spanish files as they'll have similar formatting rules there for free...) and copy and paste it in to a new one. It's easier that way.
+
+If you do make your own name file then fork this project and send me a pull request! (See the Github help if you don't know how).
 
 These are current name files in the library:
 
