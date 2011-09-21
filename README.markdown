@@ -112,8 +112,8 @@ etc etc
   
 or you can do things the old fashioned way (but why? anyway...)
 
-		require 'namefiles/spanishfemalefirst' 
-    #obviously you need to use the path from where you are or where the script will run from
+		require 'namefiles/spanishfemalefirst'   
+		#obviously you need to use the path from where you are or where the script will run from
   
 		r.demographic["My fancy demo"].female = RandomPerson::Names::SpanishFemaleFirst.new
 
