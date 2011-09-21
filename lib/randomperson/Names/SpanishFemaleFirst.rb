@@ -1,5 +1,8 @@
 # encoding: UTF-8
 
+require_relative "../name.rb"
+require_relative "../ext/Array.rb"
+
 module RandomPerson
   module Names
 
