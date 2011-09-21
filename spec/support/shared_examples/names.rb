@@ -3,16 +3,6 @@
 
 shared_examples "a Name class", :parent => "Name" do
 
-  describe :execute do
-    let(:person){ Struct.new :gender, :age }
-    context "Given a male" do
-      context "Who is young" do
-        subject { instance.execute person.new( "m", 9) }
-        it { should_not be_nil }
-      end
-    end
-  end
-
   describe :formats do
     subject { instance.formats }
     it { should be_a_kind_of Hash }
