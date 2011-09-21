@@ -1,28 +1,17 @@
 module RandomPerson
 
-  class Generator
+  module Generator
     
-    require_relative './choice.rb'
     require_relative './person.rb'
     
-    attr_reader :generators
-   
-    # Sets up a list of generators
+    # Build a demographic generator
+    # @param [RandomPerson::Demographic] demographic The demographic you would like.
     # @example 
-    #   g = RandomPerson::Generator.new
-    def initialize
-      @generators = [ ] 
-    end
-
-    
-    # Build a choice generator
-    # @param [RandomPerson::Choice] choice A Choice object.
-    # @example 
-    #   g.make_generator choice
-    def make_generator( choice )
+    #   Generator.make_generator demographic
+    def self.make_generator( demographic )
     f = -> {
-        g = Generator.pick_gender( choice.gender_ratio )
-        age = Generator.pick_age( choice.age_lower, choice.age_upper)
+        g = Generator.pick_gender( demographic.gender_ratio )
+        age = Generator.pick_age( demographic.age_lower, demographic.age_upper)
         
         person = Person.new(
           :gender =>  g, 
@@ -31,26 +20,25 @@ module RandomPerson
         )
         
         if person.gender == 'm'   
-          person.first = choice.malefirst.execute( person ) unless choice.malefirst.nil?
+          person.first = demographic.malefirst.execute( person ) unless demographic.malefirst.nil?
         else
-          person.first = choice.femalefirst.execute( person ) unless choice.femalefirst.nil?
+          person.first = demographic.femalefirst.execute( person ) unless demographic.femalefirst.nil?
         end
           
-        person.last = choice.last.execute( person ) unless choice.last.nil?#lastname, 
-        person.prefix = choice.prefix.execute( person ) unless choice.prefix.nil? #title 
-        person.suffix = choice.suffix.execute( person ) unless choice.suffix.nil?#suffix
+        person.last = demographic.last.execute( person ) unless demographic.last.nil? #lastname, 
+        person.prefix = demographic.prefix.execute( person ) unless demographic.prefix.nil? #title 
+        person.suffix = demographic.suffix.execute( person ) unless demographic.suffix.nil?#suffix
         
         person
       }
-      
-      @generators << f
+
+      f
     end
     
-    class << self
-    
+      
       #create a ratio that is made up of ranges
       #to help hit with multiple valued ratios
-      def ratiod( ratio=[1,1] )
+      def self.ratiod( ratio=[1,1] )
         sum = ratio.reduce(:+) #sum
         mult = 100.divmod( sum ).first #get a bigger spread of numbers
         ratio.map! { |n| n * mult }
@@ -68,7 +56,7 @@ module RandomPerson
       #   pick_gender( [1,2] )
       # @param [optional,Array<Integer,Integer>] ratio The ratio of males to females expressed in an array, e.g. [1,1] is (a chance of) one male for every female, [1,2] is one male to two females. The default is [1,1].
       # @return [String] Returns a 'f' for female or an 'm' for male.
-      def pick_gender( ratio=[1,1] ) #male first
+      def self.pick_gender( ratio=[1,1] ) #male first
         if ratio.length == 2
           return 'f' if ratio.first == 0
           return 'm' if ratio.last == 0 
@@ -81,25 +69,18 @@ module RandomPerson
         end
       end
 
-      def pick_age( lower=0, upper=100 )
+      def self.pick_age( lower=0, upper=100 )
         age =  rand(upper - lower).to_i + lower 
       end
       
-      def pick_dob( y=16 )
+      def self.pick_dob( y=16 )
         year  = Time.now.year - y
         month = rand(12) + 1;
         day   = rand( Date.days_in_month( year, month ) ) + 1 
         Time.local( year, month, day )
       end
-      
-    
-    end #class << self
-      
-    
 
-  
-
-    def reset
+    def self.reset
       @generators = [ ] 
     end
 
