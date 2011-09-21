@@ -143,10 +143,10 @@ English males:
 If you need to check what's loaded, have a look in the instance variables of the demographic:
 
 		r.demographic["Spanish"].male
-		r.demographic["Spanish"].male.female
-		r.demographic["Spanish"].male.last
-		r.demographic["Spanish"].male.prefix
-		r.demographic["Spanish"].male.suffix
+		r.demographic["Spanish"].female
+		r.demographic["Spanish"].last
+		r.demographic["Spanish"].prefix
+		r.demographic["Spanish"].suffix
   
 ## NEGATIONS
 
