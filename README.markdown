@@ -1,10 +1,10 @@
-=RandomPerson
+# RandomPerson
 
 A port to Ruby of Perl's Data::RandomPerson.
 
 http://search.cpan.org/~peterhi/Data-RandomPerson-0.4/
 
-Initially just the Names portion. In fact, probably just that. I'm not a masochist. Well, just a bit.
+Make sure you're reading the right version of the docs to go with your library! (If you're reading this on Github look for the "Switch Tags" above to get the right version.)
 
 ## Why did I write this?
 
@@ -12,7 +12,7 @@ Because the Faker library and a few of the other random ones are very good, but 
 
 And I'm a masochist.
 
-It also has unicode characters, so it'll give your database a real test.
+It also has unicode characters, so it'll give your database a real test. At least, if it's MySQL, all the other databases won't even notice.
 
 
 ## Installation:
@@ -43,34 +43,34 @@ So, to generate 1000 random people with Spanish names, between the ages of 16 an
   
   10.times { |i| puts "#{people[i].first} #{people[i].last} age: #{people[i].age} born: #{people[i].dob.strftime("%d-%b-%Y")}" }
 
-  Bartolomé Andrés de Elixaeberna age: 20 born: 28-Apr-1990
-  Fabiana Cordero Balmaceda age: 21 born: 14-Jun-1989
-  Jorge Alas Albarracin age: 29 born: 16-Apr-1981
-  Eufemia Berlanga de Sergi age: 33 born: 25-Jan-1977
-  David Puig Villaroel age: 19 born: 17-Apr-1991
-  Alba Henchoz de Hurtado age: 30 born: 14-Feb-1980
-  Natalia Jara de Guevara age: 33 born: 28-Jul-1977
-  Tito Cresaco Campo age: 20 born: 14-Feb-1990
-  Susana Pitillas de Vaime age: 32 born: 12-Aug-1978
-  Gustavo Hierro Carbajal y Plazas age: 31 born: 08-Feb-1979
+  Bartolomé Andrés de Elixaeberna age: 20 born: 28-Apr-1990  
+  Fabiana Cordero Balmaceda age: 21 born: 14-Jun-1989  
+  Jorge Alas Albarracin age: 29 born: 16-Apr-1981  
+  Eufemia Berlanga de Sergi age: 33 born: 25-Jan-1977  
+  David Puig Villaroel age: 19 born: 17-Apr-1991  
+  Alba Henchoz de Hurtado age: 30 born: 14-Feb-1980  
+  Natalia Jara de Guevara age: 33 born: 28-Jul-1977  
+  Tito Cresaco Campo age: 20 born: 14-Feb-1990  
+  Susana Pitillas de Vaime age: 32 born: 12-Aug-1978  
+  Gustavo Hierro Carbajal y Plazas age: 31 born: 08-Feb-1979  
 
 Here's an example using the Thai Romanised data:
 
-  r.demographic("Thai").add_Thai_Romanised 
+  r.demographic("Thai").add_Thai_Romanised  
   people = [ ]
   10.times { people << r.generate( "Thai") }
   10.times { |i| puts "#{people[i].first} #{people[i].last} age: #{people[i].age} born: #{people[i].dob.strftime("%d-%b-%Y")}" }
   
-  Yongchaiyuth Sripituksakul Puntasrima age: 39 born: 29-Mar-1971
-  Sri-Patana Wattanasin age: 77 born: 04-Feb-1933
-  Wattana Rojjanasukchai age: 7 born: 27-Jun-2003
-  Ban Sukbunsung age: 85 born: 07-Sep-1925
-  Daeng Prasongsanti age: 65 born: 27-Mar-1945
-  Proi Paowsong Sriwarunyu age: 60 born: 06-May-1950
-  Ban Yongjaiyut age: 4 born: 06-Nov-2006
-  Siam Narkhirunkanok age: 15 born: 12-Aug-1995
-  Tong Punyawong Kadesadayurat age: 64 born: 01-Sep-1946
-  Sarai Wattanapanit Maneerattana age: 44 born: 21-Dec-1966
+  Yongchaiyuth Sripituksakul Puntasrima age: 39 born: 29-Mar-1971  
+  Sri-Patana Wattanasin age: 77 born: 04-Feb-1933  
+  Wattana Rojjanasukchai age: 7 born: 27-Jun-2003  
+  Ban Sukbunsung age: 85 born: 07-Sep-1925  
+  Daeng Prasongsanti age: 65 born: 27-Mar-1945  
+  Proi Paowsong Sriwarunyu age: 60 born: 06-May-1950  
+  Ban Yongjaiyut age: 4 born: 06-Nov-2006  
+  Siam Narkhirunkanok age: 15 born: 12-Aug-1995  
+  Tong Punyawong Kadesadayurat age: 64 born: 01-Sep-1946  
+  Sarai Wattanapanit Maneerattana age: 44 born: 21-Dec-1966  
 
 ## DEMOGRAPHIC
 
@@ -114,11 +114,11 @@ The rule is, put_underscores_between_the_important_words
 
 _and_
 
-always begin with *add_*
+always begin with `add_`
 
 _and_
 
-make sure each word is capitalised, add\_male will actually pick up Fe_male_ whereas Female and Male will get what you want.
+make sure each word is capitalised, `add_male` will actually pick up Fe_male_ whereas `Female` and `Male` will get what you want.
 
 If you want EnglishLast names loaded:
 
@@ -159,7 +159,7 @@ This is an experimental thing. Seems to work, but may change. You cannot do this
 
 	  r.demographic.notRomanised_add_Thai
   
-*Always begin with add_*
+**Always** *begin with* `add_`
 
 ## RATIOS VS ODDS
 
