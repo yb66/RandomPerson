@@ -8,12 +8,10 @@ module RandomPerson
 
     attr_accessor :malefirst, :femalefirst, :last, :gender_ratio, :age_lower, :age_upper, :prefix, :suffix #,:age_ratio
     
-    def available_classes
-      @@available_classes #TODO change this to a class instance variable or something
+    def self.available_classes
+      @available_classes ||= Set.new
     end
     
-
-    @@available_classes = Set.new
 
     # Initialize the class with the parameters for the population you want.
     # @example 
@@ -37,7 +35,7 @@ module RandomPerson
       patterns.each do |pat|
         full_pattern = File.join( lib_dir, 'Names', pat )
         Dir.glob( full_pattern ).each do |file|
-          @@available_classes << file
+          Demographic.available_classes << file
         end
       end
     end
@@ -56,9 +54,9 @@ module RandomPerson
       #TODO: check the beginning of each word has an uc letter
       
       #get a set of nots
-      n = nots.map{|word| @@available_classes.classify_true(word)}.fold(:&)
+      n = nots.map{|word| Demographic.available_classes.classify_true(word)}.fold(:&)
       #get a set of wanteds
-      cs = words.map{|word| @@available_classes.classify_true(word)}.fold(:&)
+      cs = words.map{|word| Demographic.available_classes.classify_true(word)}.fold(:&)
       
       cs = cs - n unless n.nil? #remove nots from wanteds
       
