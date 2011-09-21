@@ -9,7 +9,7 @@ module RandomPerson
     attr_accessor :malefirst, :femalefirst, :last, :gender_ratio, :age_lower, :age_upper, :prefix, :suffix #,:age_ratio
     
     def available_classes
-      @@available_classes
+      @@available_classes #TODO change this to a class instance variable or something
     end
     
 
