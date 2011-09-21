@@ -30,6 +30,8 @@ then install it:
 
 ## USAGE:
 
+The original API (if you can call it that) was very clunky so I've endeavoured to improve it by adding a nice facade over the top. I'll start off using that but as the examples move along I might do some things "the old fashioned way" by using some of the classes underlying everything directly, just so you know what's going on under there. If you see several ways of doing the same thing don't freak out! You're probably best using the stuff just below here.
+
 So, to generate 1000 random people with Spanish names, between the ages of 16 and 35 with a ratio of 3 males to every 5 females:
 
 		require 'randomperson'
@@ -43,6 +45,7 @@ So, to generate 1000 random people with Spanish names, between the ages of 16 an
 
 		10.times { |i| puts "#{people[i].first} #{people[i].last} age: #{people[i].age} born: #{people[i].dob.strftime("%d-%b-%Y")}" }
 
+Output:
   Bartolomé Andrés de Elixaeberna age: 20 born: 28-Apr-1990  
   Fabiana Cordero Balmaceda age: 21 born: 14-Jun-1989  
   Jorge Alas Albarracin age: 29 born: 16-Apr-1981  
@@ -60,7 +63,8 @@ Here's an example using the Thai Romanised data:
 		people = [ ]
 		10.times { people << r.generate( "Thai") }
 		10.times { |i| puts "#{people[i].first} #{people[i].last} age: #{people[i].age} born: #{people[i].dob.strftime("%d-%b-%Y")}" }
-  
+
+Output:  
   Yongchaiyuth Sripituksakul Puntasrima age: 39 born: 29-Mar-1971  
   Sri-Patana Wattanasin age: 77 born: 04-Feb-1933  
   Wattana Rojjanasukchai age: 7 born: 27-Jun-2003  
@@ -72,7 +76,7 @@ Here's an example using the Thai Romanised data:
   Tong Punyawong Kadesadayurat age: 64 born: 01-Sep-1946  
   Sarai Wattanapanit Maneerattana age: 44 born: 21-Dec-1966  
 
-## DEMOGRAPHIC
+## DEMOGRAPHICS
 
 The Demographic class sets the parameters that will be used to generate people.
 
@@ -104,11 +108,12 @@ r.demographic.add_Spanish would load:
 
 etc etc
   
-or you can do things the old fashioned way
+or you can do things the old fashioned way (but why? anyway...)
 
-  `require 'namefiles/spanishfemalefirst'` #obviously you need to use the path from where you are or where the script will run from
+		require 'namefiles/spanishfemalefirst' 
+    #obviously you need to use the path from where you are or where the script will run from
   
-		r.demographic["My fancy demo"].female = RandomPerson::SpanishFemaleFirst.new
+		r.demographic["My fancy demo"].female = RandomPerson::Names::SpanishFemaleFirst.new
 
 The rule is, put_underscores_between_the_important_words
 
@@ -130,7 +135,7 @@ All English files:
 
 English males:
 
-		r.demographic.add_English_Male
+    r.demographic.add_English_Male
 
 
 If you need to check what's loaded, have a look in the instance variables of the demographic:
@@ -169,13 +174,12 @@ A ratio of 1:1 will not necessarily give you a population with exactly half male
 
 If you wish to have an exact ratio within the population then create two choices each with a 0% chance of producing the other. For example:
 
-	  men = RandomPerson::Choice.new( gender_ratio:[1,0] )
-	  women = RandomPerson::Choice.new( gender_ratio:[0,1] )
-	  ...more code here...
-	  g.make_generator men # pushes the generator onto @generators in 0 position
-	  g.make_generator women # pushes the generator onto @generators in 1 position
-	  25.times { people << g.generators[0].call }
-	  75.times { people << g.generators[1].call }
+	  r.demographic("Men", gender_ratio:[1,0] )
+	  r.demographic("Women", gender_ratio:[0,1] )
+	  #...more code here...
+	  
+	  25.times { people << r.generate("Men") }
+	  75.times { people << r.generate("Women") }
 
 This would give you a population of 25 males and 75 females. Which sounds great unless you really think about it.
 
