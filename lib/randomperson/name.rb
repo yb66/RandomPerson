@@ -1,3 +1,7 @@
+# encoding: UTF-8
+
+require_relative "./ext/Hash.rb"
+
 module RandomPerson
 
   class Name
@@ -6,11 +10,11 @@ module RandomPerson
 
     def execute( person=nil )
       if @formats.length > 1
-        r = rand(@formats_ratiod.last.end)
+        r = rand(@formats_ratiod.last.end + 1)
         i = @formats_ratiod.index_in_range( r )
-        f = @formats.by_index(i).last
+        f = @formats[i]
       else
-        k, f = @formats.first #throw away the key name
+        f = @formats.first #throw away the key name
       end
       f.( @names )
     end 
