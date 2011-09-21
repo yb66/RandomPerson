@@ -5,9 +5,9 @@ module RandomPerson
     require_relative './person.rb'
     
     # Build a demographic generator
-    # @param [RandomPerson::Choice] demographic A Choice object.
+    # @param [RandomPerson::Demographic] demographic The demographic you would like.
     # @example 
-    #   g.make_generator demographic
+    #   Generator.make_generator demographic
     def self.make_generator( demographic )
     f = -> {
         g = Generator.pick_gender( demographic.gender_ratio )
