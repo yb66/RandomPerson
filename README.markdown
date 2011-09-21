@@ -152,15 +152,13 @@ If you need to check what's loaded, have a look in the instance variables of the
 
 Sometimes you'll want to load something but not another, you can do this by prepending _not_ to the things you don't want. For example, to get the Thai names that are in Thai script and not romanised:
 
-		# an already load demographic gets Thai
+		# an already load demographic gets Thai, non romanised
 	  r.demographic["Thai"].male.add_Thai_notRomanised
   
-or
+or to also get rid of the female names.
 
 		# a new demographic gets non romanised Thai and no female names
 	  r.demographic("Thai").add_Thai_notRomanised_notFemale
-
-to also get rid of the female names.
   
 This is an experimental thing. Seems to work, but may change. You cannot do this (at the moment)
 
