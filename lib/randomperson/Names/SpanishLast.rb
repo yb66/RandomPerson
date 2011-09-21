@@ -9,14 +9,14 @@ module RandomPerson
     class SpanishLast < Name
       
       def initialize
-        @formats = {
-          :double_barrelled    => ->(n){ n.rand + ' ' + n.rand },
-          :de                  => ->(n){ n.rand + ' de ' + n.rand },
-          :compound_hyphenated => ->(n){ n.rand + ' ' + n.rand + ' ' + n.rand },
-          :compound_y          => ->(n){ n.rand + ' ' + n.rand + ' y ' + n.rand },
-        }
-         
         @formats_ratiod = [ 0..74, 75..90, 91..96, 97..99 ]
+        @formats = [
+          ->(n){ n.rand + ' ' + n.rand },
+          ->(n){ n.rand + ' de ' + n.rand },
+          ->(n){ n.rand + ' ' + n.rand + ' ' + n.rand },
+          ->(n){ n.rand + ' ' + n.rand + ' y ' + n.rand },
+        ]
+         
         setupnames
       end
       
