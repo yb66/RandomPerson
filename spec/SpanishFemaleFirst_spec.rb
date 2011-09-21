@@ -16,7 +16,7 @@ module RandomPerson
         subject { instance.execute person.new( "f", rand(100)) }
         it { should_not be_nil }
         100.times do |_|
-          it { should match /[A-Z]\p{Alpha}+/ }
+          it { should match /\p{Upper}\p{Alpha}+/ }
         end
       end # execute
     end # SpanishFemaleFirst
