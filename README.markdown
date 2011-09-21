@@ -4,7 +4,7 @@ A port to Ruby of Perl's Data::RandomPerson.
 
 http://search.cpan.org/~peterhi/Data-RandomPerson-0.4/
 
-Make sure you're reading the right version of the docs to go with your library! (If you're reading this on Github look for the "Switch Tags" above to get the right version.)
+Make sure you're reading the right version of the docs to go with your library! This was my first Ruby library and right now I'm in the process of rewriting it. (If you're reading this on Github look for the "Switch Tags" above to get the right version.)
 
 ## Why did I write this?
 
@@ -106,9 +106,9 @@ etc etc
   
 or you can do things the old fashioned way
 
-  require 'namefiles/spanishfemalefirst' #obviously you need to use the path from where you are or where the script will run from
+  `require 'namefiles/spanishfemalefirst'` #obviously you need to use the path from where you are or where the script will run from
   
-  r.demographic["My fancy demo"].female = RandomPerson::SpanishFemaleFirst.new
+		r.demographic["My fancy demo"].female = RandomPerson::SpanishFemaleFirst.new
 
 The rule is, put_underscores_between_the_important_words
 
@@ -130,16 +130,16 @@ All English files:
 
 English males:
 
-  r.demographic.add_English_Male
+		r.demographic.add_English_Male
 
 
 If you need to check what's loaded, have a look in the instance variables of the demographic:
 
-  r.demographic["Spanish"].male
-  r.demographic["Spanish"].male.female
-  r.demographic["Spanish"].male.last
-  r.demographic["Spanish"].male.prefix
-  r.demographic["Spanish"].male.suffix
+		r.demographic["Spanish"].male
+		r.demographic["Spanish"].male.female
+		r.demographic["Spanish"].male.last
+		r.demographic["Spanish"].male.prefix
+		r.demographic["Spanish"].male.suffix
   
 ## NEGATIONS
 
@@ -169,13 +169,13 @@ A ratio of 1:1 will not necessarily give you a population with exactly half male
 
 If you wish to have an exact ratio within the population then create two choices each with a 0% chance of producing the other. For example:
 
-  men = RandomPerson::Choice.new( gender_ratio:[1,0] )
-  women = RandomPerson::Choice.new( gender_ratio:[0,1] )
-  ...more code here...
-  g.make_generator men # pushes the generator onto @generators in 0 position
-  g.make_generator women # pushes the generator onto @generators in 1 position
-  25.times { people << g.generators[0].call }
-  75.times { people << g.generators[1].call }
+	  men = RandomPerson::Choice.new( gender_ratio:[1,0] )
+	  women = RandomPerson::Choice.new( gender_ratio:[0,1] )
+	  ...more code here...
+	  g.make_generator men # pushes the generator onto @generators in 0 position
+	  g.make_generator women # pushes the generator onto @generators in 1 position
+	  25.times { people << g.generators[0].call }
+	  75.times { people << g.generators[1].call }
 
 This would give you a population of 25 males and 75 females. Which sounds great unless you really think about it.
 
@@ -185,19 +185,20 @@ Each culture has it's own conventions around names. This makes sticking some mon
 
 For example, in the EnglishLast.rb file:
 
-  @formats = {
-          :single =>                      ->(n)   { n.rand },
-          :double_barrelled_hyphenated=> ->(n)   { n.rand + '-' + n.rand },
-         }
+		@formats = {
+			:single =>                      ->(n)   { n.rand },
+			:double_barrelled_hyphenated=>  ->(n)   { n.rand + '-' + n.rand },
+		}
        
 This tells us that there are two ways of formatting last names defined in the file. All formats are described as lambda functions in a hash, the key being a description of what it's trying to achieve.
 
 ## BIT MORE ON RATIOS
 
-Behind the scenes, ratios like this [1,3] are converted to an array of ranges like this [0..24, 25..99], called ratiod. Just so you know for this next bit.
+Behind the scenes, ratios like this [1,3] are converted to an array of ranges like this `[0..24, 25..99]`, called ratiod. Just so you know for this next bit.
 
 In the EnglishLast.rb file:
-  @formats_ratiod = [ (0..96), (97..99) ]
+
+    @formats_ratiod = [ (0..96), (97..99) ]
 
 This says that the chances of a name being single barrelled is 97%, and double barrelled is 3%. I made up those figures from my own experience, but if you disagree with either the ratios or the formatting then you can change it. Either directly in the file or while running the code. It's your choice. Just make sure the numbers are right, length of arrays should be the same ( e.g. four formatting options should have a ratio with four parts like [a,b,c,d]) or it will break.
 
