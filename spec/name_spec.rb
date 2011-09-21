@@ -1,6 +1,7 @@
+# encoding: UTF-8
+
 require 'rspec'
 require_relative "../lib/randomperson/name.rb"
-
 
 module RandomPerson
   
