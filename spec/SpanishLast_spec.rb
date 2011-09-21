@@ -18,7 +18,7 @@ module RandomPerson
         1000.times do |_|
           it {
             puts "#{subject}"
-            should match /\p{Upper}\p{Alpha}+/ }
+            should match /\p{Upper}\p{Alpha}+$/ }
 
         end
       end # execute

@@ -45,7 +45,7 @@ def hash_with_ranges_contender( r )
 end
 
 
-Benchmark.bm do |b|  
+Benchmark.bmbm do |b|  
   b.report( 'a ' ) do
     Times.times {|i| array_contender R[i] }
   end
