@@ -104,9 +104,9 @@ To see a particular one, use its name (it's a hash):
   
 `r.demographic.add_Spanish` would load:
 
-  SpanishFemaleFirst into choice.female  
-  SpanishMaleFirst into choice.male  
-  SpanishLast into choice.last  
+  SpanishFemaleFirst into r.demographic["0"].female  
+  SpanishMaleFirst into r.demographic["0"].male  
+  SpanishLast into r.demographic["0"].last  
 
 etc etc
   
