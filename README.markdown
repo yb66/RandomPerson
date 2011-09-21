@@ -6,7 +6,7 @@ http://search.cpan.org/~peterhi/Data-RandomPerson-0.4/
 
 Initially just the Names portion. In fact, probably just that. I'm not a masochist. Well, just a bit.
 
-==Why did I write this?
+## Why did I write this?
 
 Because the Faker library and a few of the other random ones are very good, but they don't have the precision I needed. I wanted believable male names between a certain age range for a football game I was writing. Producing names like Mrs Albert Wiggins wasn't really going to cut it.
 
@@ -15,7 +15,7 @@ And I'm a masochist.
 It also has unicode characters, so it'll give your database a real test.
 
 
-==Installation:
+## Installation:
 
 You'll need at least Ruby v1.9.1
 
@@ -28,23 +28,18 @@ then install it:
   gem install randomperson -P HighSecurity
   
 
-==USAGE:
+## USAGE:
 
 So, to generate 1000 random people with Spanish names, between the ages of 16 and 35 with a ratio of 3 males to every 5 females:
 
   require 'randomperson'
 
-  choice = RandomPerson::Choice.new( {gender_ratio: [3,5] , age_lower:16, age_upper:35 } )
+  r = RandomPerson() # don't forget the brackets!
+  
+  r.demographic("Spain").add_Spanish( {gender_ratio: [3,5] , age_lower:16, age_upper:35 } )
 
-  choice.add_Spanish
-  
-  g = RandomPerson::Generator.new
-  
-  g.make_generator choice
-  
   people = [ ]
-  
-  1000.times { people << g.generators[0].call }
+  1000.times { people << r.generate }
   
   10.times { |i| puts "#{people[i].first} #{people[i].last} age: #{people[i].age} born: #{people[i].dob.strftime("%d-%b-%Y")}" }
 
@@ -61,12 +56,9 @@ So, to generate 1000 random people with Spanish names, between the ages of 16 an
 
 Here's an example using the Thai Romanised data:
 
-  choice = RandomPerson::Choice.new
-  choice.add_Thai_Romanised
-  g = RandomPerson::Generator.new
-  g.make_generator choice 
+  r.demographic("Thai").add_Thai_Romanised 
   people = [ ]
-  10.times { people << g.generators[0].call }
+  10.times { people << r.generate( "Thai") }
   10.times { |i| puts "#{people[i].first} #{people[i].last} age: #{people[i].age} born: #{people[i].dob.strftime("%d-%b-%Y")}" }
   
   Yongchaiyuth Sripituksakul Puntasrima age: 39 born: 29-Mar-1971
@@ -80,33 +72,43 @@ Here's an example using the Thai Romanised data:
   Tong Punyawong Kadesadayurat age: 64 born: 01-Sep-1946
   Sarai Wattanapanit Maneerattana age: 44 born: 21-Dec-1966
 
-==CHOICE
+## DEMOGRAPHIC
 
-The choice class sets the parameters that will be used to generate people.
+The Demographic class sets the parameters that will be used to generate people.
 
-  choice = RandomPerson::Choice.new
+    r.demographic("My fancy demo")
 
 is the same as
 
-  choice = RandomPerson::Choice.new( gender_ratio:[1,1] , age_lower: 0, age_upper: 100 )
+    r.demographic("My fancy demo", gender_ratio: [1,1] , age_lower: 0, age_upper: 115 )
 
-So you'd end up with a population of roughly 50:50 male/female with ages from 0 to 100 years.
+So you'd end up with a population of roughly 50:50 male/female with ages from 0 to 115 years.
 
-==LOADING NAMEFILES
+If you don't give a demographic name it will be given a number. To see the demographics use:
 
-  choice.add_Spanish_Female would just load the SpanishFemaleFirst into choice.female
+    r.demographics
+    
+To see a particular one, use its name (it's a hash):
+
+    r.demographics["My fancy demo"]
+
+## LOADING NAMEFILES
+
+`r.demographic.add_Spanish_Female` would just load the SpanishFemaleFirst into r.demographics.
   
-  choice.add_Spanish would load:
-    SpanishFemaleFirst into choice.female
-    SpanishMaleFirst into choice.male
-    SpanishLast into choice.last
+r.demographic.add_Spanish would load:
+
+  SpanishFemaleFirst into choice.female
+  SpanishMaleFirst into choice.male
+  SpanishLast into choice.last
+
 etc etc
   
 or you can do things the old fashioned way
 
   require 'namefiles/spanishfemalefirst' #obviously you need to use the path from where you are or where the script will run from
   
-  choice.female = RandomPerson::SpanishFemaleFirst.new
+  r.demographic["My fancy demo"].female = RandomPerson::SpanishFemaleFirst.new
 
 The rule is, put_underscores_between_the_important_words
 
@@ -116,49 +118,50 @@ always begin with *add_*
 
 _and_
 
-make sure each word is capitalised, add_male will actually pick up Fe_male_ whereas Female and Male will get what you want.
+make sure each word is capitalised, add\_male will actually pick up Fe_male_ whereas Female and Male will get what you want.
 
 If you want EnglishLast names loaded:
 
-  choice.add_English_Last
+    r.demographic.add_English_Last
 
 All English files:
 
-  choice.add_English
+    r.demographic.add_English
 
 English males:
 
-  choice.add_English_Male
+  r.demographic.add_English_Male
 
 
-Do you see how this is working? If you need to check what's loaded, have a look in the instance variables of choice (or whatever you named your Choice instance):
+If you need to check what's loaded, have a look in the instance variables of the demographic:
 
-  choice.male
-  choice.female
-  choice.last
-  choice.prefix
-  choice.suffix
+  r.demographic["Spanish"].male
+  r.demographic["Spanish"].male.female
+  r.demographic["Spanish"].male.last
+  r.demographic["Spanish"].male.prefix
+  r.demographic["Spanish"].male.suffix
   
-==NEGATIONS
+## NEGATIONS
 
 Sometimes you'll want to load something but not another, you can do this by prepending _not_ to the things you don't want. For example, to get the Thai names that are in Thai script and not romanised:
 
-  choice = RandomPerson::Choice.new
-  choice.add_Thai_notRomanised
+		# an already load demographic gets Thai
+	  r.demographic["Thai"].male.add_Thai_notRomanised
   
 or
 
-  choice.add_Thai_notRomanised_notFemale
+		# a new demographic gets non romanised Thai and no female names
+	  r.demographic("Thai").add_Thai_notRomanised_notFemale
 
 to also get rid of the female names.
   
 This is an experimental thing. Seems to work, but may change. You cannot do this (at the moment)
 
-  choice.notRomanised_add_Thai
+	  r.demographic.notRomanised_add_Thai
   
 *Always begin with add_*
 
-==RATIOS VS ODDS
+## RATIOS VS ODDS
 
 The default gender ratio is 1:1. The male part is the left side (or Array#first), the female is the right side (or Array#last). All ratios are given as an array i.e. [1,1] or [3,2]
 
@@ -176,7 +179,7 @@ If you wish to have an exact ratio within the population then create two choices
 
 This would give you a population of 25 males and 75 females. Which sounds great unless you really think about it.
 
-==FORMATTING
+## FORMATTING
 
 Each culture has it's own conventions around names. This makes sticking some monolithic algorithm in the centre of the code to sort out how names should be displayed impossible, so each data file describes how it thinks the names should be formatted.
 
@@ -189,7 +192,7 @@ For example, in the EnglishLast.rb file:
        
 This tells us that there are two ways of formatting last names defined in the file. All formats are described as lambda functions in a hash, the key being a description of what it's trying to achieve.
 
-==BIT MORE ON RATIOS
+## BIT MORE ON RATIOS
 
 Behind the scenes, ratios like this [1,3] are converted to an array of ranges like this [0..24, 25..99], called ratiod. Just so you know for this next bit.
 
@@ -198,13 +201,13 @@ In the EnglishLast.rb file:
 
 This says that the chances of a name being single barrelled is 97%, and double barrelled is 3%. I made up those figures from my own experience, but if you disagree with either the ratios or the formatting then you can change it. Either directly in the file or while running the code. It's your choice. Just make sure the numbers are right, length of arrays should be the same ( e.g. four formatting options should have a ratio with four parts like [a,b,c,d]) or it will break.
 
-==PREFIXES AND SUFFIXES
+## PREFIXES AND SUFFIXES
 
 Each generator starts by producing a person with a gender, an age and a date of birth. These are then passed on to the subsequent name portions so that a male always gets a male name and a male prefix (if you've specified a prefix file).
 
 Suffix files will also (I hope) do a bit of checking at what's already been set, so you won't get Dr. Bobby Horliton PhD, as it should be either Dr. or PhD (apparently). Stuff like that should get caught.
 
-==ADDING YOUR OWN NAMEFILES
+## ADDING YOUR OWN NAMEFILES
 
 My suggestion is to find the type of name that is closest (if you're looking for Spanishy names then look at the Spanish files as they'll have similar formatting rules there for free...) and copy and paste it in to a new one. It's easier that way.
 
@@ -262,15 +265,15 @@ WelshMaleFirst
 WelshPrefix
 
 
-==ACCURACY OF NAMES AND RATIOS
+## ACCURACY OF NAMES AND RATIOS
 
 I've taken bits and pieces from wherever I could get them, so if you see something is wrong then either let me know or produce a patch. I've no idea what the process is for that on GitHub but I'm sure there's a tutorial if you look for it. I'll also add you name to this readme, and worldly fame will be yours.
 
-==TODO:
+## TODO:
 
 There's lots to do. Lot of repetition and ugly bits here and there, but it works so I'll get round to it when I can.
 
-==THANKS GO TO
+## THANKS GO TO
 
 Peter Hickman for writing the original library in Perl that inspired this on in Ruby.
 
@@ -282,11 +285,11 @@ Fabiola Fernández Gutiérrez for help with the Spanish prefixes.
 
 Special thanks to my agent, all the people at Marvel and DC for such fine comics, my wife and my mom for supporting me when no one else believed in me, but (sniff) most thanks goes to Noel Edmonds and Jeremy Kyle, for making daytime TV so creepy and inane that I rarely waste time watching it.
 
-==THE END UNLESS YOU WANT TO READ THE LICENCE
+## THE END UNLESS YOU WANT TO READ THE LICENCE
 
 *Iain Barnett*
 
-==LICENCE:
+## LICENCE:
 
 It's an MIT Licence, I didn't take any code from the Perl one just names and a slight idea on how to structure things, so this ain't gonna be under the GPL. MIT is better anyway ;)
 

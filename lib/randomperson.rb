@@ -56,6 +56,10 @@ module RandomPerson
         end
       @person
     end
+    
+    def generate( demo_name=nil )
+      gen_new( demo_name ).first
+    end
 
     # If not given a demograpic's name then the *last demographic defined* will be used.
     def gen_new( demo_name=nil )
