@@ -1,5 +1,8 @@
 # encoding: UTF-8
 
+require_relative "../name.rb"
+require_relative "../ext/Array.rb"
+
 module RandomPerson
   module Names
 
@@ -7,23 +10,28 @@ module RandomPerson
             
       def initialize
          
-        @formats_ratiod = [ 0..47, 48, 49, 50..73, 74..99]
+        @formats = {
+          single: ->(n) { n.rand }
+        }
+        @formats_ratiod = [ 0..48, 49..49, 50..50, 51..74, 75..99]
         
-        @names          = %w(Sr. Dr. Dra. Sra. Srta.)
+        @names          = ["Sr.", "Dr.", "Dra.", "Sra.", "Srta."] 
       end
       
       def execute( person )
-              
-        if person.age < 17
-          return @names[4] if person.gender == 'f'
-          return @names[0]
+        name = if person.age < 17
+          person.gender == 'f' ? "Srta." : "Sr." 
+        else
+          r = rand(50) #0..99
+          r += 50 if person.gender == "f"
+          i = @formats_ratiod.index_in_range( r )
+          puts "r: #{r} i: #{i}"
+          @names[i]
         end
-          
-        r = rand(100) #0..99
-  
-        i = @formats_ratiod.index_in_range( r )
-        return @names[i]
+        
+        name
       end
-    end
-  end
-end
+
+    end # class
+  end # Names
+end # RandomPerson
