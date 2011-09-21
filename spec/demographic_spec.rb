@@ -1,13 +1,15 @@
+# encoding: UTF-8
+
 require 'rspec'
-require_relative "../lib/randomperson/choice.rb"
+require_relative "../lib/randomperson/demographic.rb"
 
 
 module RandomPerson
   
-  describe Choice do
+  describe Demographic do
     
     it "should not blow up on instatiation" do
-      Choice.new.should_not == nil
+      Demographic.new.should_not == nil
     end
-  end # Choice
+  end # Demographic
 end # RandomPerson
