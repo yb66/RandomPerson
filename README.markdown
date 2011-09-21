@@ -45,7 +45,8 @@ So, to generate 1000 random people with Spanish names, between the ages of 16 an
 
 		10.times { |i| puts "#{people[i].first} #{people[i].last} age: #{people[i].age} born: #{people[i].dob.strftime("%d-%b-%Y")}" }
 
-Output:
+Output:  
+
   Bartolomé Andrés de Elixaeberna age: 20 born: 28-Apr-1990  
   Fabiana Cordero Balmaceda age: 21 born: 14-Jun-1989  
   Jorge Alas Albarracin age: 29 born: 16-Apr-1981  
@@ -65,6 +66,7 @@ Here's an example using the Thai Romanised data:
 		10.times { |i| puts "#{people[i].first} #{people[i].last} age: #{people[i].age} born: #{people[i].dob.strftime("%d-%b-%Y")}" }
 
 Output:  
+ 
   Yongchaiyuth Sripituksakul Puntasrima age: 39 born: 29-Mar-1971  
   Sri-Patana Wattanasin age: 77 born: 04-Feb-1933  
   Wattana Rojjanasukchai age: 7 born: 27-Jun-2003  
