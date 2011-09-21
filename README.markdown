@@ -100,13 +100,13 @@ To see a particular one, use its name (it's a hash):
 
 ## LOADING NAMEFILES
 
-`r.demographic.add_Spanish_Female` would just load the SpanishFemaleFirst into r.demographics.
+`r.demographic.add_Spanish_Female` would just load the `SpanishFemaleFirst` class into `r.demographics`.
   
-r.demographic.add_Spanish would load:
+`r.demographic.add_Spanish` would load:
 
-  SpanishFemaleFirst into choice.female
-  SpanishMaleFirst into choice.male
-  SpanishLast into choice.last
+  SpanishFemaleFirst into choice.female  
+  SpanishMaleFirst into choice.male  
+  SpanishLast into choice.last  
 
 etc etc
   
