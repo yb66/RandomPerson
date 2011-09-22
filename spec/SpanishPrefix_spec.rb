@@ -15,24 +15,29 @@ module RandomPerson
         let(:person){ Struct.new :gender, :age }
         context "Given a male" do
           context "Who is young" do
-            subject { instance.execute person.new( "m", 9) }
+            let(:p) { instance.execute person.new( "m", 9) }
+            subject { p } 
             it { should_not be_nil }
             it { should eql "Sr." }
           end
           context "Who is older" do
-            subject { instance.execute person.new( "m", 45) }
+            let(:p) { instance.execute person.new( "m", 45) }
+            subject { p } 
             it { should_not be_nil }
-            it { should be_in ["Sr.", "Dr."] }
+            it { 
+              should be_in ["Sr.", "Dr."] }
           end
         end # male
         context "Given a female" do
           context "Who is young" do
-            subject { instance.execute person.new( "f", 9 ) }
+            let(:p) { instance.execute person.new( "f", 9 ) }
+            subject { p } 
             it { should_not be_nil }
             it { should eql "Srta." }
           end
           context "Who is older" do
-            subject { instance.execute person.new( "f", 45) }
+            let(:p) { instance.execute person.new( "f", 45) }
+            subject { p }
             it { should_not be_nil }
             it { should be_in ["Srta.", "Dra.", "Sra."] }
           end 
