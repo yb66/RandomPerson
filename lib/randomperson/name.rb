@@ -1,20 +1,21 @@
 # encoding: UTF-8
 
-require_relative "./ext/Hash.rb"
-
 module RandomPerson
 
   class Name
     
-    attr_accessor :formats, :formats_ratiod, :names
+    attr_accessor :formats, :formats_ratiod, :names, :possibles
+
+    def initialize
+      @possibles = Hash[ @formats_ratiod.zip @formats ]
+    end
 
     def execute( person=nil )
-      if @formats.length > 1
+      f = if @formats.length > 1
         r = rand(@formats_ratiod.last.end + 1)
-        i = @formats_ratiod.index_in_range( r )
-        f = @formats[i]
+        @possibles.each_pair{|k,v| break v if k === r }
       else
-        f = @formats.first #throw away the key name
+        @possibles.first.last #throw away the key name
       end
       f.( @names )
     end 
