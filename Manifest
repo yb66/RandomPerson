@@ -73,6 +73,7 @@ spec/AmericanLast_spec.rb
 spec/AmericanMaleFirst_spec.rb
 spec/AmericanPrefix_spec.rb
 spec/AmericanSuffix_spec.rb
+spec/AnyLast_spec.rb
 spec/SpanishFemaleFirst_spec.rb
 spec/SpanishLast_spec.rb
 spec/SpanishMaleFirst_spec.rb
