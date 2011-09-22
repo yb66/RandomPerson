@@ -18,3 +18,5 @@ require "logger"
 lg = Logger.new STDOUT
 lg.level = Logger::DEBUG
 Lg = lg
+
+

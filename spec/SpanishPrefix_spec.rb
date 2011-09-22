@@ -3,6 +3,7 @@
 require_relative "./rspec_helper.rb"
 require_relative "./support/shared_examples/names.rb"
 require_relative "../lib/randomperson/Names/SpanishPrefix.rb"
+require_relative "../lib/randomperson/person.rb"
 
 module RandomPerson
   module Names
@@ -12,16 +13,15 @@ module RandomPerson
       subject{ instance }
       it_should_behave_like "a Name class"
       describe :execute do
-        let(:person){ Struct.new :gender, :age }
         context "Given a male" do
           context "Who is young" do
-            let(:p) { instance.execute person.new( "m", 9) }
+            let(:p) { instance.execute Person.new( gender: "m", age: 9) }
             subject { p } 
             it { should_not be_nil }
             it { should eql "Sr." }
           end
           context "Who is older" do
-            let(:p) { instance.execute person.new( "m", 45) }
+            let(:p) { instance.execute Person.new( gender: "m", age: 45) }
             subject { p } 
             it { should_not be_nil }
             it { 
@@ -30,13 +30,13 @@ module RandomPerson
         end # male
         context "Given a female" do
           context "Who is young" do
-            let(:p) { instance.execute person.new( "f", 9 ) }
+            let(:p) { instance.execute Person.new( gender: "f", age: 9 ) }
             subject { p } 
             it { should_not be_nil }
             it { should eql "Srta." }
           end
           context "Who is older" do
-            let(:p) { instance.execute person.new( "f", 45) }
+            let(:p) { instance.execute Person.new( gender: "f", age: 45) }
             subject { p }
             it { should_not be_nil }
             it { should be_in ["Srta.", "Dra.", "Sra."] }
