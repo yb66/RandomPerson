@@ -16,10 +16,7 @@ module RandomPerson
         subject { instance.execute person.new( "m", rand(100)) }
         it { should_not be_nil }
         1000.times do |_|
-          it {
-            puts "#{subject}"
-            should match /\p{Upper}\p{Alpha}+$/ }
-
+          it { should match /^ \b\p{Upper}(?:\p{Alpha}+-)?\p{Alpha}+?\b\s (?: (?:\bde\b\s) | (?: \b\p{Upper}(?:\p{Alpha}+-)?\p{Alpha}+?\b\s (?:\by\b\s)? ) )? \b\p{Upper}(?:\p{Alpha}+-)?\p{Alpha}+?\b$/x } 
         end
       end # execute
     end # SpanishLast
