@@ -1,26 +1,33 @@
+# encoding: UTF-8
+
+require_relative "../name.rb"
+require_relative "../ext/Array.rb"
+
 module RandomPerson
   module Names
 
     class AmericanPrefix < Name
+
+      Names = %w(Mr. Dr. Mrs. Ms. Miss)
             
       def initialize
-         
-        @formats_ratiod = [ 0..47, 48..49, 50..69, 70..87, 88..99]
-        
-        @names = %w(Mr. Dr. Mrs. Ms. Miss )
+        @names = Names         
+        @formats = [ nil ]
+        @formats_ratiod = [ 0..48, 49..50, 51..69, 70..87, 88..99]
+        @possibles = Hash[ @formats_ratiod.zip @names ]
       end
       
       def execute( person )
               
-        if person.age < 17
-          return 'Miss' if person.gender == 'f'
-          return 'Mr.'
+        name = if person.age < 17
+          person.gender == 'f' ? 'Miss' : 'Mr.'
+        else
+          r = rand( 48 + 1)
+          r += 50 if person.gender == "f"
+          @possibles.each_pair{|k,v| break v if k === r }
         end
           
-        r = rand(100) #0..99
-  
-        i = @formats_ratiod.index_in_range( r )
-        return @names[i]
+        return name
       end
     end
   end
