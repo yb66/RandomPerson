@@ -7,7 +7,9 @@ module RandomPerson
     attr_accessor :formats, :formats_ratiod, :names, :possibles
 
     def initialize
-      @possibles = Hash[ @formats_ratiod.zip @formats ]
+      unless @formats_ratiod.nil? && @formats.nil?
+        @possibles = Hash[ @formats_ratiod.zip @formats ]
+      end
     end
 
     def execute( person=nil )
