@@ -19,6 +19,7 @@ module RandomPerson
       french_rgx = /^(?:(?:d(?:e|u)\s) | (?:\b\p{Upper}\p{Alpha}+?\b-))? \b\p{Upper}\p{Alpha}+?\b$/x
       hypenated_rgx = /^\b\p{Upper}\p{Alpha}+?\b (?:(?:\s|-)\b\p{Upper}\p{Alpha}+?\b)?$/x 
       unhypenated_rgx = /^\b\p{Upper}\p{Alpha}+?\b\s\b\p{Upper}\p{Alpha}+?\b?$/x 
+      thai_style = /^\b\p{Graph}+?\b$/x
       default_fix = {times: 5 } 
       fixtures = {}
       fixtures.default = default_fix
@@ -29,6 +30,13 @@ module RandomPerson
       fixtures["FrenchFemaleFirst"] = default_fix.merge({ rgx: hypenated_rgx  } )
       fixtures["FrenchMaleFirst"] = default_fix.merge({ rgx: hypenated_rgx  } )
       fixtures["BasqueLast"] = default_fix.merge({ rgx: unhypenated_rgx  } )
+      fixtures["ThaiRomanisedLast"] = default_fix.merge({ rgx: hypenated_rgx  } )
+      fixtures["ThaiFemaleFirst"] = default_fix.merge({ rgx: thai_style } )
+      fixtures["ThaiMaleFirst"] = default_fix.merge({ rgx: thai_style} )
+      fixtures["ThaiLast"] = default_fix.merge({ rgx: thai_style} )
+      fixtures["ThaiFirst"] = default_fix.merge({ rgx: thai_style} )
+      fixtures["ThaiRomanisedMaleFirst"] = default_fix.merge({ rgx: hypenated_rgx} )
+      fixtures["ThaiRomanisedFemaleFirst"] = default_fix.merge({ rgx: hypenated_rgx} )
       fixtures["AncientGreekLast"] = default_fix.merge(
         { rgx: /^\bof\b\s(?:\b\p{Alpha}+?\b\s){0,2}\b\p{Alpha}+?\b$/x } )
       
