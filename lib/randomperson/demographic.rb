@@ -90,17 +90,6 @@ module RandomPerson
       @gender_ratio  = nil
     end
     
-#       while n > 0
-#         r = rand(rat.last.last)
-#         puts "n: #{n} r: #{r}"
-#         i = rat.index_in_range( r )
-#         puts "i: #{i}"
-#         
-#         person = @demographics[i].call
-#         puts person.inspect
-#         @people << person 
-#         n -= 1
-#       end
     
     
   end

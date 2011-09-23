@@ -13,7 +13,7 @@ module RandomPerson
       def initialize
         @names = Names
         @formats = []
-        @formats_ratiod = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9..59, 59..159]
+        @formats_ratiod = [ 0..0, 1..1, 2..2, 3..3, 4..4, 5..5, 6..6, 7..7, 8..8, 9..59, 59..159]
         @possibles = Hash[ @formats_ratiod.zip @names ]
 
         @on_execute = for_prefixes( nil, nil, 16, 160, 0 )
