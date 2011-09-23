@@ -18,8 +18,6 @@ module RandomPerson
         
         fulls = opts[:patterns].map do |pattern|
           full_pattern = File.join( opts[:lib_dir], 'Names', pattern )
-          puts "full_pattern: #{full_pattern}"
-          full_pattern
         end
          Dir.glob( fulls )
       end
