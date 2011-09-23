@@ -11,7 +11,7 @@ module RandomPerson
     available_classes = Demographic.load_names
     available_classes.each do |klass|
       klass = Demographic.requiring klass
-      next unless ["German", "English", "Scottish", "Swedish","Spanish","French", "Finnish","Basque", "American", "AncientGreek", "Any"].any?{|x| klass.include? x }
+      next unless ["Welsh","German", "English", "Scottish", "Swedish", "Thai","Spanish","French", "Finnish","Basque", "American", "AncientGreek", "Any"].any?{|x| klass.include? x }
       next if ["Prefix", "Suffix"].any?{|x| klass.include? x }
       k = eval "RandomPerson::Names::#{klass}"
       
