@@ -13,7 +13,8 @@ module RandomPerson
       subject{ instance }
       it_should_behave_like "a Name class"
       describe :execute do
-        subject { instance.execute Person.new( gender: "m", age: rand(100)) }
+        let(:person) { Person.new( gender: "m", age: rand(100)) }
+        subject { instance.execute person }
         it { should_not be_nil }
         1000.times do |_|
           it { should match /^ \b\p{Upper}\p{Alpha}+?\b (?:(?:\s|-)\b\p{Upper}\p{Alpha}+?\b)?$/x }

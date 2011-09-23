@@ -15,31 +15,18 @@ module RandomPerson
       describe :execute do
         context "Given a male" do
           context "Who is young" do
-            let(:p) { instance.execute Person.new( gender: "m", age: 9) }
-            subject { p } 
-            it { should_not be_nil }
-            it { should eql "Sr." }
+            it_should_behave_like "a name generator", gender: "m", times: 5, age: rand(17), rgx: /^Sr\.$/
           end
           context "Who is older" do
-            let(:p) { instance.execute Person.new( gender: "m", age: 45) }
-            subject { p } 
-            it { should_not be_nil }
-            it { 
-              should be_in ["Sr.", "Dr."] }
+            it_should_behave_like "a name generator", gender: "m", times: 5, age: rand(83) + 17, rgx: /^[DS]r\.$/
           end
         end # male
         context "Given a female" do
           context "Who is young" do
-            let(:p) { instance.execute Person.new( gender: "f", age: 9 ) }
-            subject { p } 
-            it { should_not be_nil }
-            it { should eql "Srta." }
+            it_should_behave_like "a name generator", gender: "f", times: 5, age: rand(17), rgx: /^Srta\.$/
           end
           context "Who is older" do
-            let(:p) { instance.execute Person.new( gender: "f", age: 45) }
-            subject { p }
-            it { should_not be_nil }
-            it { should be_in ["Srta.", "Dra.", "Sra."] }
+            it_should_behave_like "a name generator", gender: "f", times: 5, age: rand(83)+17, rgx: /^(?:Dr|Srt?)a.$/x
           end 
         end # female
 

@@ -12,13 +12,7 @@ module RandomPerson
       let(:instance) { SpanishLast.new }
       subject{ instance }
       it_should_behave_like "a Name class"
-      describe :execute do
-        subject { instance.execute Person.new( gender: "m", age: rand(100)) }
-        it { should_not be_nil }
-        1000.times do |_|
-          it { should match /^ \b\p{Upper}(?:\p{Alpha}+-)?\p{Alpha}+?\b\s (?: (?:\bde\b\s) | (?: \b\p{Upper}(?:\p{Alpha}+-)?\p{Alpha}+?\b\s (?:\by\b\s)? ) )? \b\p{Upper}(?:\p{Alpha}+-)?\p{Alpha}+?\b$/x } 
-        end
-      end # execute
+      it_should_behave_like "a name generator", gender: "m", times: SpanishLast::Names.length, rgx: /^ \b\p{Upper}(?:\p{Alpha}+-)?\p{Alpha}+?\b\s (?: (?:\bde\b\s) | (?: \b\p{Upper}(?:\p{Alpha}+-)?\p{Alpha}+?\b\s (?:\by\b\s)? ) )? \b\p{Upper}(?:\p{Alpha}+-)?\p{Alpha}+?\b$/x 
     end # SpanishLast
 
   end # Names

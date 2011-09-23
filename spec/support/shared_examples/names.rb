@@ -1,5 +1,21 @@
 # encoding: UTF-8
 
+dir = File.dirname(__FILE__)
+spec_dir = File.expand_path( File.join dir, "../../" )
+
+require_relative File.expand_path( File.join spec_dir, "../lib/randomperson/person.rb" )
+
+shared_examples "a name generator" do |opts={}|
+  opts = {times: 1000, rgx: /^\p{Upper}\p{Alpha}+$/, gender: "f", age: rand(100),}.merge( opts )
+  puts "rgx: #{opts[:rgx].inspect}"
+  describe :execute do
+    subject { instance.execute RandomPerson::Person.new( gender: opts[:gender], age: opts[:age] ) }
+    it { should_not be_nil }
+    opts[:times].times do |_|
+      it { should match opts[:rgx]  }
+    end
+  end # execute
+end
 
 
 shared_examples "a Name class", :parent => "Name" do
@@ -14,11 +30,6 @@ shared_examples "a Name class", :parent => "Name" do
     it { should respond_to(:possibles)}
   end
 
-  describe :formats do
-    subject { instance.formats }
-    it { should be_a_kind_of Array}
-    it { should have_at_least(1).items }
-  end
 
   describe :formats_ratiod do
     subject { instance.formats_ratiod }
