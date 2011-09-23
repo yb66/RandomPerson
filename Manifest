@@ -5,6 +5,7 @@ README.markdown
 Rakefile
 gem-public_cert.pem
 lib/randomperson.rb
+lib/randomperson/Loader.rb
 lib/randomperson/Names/AmericanFemaleFirst.rb
 lib/randomperson/Names/AmericanLast.rb
 lib/randomperson/Names/AmericanMaleFirst.rb
@@ -55,6 +56,7 @@ lib/randomperson/Names/WelshFemaleFirst.rb
 lib/randomperson/Names/WelshLast.rb
 lib/randomperson/Names/WelshMaleFirst.rb
 lib/randomperson/Names/WelshPrefix.rb
+lib/randomperson/Outputter.rb
 lib/randomperson/demographic.rb
 lib/randomperson/ext/Array.rb
 lib/randomperson/ext/Date.rb
@@ -68,15 +70,11 @@ lib/randomperson/person.rb
 lib/randomperson/ratio.rb
 lib/randomperson/version.rb
 randomperson.gemspec
-spec/AmericanFemaleFirst_spec.rb
-spec/AmericanLast_spec.rb
-spec/AmericanMaleFirst_spec.rb
 spec/AmericanPrefix_spec.rb
 spec/AmericanSuffix_spec.rb
 spec/AnyLast_spec.rb
-spec/SpanishFemaleFirst_spec.rb
-spec/SpanishLast_spec.rb
-spec/SpanishMaleFirst_spec.rb
+spec/FinnishPrefix_spec.rb
+spec/Last_and_First_Names_spec.rb
 spec/SpanishPrefix_spec.rb
 spec/array_spec.rb
 spec/demographic_spec.rb
