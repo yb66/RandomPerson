@@ -11,11 +11,12 @@ module RandomPerson
     available_classes = Demographic.load_names
     available_classes.each do |klass|
       klass = Demographic.requiring klass
-      next unless ["English","Spanish", "Finnish","Basque", "American", "AncientGreek", "Any"].any?{|x| klass.include? x }
+      next unless ["English","Spanish","French", "Finnish","Basque", "American", "AncientGreek", "Any"].any?{|x| klass.include? x }
       next if ["Prefix", "Suffix"].any?{|x| klass.include? x }
       k = eval "RandomPerson::Names::#{klass}"
       
       
+      french_rgx = /^(?:(?:de|u\s)? | (?:\b\p{Upper}\p{Alpha}+?\b-))? \b\p{Upper}\p{Alpha}+?\b$/x
       hypenated_rgx = /^\b\p{Upper}\p{Alpha}+?\b (?:(?:\s|-)\b\p{Upper}\p{Alpha}+?\b)?$/x 
       unhypenated_rgx = /^\b\p{Upper}\p{Alpha}+?\b\s\b\p{Upper}\p{Alpha}+?\b?$/x 
       default_fix = {times: 5 } 
@@ -24,6 +25,9 @@ module RandomPerson
       fixtures["SpanishLast"] = default_fix.merge({ rgx: /^ \b\p{Upper}(?:\p{Alpha}+-)?\p{Alpha}+?\b\s (?: (?:\bde\b\s) | (?: \b\p{Upper}(?:\p{Alpha}+-)?\p{Alpha}+?\b\s (?:\by\b\s)? ) )? \b\p{Upper}(?:\p{Alpha}+-)?\p{Alpha}+?\b$/x })
       fixtures["AmericanLast"] = default_fix.merge({ rgx: hypenated_rgx } )
       fixtures["AnyLast"] = default_fix.merge({ rgx: hypenated_rgx  } )
+      fixtures["FrenchLast"] = default_fix.merge({ rgx: french_rgx} )
+      fixtures["FrenchFemaleFirst"] = default_fix.merge({ rgx: hypenated_rgx  } )
+      fixtures["FrenchMaleFirst"] = default_fix.merge({ rgx: hypenated_rgx  } )
       fixtures["BasqueLast"] = default_fix.merge({ rgx: unhypenated_rgx  } )
       fixtures["AncientGreekLast"] = default_fix.merge({ rgx: /^\b\p{Alpha}+?\b\s(?:\b\p{Alpha}+?\b\s)?\b\p{Alpha}+?\b$/x } )
       
