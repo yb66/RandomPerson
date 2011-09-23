@@ -1,6 +1,12 @@
+# encoding: UTF-8
+
+require_relative "./Loader.rb"
+
 module RandomPerson
 
   class Demographic
+    include Loader
+    
     require 'set'
     
     # the name of this demographic
@@ -27,18 +33,10 @@ module RandomPerson
       @age_upper = opts[:age_upper] || 115
       
 
-      load_names
+      Demographic.available_classes.merge Demographic.load_names
     end
     
-    def load_names( patterns=['*.rb'] )
-      lib_dir = File.dirname(__FILE__)
-      patterns.each do |pat|
-        full_pattern = File.join( lib_dir, 'Names', pat )
-        Dir.glob( full_pattern ).each do |file|
-          Demographic.available_classes << file
-        end
-      end
-    end
+
     
     # tribe, gender, position
     def method_missing( name, *args )
@@ -51,33 +49,25 @@ module RandomPerson
       #get just the positives
       words.reject! {|w| w =~ /^not/ }
       
-      #TODO: check the beginning of each word has an uc letter
+      #check the beginning of each word has an uc letter
+      words.select! {|w| w =~ /^\p{Upper}/ }
       
       #get a set of nots
-      n = nots.map{|word| Demographic.available_classes.classify_true(word)}.fold(:&)
+      nots = nots.map{|word| Demographic.available_classes.classify_true(word)}.fold(:&)
       #get a set of wanteds
-      cs = words.map{|word| Demographic.available_classes.classify_true(word)}.fold(:&)
+      yesses = words.map{|word| Demographic.available_classes.classify_true(word)}.fold(:&)
       
-      cs = cs - n unless n.nil? #remove nots from wanteds
+      yesses = yesses - nots unless nots.nil? #remove nots from wanteds
       
-      cs.each do |c|
-        require c
-        fn = File.basename( c, File.extname( c ) ) #remove the extension
-        fn = 'RandomPerson::Names::' + fn
-        addklass( fn, %w{ Male First } )
-        addklass( fn, %w{ Female First } )
-        addklass( fn, %w{ Last } )
-        addklass( fn, %w{ Prefix } )
-        addklass( fn, %w{ Suffix } )
+      Demographic.prefix_em( yesses.map{|(file_name)| Demographic.requiring( file_name ) } ).each do |klass|
+        puts "klass: #{klass}"
+        addklass klass
       end
+      
+      true # just because
     end
     
-    
-    def addklass( fn, ps )
-      if ps.map { |p| fn =~ /#{p}/ }.all?
-        instance_variable_set( "@#{ps.join.downcase}", qualified_const_get(fn).new )
-      end
-    end
+
     
     #set all the nameclasses for this instance to nil
     def reset_names
