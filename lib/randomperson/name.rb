@@ -1,27 +1,25 @@
 # encoding: UTF-8
 
+require_relative "./Outputter.rb"
+
+
 module RandomPerson
 
   class Name
+    include Outputter
     
     attr_accessor :formats, :formats_ratiod, :names, :possibles
 
     def initialize
-      unless @formats_ratiod.nil? && @formats.nil?
-        @possibles = Hash[ @formats_ratiod.zip @formats ]
-      end
+      @possibles = Hash[ @formats_ratiod.zip @formats ] if @possibles.nil? unless @formats_ratiod.nil?
+      
+      @on_execute ||= for_standard
+      
+      @possibles    
     end
+    
 
-    def execute( person=nil )
-      f = if @formats.length > 1
-        r = rand(@formats_ratiod.last.end + 1)
-        @possibles.each_pair{|k,v| break v if k === r }
-      else
-        @possibles.first.last #throw away the key name
-      end
-      f.( @names )
-    end 
   
-  end
+  end # class
   
-end
+end # RandomPerson
