@@ -1,29 +1,27 @@
 # encoding: UTF-8
 
+require_relative "../name.rb"
+require_relative "../ext/Array.rb"
+
 module RandomPerson
   module Names
 
     class FinnishPrefix < Name
+
+      Names =  %w(herra Dr rouva neiti)
             
       def initialize
-         
-        @formats_ratiod = [ 0..47, 48..49, 50..69, 70..99]
+        @names = Names
+        @formats = [ nil ]
+        @formats_ratiod = [ 0..48, 49..50, 51..70, 71..99]
+        @possibles = Hash[ @formats_ratiod.zip @names ]
         
-        @names = %w(herra Dr rouva neiti)
-      end
+        @on_execute = for_prefixes( @names[3], @names.first, child_age_upper_bound=16, female_lower_bound=50, male_upper_bound=50 )
+        
+      end # initialize
       
-      def execute( person )
-              
-        if person.age < 17
-          return @names[3] if person.gender == 'f'
-          return @names[0]
-        end
-          
-        r = rand(100) #0..99
-  
-        i = @formats_ratiod.index_in_range( r )
-        return @names[i]
-      end
-    end
+
+    
+    end # class
   end
 end
