@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class Array
 
   # This will iterate over an array of ranges, and if the given n is in the range it will return the index for that range.
