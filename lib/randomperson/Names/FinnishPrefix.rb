@@ -16,7 +16,7 @@ module RandomPerson
         @formats_ratiod = [ 0..48, 49..50, 51..70, 71..99]
         @possibles = Hash[ @formats_ratiod.zip @names ]
         
-        @on_execute = for_prefixes( @names[3], @names.first, child_age_upper_bound=16, female_lower_bound=50, male_upper_bound=50 )
+        @on_execute = for_prefixes( @names[3], @names.first )
         
       end # initialize
       

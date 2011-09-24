@@ -17,7 +17,7 @@ module RandomPerson
         
 
       
-      french_rgx = /^(?:(?:d(?:e|u)\s) | (?:\b\p{Upper}\p{Alpha}+?\b-))? \b\p{Upper}\p{Alpha}+?\b$/x
+      french_rgx = /^(?:(?: (?:\bLe\b ) | (?:\bd[eu]\b)\s) | (?:\b\p{Upper}\p{Alpha}+?\b-))? \b\p{Upper}\p{Alpha}+?\b$/x
       hypenated_rgx = /^\b\p{Upper}\p{Alpha}+?\b (?:(?:\s|-)\b\p{Upper}\p{Alpha}+?\b)?$/x 
       unhypenated_rgx = /^\b\p{Upper}\p{Alpha}+?\b\s\b\p{Upper}\p{Alpha}+?\b?$/x 
       thai_style = /^\b\p{Graph}+?\b$/x
@@ -28,6 +28,7 @@ module RandomPerson
       fixtures["AmericanLast"] = default_fix.merge({ rgx: hypenated_rgx } )
       fixtures["AnyLast"] = default_fix.merge({ rgx: hypenated_rgx  } )
       fixtures["BritishLast"] = default_fix.merge({ rgx: hypenated_rgx  } )
+      fixtures["EnglishLast"] = default_fix.merge({ rgx: hypenated_rgx  } )
       fixtures["FrenchLast"] = default_fix.merge({ rgx: french_rgx} )
       fixtures["FrenchFemaleFirst"] = default_fix.merge({ rgx: hypenated_rgx  } )
       fixtures["FrenchMaleFirst"] = default_fix.merge({ rgx: hypenated_rgx  } )
@@ -54,7 +55,7 @@ module RandomPerson
       fix_fixtures["SpanishPrefix"] = {
         young_male: {gender: "m", age: rand(17), in: ["Sr."]}, #rgx: /^\bSr\b\.$/x },
         older_male: {gender: "m", in: ["Sr.", "Dr."]}, #rgx: /^\b(?:[SD]r\b\.)$/x },
-        young_female: {gender: "f", age: rand(17), in: ["Stra."]}, #rgx: /^\bSrta\b.$/x },
+        young_female: {gender: "f", age: rand(17), in: ["Srta."]}, #rgx: /^\bSrta\b.$/x },
         older_female: {gender: "f", in: ["Dr.", "Srta.", "Sra."]}#rgx: /^[DS]rt?a\b\.$/x }
       }
       fix_fixtures["AmericanPrefix"] = {
@@ -74,11 +75,21 @@ module RandomPerson
         young_male: {gender: "m", age: rand(17), rgx: /^\bMr\b$/},
         older_male:  {gender: "m", rgx: /^\b[MD]r\b$/}, }
       fix_fixtures["EnglishPrefix"] = fix_fixtures["ScottishPrefix"] = fix_fixtures["WelshPrefix"] = fix_fixtures["BritishPrefix"]
+
+#SUFFIXES
       fix_fixtures["BritishSuffix"] = {
-        young_female: {},
-        older_female: {},
-        young_male: {},
-        older_male: {}  }
+        young_female: {age: rand(17), gender: "f", in: [""] },
+        older_female: { gender: "f", in: %w( OBE MBE GBE KBE DBE CBE JP GM PhD BSc BA )}, 
+        young_male: {age: rand(17), gender: "m", in: [""] },
+        older_male: {gender: "m", in: %w( OBE MBE GBE KBE DBE CBE JP GM PhD BSc BA ) }, 
+      }
+      fix_fixtures["AmericanSuffix"] = { # strictly speaking, gender doesn't matter here, but I'll leave the test in.
+        young_female: {age: rand(17), gender: "f", in: [ 'Jr.', ''] + %w( I II III IV V) },
+        young_male: { age: rand(17), gender: "m", in: [ 'Jr.', ''] + %w( I II III IV V ) },
+        older_male: { gender: "m", in: [ ''] + %w( I II III IV V Sr. ) },
+        older_female: { gender: "f", in: [ ''] + %w( I II III IV V Sr. ) }, 
+      }
+
 
       puts "Describe #{klass}" #because rspec doesn't output this before it blow up! Sheesh!!
       describe klass do

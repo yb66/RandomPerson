@@ -18,7 +18,7 @@ module Outputter
     private 
     
 #TODO rename this as other classes are using it too
-    def for_prefixes( for_females, for_males, child_age_upper_bound=16, female_lower_bound=50, male_upper_bound=50 )
+    def for_prefixes( for_females, for_males,  male_upper_bound=50, child_age_upper_bound=16, female_lower_bound=50)
       
       ->(person){
         name = if person.age <= child_age_upper_bound
