@@ -5,14 +5,26 @@ spec_dir = File.expand_path( File.join dir, "../../" )
 
 require_relative File.expand_path( File.join spec_dir, "../lib/randomperson/person.rb" )
 
+shared_examples "it cares about gender and/or age" do |opts={}|
+  opts.each{|k,v| opts[k] = { gender: "m", times: 5, age: rand(83)+17,  }.merge( v ) }
+
+  opts.each_pair do |k,v|
+    context "Given a #{k.to_s.gsub("_", " ")}" do
+      it_should_behave_like "a name generator" , opts[k]
+    end
+  end
+end
+
 shared_examples "a name generator" do |opts={}|
-  opts = {times: 1000, rgx: /^\p{Upper}\p{Alpha}+$/, gender: "f", age: rand(100),}.merge( opts )
-  puts "rgx: #{opts[:rgx].inspect}"
+  opts = {times: 1000,  gender: "f", age: rand(100),}.merge( opts )
+  opts[:rgx] = /^\p{Upper}\p{Alpha}+$/x if opts[:in].nil? && opts[:rgx].nil? 
   describe :execute do
     subject { instance.execute RandomPerson::Person.new( gender: opts[:gender], age: opts[:age] ) }
     it { should_not be_nil }
+
     opts[:times].times do |_|
-      it { should match opts[:rgx]  }
+      opts[:rgx].nil? ?  nil : it { should match opts[:rgx]  }
+      opts[:in].nil? ? nil : it { should be_in opts[:in] }
     end
   end # execute
 end
