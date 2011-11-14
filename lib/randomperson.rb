@@ -41,9 +41,20 @@ module RandomPerson
       end
       name = demographics.length.to_s if name.nil?
       demo = Demographic.new name, opts
-      demographics[name] = demo 
+      demographics[name] = demo
+      generators.delete name # just in case it already exists
       demo
     end
+    
+    
+    def clear
+      @demos = nil
+      @generators = nil
+      @person = nil
+      @last_demo_name = nil
+    end
+    
+    alias :reset :clear
 
     # The last person generated.
     # If a demographic name is given that is different to the last then a new person is generated. If no name is given then the last is used.

@@ -36,10 +36,11 @@ shared_examples "a Name class", :parent => "Name" do
     subject { instance }
     it { should_not be_nil }
     it { should respond_to( :execute ) }
-    it {  should respond_to(:formats ) }
+    it { should respond_to(:formats ) }
     it { should respond_to( :formats_ratiod ) }
     it { should respond_to(:names)} 
     it { should respond_to(:possibles)}
+    specify { subject.qualified_const_get( "Names" ).should_not be_empty }
   end
 
 

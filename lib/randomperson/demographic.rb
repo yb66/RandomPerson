@@ -66,31 +66,6 @@ module RandomPerson
       true # just because
     end
     
-
-    
-    #set all the nameclasses for this instance to nil
-    def reset_names
-      @suffix = nil
-      @prefix = nil
-      @last = nil
-      @malefirst = nil
-      @femalefirst = nil
-    end
-    
-    #set all parameters and nameclasses for this instance to nil
-    def reset_all
-      reset_names
-      reset_parameters
-    end
-    
-    #set the age and gender parameters for this instance to nil
-    def reset_parameters
-      @age_upper = nil
-      @age_lower = nil
-      @gender_ratio  = nil
-    end
-    
-    
     
   end
   

@@ -16,12 +16,13 @@ module RandomPerson
       
         
 
-      
-      french_rgx = /^(?:(?: (?:\bLe\b ) | (?:\bd[eu]\b)\s) | (?:\b\p{Upper}\p{Alpha}+?\b-))? \b\p{Upper}\p{Alpha}+?\b$/x
-      hypenated_rgx = /^\b\p{Upper}\p{Alpha}+?\b (?:(?:\s|-)\b\p{Upper}\p{Alpha}+?\b)?$/x 
+      hyph = /\b\p{Upper}\p{Alpha}+?\b (?:(?:\s|-)\b\p{Upper}\p{Alpha}+?\b)?/x
+      hypenated_rgx = /^#{hyph}$/x 
+      french_rgx = /^(?:(?: (?:\bLe\b\s) | (?:\bd[eu]\b)\s) | (?:\b\p{Upper}\p{Alpha}+?\b-))? #{hyph}$/x
+      hypenated_many_rgx = /^\b\p{Upper}\p{Alpha}+?\b (?:(?:\s|-)\b\p{Upper}\p{Alpha}+?\b)*$/x
       unhypenated_rgx = /^\b\p{Upper}\p{Alpha}+?\b\s\b\p{Upper}\p{Alpha}+?\b?$/x 
       thai_style = /^\b\p{Graph}+?\b$/x
-      default_fix = {times: 5 } 
+      default_fix = {times: 50 } 
       fixtures = {}
       fixtures.default = default_fix
       fixtures["SpanishLast"] = default_fix.merge({ rgx: /^ \b\p{Upper}(?:\p{Alpha}+-)?\p{Alpha}+?\b\s (?: (?:\bde\b\s) | (?: \b\p{Upper}(?:\p{Alpha}+-)?\p{Alpha}+?\b\s (?:\by\b\s)? ) )? \b\p{Upper}(?:\p{Alpha}+-)?\p{Alpha}+?\b$/x })
@@ -39,10 +40,10 @@ module RandomPerson
       fixtures["ThaiMaleFirst"] = default_fix.merge({ rgx: thai_style} )
       fixtures["ThaiLast"] = default_fix.merge({ rgx: thai_style} )
       fixtures["ThaiFirst"] = default_fix.merge({ rgx: thai_style} )
-      fixtures["ThaiRomanisedMaleFirst"] = default_fix.merge({ rgx: hypenated_rgx} )
-      fixtures["ThaiRomanisedFemaleFirst"] = default_fix.merge({ rgx: hypenated_rgx} )
+      fixtures["ThaiRomanisedMaleFirst"] = default_fix.merge({ rgx: hypenated_many_rgx} )
+      fixtures["ThaiRomanisedFemaleFirst"] = default_fix.merge({ rgx: hypenated_many_rgx} )
       fixtures["AncientGreekLast"] = default_fix.merge(
-        { rgx: /^\bof\b\s(?:\b\p{Alpha}+?\b\s){0,2}\b\p{Alpha}+?\b$/x } )
+        { rgx: /^\bof\b\s(?:\b\p{Alpha}+?\b(?:\s|-)){0,2}\b\p{Alpha}+?\b$/x } )
       
 #PREFIXES
       fix_fixtures = {}
@@ -56,7 +57,7 @@ module RandomPerson
         young_male: {gender: "m", age: rand(17), in: ["Sr."]}, #rgx: /^\bSr\b\.$/x },
         older_male: {gender: "m", in: ["Sr.", "Dr."]}, #rgx: /^\b(?:[SD]r\b\.)$/x },
         young_female: {gender: "f", age: rand(17), in: ["Srta."]}, #rgx: /^\bSrta\b.$/x },
-        older_female: {gender: "f", in: ["Dr.", "Srta.", "Sra."]}#rgx: /^[DS]rt?a\b\.$/x }
+        older_female: {gender: "f", in: ["Dra.", "Srta.", "Sra."]}#rgx: /^[DS]rt?a\b\.$/x }
       }
       fix_fixtures["AmericanPrefix"] = {
         young_female: {gender: "f", age: rand(17), rgx: /^\bMiss\b$/},
