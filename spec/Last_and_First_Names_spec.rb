@@ -16,11 +16,12 @@ module RandomPerson
       
         
 
-      hyph = /\b\p{Upper}\p{Alpha}+?\b (?:(?:\s|-)\b\p{Upper}\p{Alpha}+?\b)?/x
-      hypenated_rgx = /^#{hyph}$/x 
-      french_rgx = /^(?:(?: (?:\bLe\b\s) | (?:\bd[eu]\b)\s) | (?:\b\p{Upper}\p{Alpha}+?\b-))? #{hyph}$/x
-      hypenated_many_rgx = /^\b\p{Upper}\p{Alpha}+?\b (?:(?:\s|-)\b\p{Upper}\p{Alpha}+?\b)*$/x
-      unhypenated_rgx = /^\b\p{Upper}\p{Alpha}+?\b\s\b\p{Upper}\p{Alpha}+?\b?$/x 
+      word = /\b\p{Upper}\p{Alpha}+?\b (?:(?:\s|-)\b\p{Upper}\p{Alpha}+?\b)?/x
+      hypenated_rgx = /^#{word}$/x 
+      french_rgx = /^(?:(?: (?:\bLe\b\s) | (?:\bd[eu]\b)\s) | (?:#{word}-))? #{word}$/x
+      hypenated_many_rgx = /^#{word} (?:(?:\s|-)#{word})*$/x
+      unhypenated_rgx = /^#{word}\s#{word}?$/x 
+      poss_unhyph = /^#{word}(?:\s#{word})?$/
       thai_style = /^\b\p{Graph}+?\b$/x
       default_fix = {times: 50 } 
       fixtures = {}
@@ -30,6 +31,8 @@ module RandomPerson
       fixtures["AnyLast"] = default_fix.merge({ rgx: hypenated_rgx  } )
       fixtures["BritishLast"] = default_fix.merge({ rgx: hypenated_rgx  } )
       fixtures["EnglishLast"] = default_fix.merge({ rgx: hypenated_rgx  } )
+      fixtures["ScottishLast"] = default_fix.merge({ rgx: hypenated_rgx  } )
+      fixtures["WelshLast"] = default_fix.merge({ rgx: poss_unhyph  } )
       fixtures["FrenchLast"] = default_fix.merge({ rgx: french_rgx} )
       fixtures["FrenchFemaleFirst"] = default_fix.merge({ rgx: hypenated_rgx  } )
       fixtures["FrenchMaleFirst"] = default_fix.merge({ rgx: hypenated_rgx  } )
