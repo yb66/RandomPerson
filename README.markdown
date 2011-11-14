@@ -294,6 +294,7 @@ Johan Bergsten for helping me out with the Swedish names.
 HALLOJULIA (hayl yeah!) for helping me with the German names.  
 Aino Rissanen for helping me with the Finnish names.  
 Fabiola Fernández Gutiérrez for help with the Spanish prefixes.  
+Aled Coe and Annette Smith for help with Welsh surnames.
 
 Special thanks to my agent, all the people at Marvel and DC for such fine comics, my wife and my mom for supporting me when no one else believed in me, but (sniff) most thanks goes to Noel Edmonds and Jeremy Kyle, for making daytime TV so **creepy** and inane that I rarely waste time watching it.
 
