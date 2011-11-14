@@ -115,6 +115,7 @@ describe RandomPerson do
     end
   end # :person
   
+  
   describe :generators do
     let(:r) { RandomPerson() }
     before(:all) {
@@ -163,4 +164,78 @@ describe RandomPerson do
     it_behaves_like "a Person"
     it { should_not satisfy {|person| people.include? person } }
   end
+  
+  describe :demographics do
+    let(:r) { RandomPerson() }
+    context "With no demographics loaded" do
+      subject { r.demographics }
+      it { should be_empty }
+      it { should be_a_kind_of Hash }
+    end
+    context "Given a demographic" do
+      context "With a name" do
+        before(:all) {
+          r.demographic("Spain").add_Spanish
+        }
+        subject { r.demographics }
+        it { should_not be_empty }
+        it { should be_a_kind_of Hash }
+        specify { subject.first.should be_a_kind_of Array }
+        specify { subject.first.first.should be_a_kind_of String }
+        specify { subject.first.last.should be_a_kind_of RandomPerson::Demographic }
+      end
+      context "Without a name" do
+        before(:all) {
+          r.demographic.add_Spanish
+        }
+        subject { r.demographics }
+        it { should_not be_empty }
+        it { should be_a_kind_of Hash }
+        specify { subject.first.should be_a_kind_of Array }
+        specify { subject.first.first.should be_a_kind_of String }
+        specify { subject.first.last.should be_a_kind_of RandomPerson::Demographic }
+      end
+      
+      context "With options" do
+        context "With a named demographic" do
+          let(:lower){ rand(99) }
+          let(:upper){ rand(100 - lower) + lower }
+          let(:females) { rand(10) } 
+          let(:males) { rand(10) }
+          before(:all) {
+            r.demographic("Random!", gender_ratio: [females,males] , age_lower: lower, age_upper: upper ).add_Spanish
+          }
+          subject { r.demographics }
+          it { should_not be_empty }
+          it { should be_a_kind_of Hash }
+          specify { subject.first.should be_a_kind_of Array }
+          specify { subject.first.first.should be_a_kind_of String }
+          specify { subject.first.last.should be_a_kind_of RandomPerson::Demographic }
+          specify { subject.first.last.age_lower.should == lower }
+          specify { subject.first.last.age_upper.should == upper }
+          specify { subject.first.last.gender_ratio.should == [females,males] }
+        end
+        context "Without a named demographic" do
+          let(:lower){ rand(99) }
+          let(:upper){ rand(100 - lower) + lower }
+          let(:females) { rand(10) } 
+          let(:males) { rand(10) }
+          before(:all) {
+            r.demographic(gender_ratio: [females,males] , age_lower: lower, age_upper: upper ).add_Spanish
+          }
+          subject { r.demographics }
+          it { should_not be_empty }
+          it { should be_a_kind_of Hash }
+          specify { subject.first.should be_a_kind_of Array }
+          specify { subject.first.first.should be_a_kind_of String }
+          specify { subject.first.last.should be_a_kind_of RandomPerson::Demographic }
+          specify { subject.first.last.age_lower.should == lower }
+          specify { subject.first.last.age_upper.should == upper }
+          specify { subject.first.last.gender_ratio.should == [females,males] }
+        end
+      end
+    end
+  end
+    
+    
 end

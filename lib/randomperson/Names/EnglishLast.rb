@@ -14,7 +14,7 @@ module RandomPerson
           ->(n)   { n.rand },
           ->(n)   { n.rand + '-' + n.rand },
          ]
-        @formats_ratiod = [ (0..96), (97..99) ]
+        @formats_ratiod = [ 0..96, 97..99 ]
         super
       end
   
