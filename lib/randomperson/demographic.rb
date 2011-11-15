@@ -59,11 +59,14 @@ module RandomPerson
       
       yesses = yesses - nots unless nots.nil? #remove nots from wanteds
       
-      Demographic.prefix_em( yesses.map{|(file_name)| Demographic.requiring( file_name ) } ).each do |klass|
-        addklass klass
+      Demographic.prefix_em( 
+        yesses.map do |(file_name)| 
+          Demographic.requiring( file_name ) 
+        end ).each do |klass|
+          addklass klass
       end
       
-      true # just because
+      self # just because
     end
     
     
