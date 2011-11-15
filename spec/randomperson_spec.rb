@@ -56,16 +56,16 @@ shared_examples "clear or reset" do
     r.generate "Finland"
     r.generate
     r.generate "Spain"
-    r.clear
   }
-  subject { r }
-  it { should_not be_nil }
-  it { should be_a_kind_of RandomPerson::Facade }
-  specify { subject.generators.should be_empty }
-  specify { subject.demographics.should be_empty }
-  specify { expect { subject.person }.to raise_error }
-  specify { expect { subject.generate }.to raise_error }
-  specify { expect { subject.gen_new }.to raise_error }
+  subject { r.clear }
+  it { should be_nil }
+  specify { r.should_not be_nil }
+  specify { r.should be_a_kind_of RandomPerson::Facade }
+  specify { r.generators.should be_empty }
+  specify { r.demographics.should be_empty }
+  specify { expect { r.person }.to raise_error }
+  specify { expect { r.generate }.to raise_error }
+  specify { expect { r.gen_new }.to raise_error }
 end
 
 
@@ -75,12 +75,35 @@ describe RandomPerson do
     let(:r) { RandomPerson() }
     context "Given a demographic" do
       context "With a name" do
-        context "and a demographic specified" do
+        context "and one demographic specified" do
           before(:all) {
             r.demographic("Spain").add_Spanish
           }
           let(:first_run) { r.person "Spain" }
-          it_behaves_like "getting the last person"
+          subject{ first_run }
+          it_behaves_like "a Person"
+          context "on next run" do
+            context "Given no demographic" do
+              subject { r.person }
+              it { should equal first_run }
+              context "and then given the same demographic explicitly" do
+                subject{ r.person "Spain" }
+                it { should equal first_run }
+                context "and then given a demo name that doesn't exist" do
+                  subject{ r.person "Spurious" }
+                  it { should be_nil }
+                  context "and then given no demo name" do
+                    subject{ r.person }
+                    it { should equal first_run }
+                  end
+                  context "and then given the last good demographic explicitly" do
+                    subject{ r.person "Spain" }
+                    it { should equal first_run }
+                  end
+                end
+              end
+            end
+          end
         end
 
         context "and no demographic specified" do
@@ -94,13 +117,13 @@ describe RandomPerson do
       end
       
       context "Without a name" do
-        context "and a demographic specified" do
+        context "and with a demographic specified" do
           before(:all) {
+            r.clear
             r.demographic.add_Spanish
           }
-          let(:first_run) { r.person "Spain" }
-          subject { r.person }
-          it { should equal first_run }
+          subject { r.person "Spain" }
+          it { should be_nil }
         end
 
         context "and no demographic specified" do
@@ -110,6 +133,36 @@ describe RandomPerson do
           let(:first_run) { r.person }
           subject { r.person }
           it { should equal first_run }
+          context "on repeated runs" do
+            before(:all) {
+              r.clear
+              r.demographic.add_Spanish
+              r.generate
+              r.generate
+            }
+            let(:last) { r.person }
+            subject { r.person }
+            it { should equal last }
+          end
+            
+        end
+      end
+    end
+    context "With no demographic" do
+      context "Already loaded" do
+        subject { r.person }
+        specify { expect { subject }.to raise_error }
+        context "and given a demo name" do
+          subject { r.person "Not loaded" }
+          specify { expect { subject }.to raise_error }
+        end
+      end
+      context "Because they've been cleared" do
+        subject { r.person }
+        specify { expect { subject }.to raise_error }
+        context "and given a demo name" do
+          subject { r.person "Been cleared" }
+          specify { expect { subject }.to raise_error }
         end
       end
     end
@@ -150,20 +203,47 @@ describe RandomPerson do
   
   describe :generate do
     let(:r) { RandomPerson() }
-    before(:all) {
-      r.demographic("Spain").add_Spanish
-    }
-    let(:people) { 
-      people = []
-      1000.times{ people << r.generate }
-      people
-    }
-    subject { r.generate }
-    it { should_not be_nil }
-    it { should be_a_kind_of RandomPerson::Person }
-    it_behaves_like "a Person"
-    it { should_not satisfy {|person| people.include? person } }
+    context "Before a demographic has been loaded" do
+      subject { r.generate }
+      specify { expect { subject }.to raise_error }
+    end
+    context "When there is a demographic loaded" do
+      before(:all) {
+        r.demographic("Spain").add_Spanish
+      }
+      let(:people) { 
+        people = []
+        1000.times{ people << r.generate }
+        people
+      }
+      context "Given a demographic name" do
+        context "That has been added to demographics" do
+          subject { r.generate "Spain" }
+          it { should_not be_nil }
+          it { should be_a_kind_of RandomPerson::Person }
+          it_behaves_like "a Person"
+          it { should_not satisfy {|person| people.include? person } }
+        end
+        context "That has not been added to demographics" do
+          subject { r.generate "Spurious" }
+          it { should be_nil }
+        end
+      end
+      context "Given a no demographic name" do
+        subject { r.generate }
+        it { should_not be_nil }
+        it { should be_a_kind_of RandomPerson::Person }
+        it_behaves_like "a Person"
+        it { should_not satisfy {|person| people.include? person } }
+      end
+    end
+    context "When there is no demographic loaded" do
+      context "Given a demographic name" do
+        subject { r.generate "Spain" }
+      end
+    end
   end
+    
   
   describe :demographics do
     let(:r) { RandomPerson() }
