@@ -4,16 +4,16 @@ A port to Ruby of Perl's Data::RandomPerson.
 
 http://search.cpan.org/~peterhi/Data-RandomPerson-0.4/
 
-Make sure you're reading the right version of the docs to go with your library! This was my first Ruby library and right now I'm in the process of rewriting it. (If you're reading this on Github look for the "Switch Tags" above to get the right version.)
+Make sure you're reading the right version of the docs to go with your library! (If you're reading this on Github look for the "Switch Tags" or "Current Branch" -> "Tags" buttons to get the right version.)
 
 ## QUICK NOTE!
 
-This was the first Ruby library I wrote. I'm slowly adding specs and improving the code now I've half an idea of what I should be doing, but I'd really, *really* appreciate it that if you do see something is wrong or doesn't work for you or you've an idea for improvement **let me know**. Wow, Github makes this so easy, just go for it! I'll be happy to help and happy for the help.
+This was the first Ruby library I wrote. I'm adding specs and improving the code now I've half an idea of what I should be doing, but I'd really, *really* appreciate it that if you do see something is wrong or doesn't work for you or you've an idea for improvement **let me know**. Wow, Github makes this so easy, just go for it! I'll be happy to help and happy for the help.
 
 
 ## Why did I write this?
 
-Because the Faker library and a few of the other random ones are very good, but they don't have the precision I needed. I wanted believable male names between a certain age range for a football game I was writing. Producing names like Mrs Albert Wiggins wasn't really going to cut it.
+Because the Faker library and a few of the other random ones are excellent, but they don't have the precision I needed. I wanted believable male names between a certain age range for a football game I was writing. Producing names like Mrs Albert Wiggins wasn't really going to cut it.
 
 And I'm a masochist.
 
@@ -43,7 +43,7 @@ So, to generate 1000 random people with Spanish names, between the ages of 16 an
 
 		r = RandomPerson() # don't forget the brackets!
 
-		r.demographic("Spain").add_Spanish( {gender_ratio: [3,5] , age_lower:16, age_upper:35 } )
+		r.demographic("Spain", gender_ratio: [3,5] , age_lower:16, age_upper:35 ).add_Spanish
 
 		people = [ ]
 		1000.times { people << r.generate }
@@ -102,6 +102,110 @@ If you don't give a demographic name it will be given a number. To see the demog
 To see a particular one, use its name (it's a hash):
 
     r.demographics["My fancy demo"]
+    
+## LAST PERSON
+
+    r.demographic("Who was last?").add_English
+    r.person.lastname # generates a new person if none.
+> => "Fletcher"
+
+    r.person.lastname # gets the last person if there was one.
+> => "Fletcher"
+
+    r.generate.lastname # generates a new name every time
+> => "Ford"
+    
+    r.person.lastname
+> => "Ford"
+    
+    r.generate.lastname
+> => "Bradley"
+
+    r.generate.lastname
+> => "King"
+
+    r.person.lastname
+> => "King"
+
+
+    # an undefined demographic will return nil
+    r.person("What?").lastname
+> NoMethodError: undefined method `lastname' for nil:NilClass
+
+    r.person("What?") 
+> => nil
+
+    r.person.lastname # it still remembers the last person.
+> => "King"
+
+    r.person("What?") 
+> => nil
+
+    r.person("Who was last?").lastname
+> => "King"
+
+
+    r.demographic("Not English").add_Thai
+    r.person.lastname # not using Thais yet
+> => "King"
+
+    r.generate.lastname # generate will automatically assume you want to use the last loaded demographic, unless specified otherwise
+> => "Ornlamai Sriwarunyu"
+
+    r.generate("Who was last?").lastname # specify to the demographic to generate using it.
+> => "Bradley-Adams"
+
+    r.person.lastname
+> => "Bradley-Adams"
+    
+    r.generate("Not English").lastname
+> => "Suntornnitikul Parnthong"
+
+    r.person("Who was last?").lastname # this will generate a new name due to the switch between demographics. It's only keeping one lastname, not a lastname for every demographic.
+> => "Jones"
+
+## WHY NAME THE DEMOGRAPHIC?
+
+Because you can mix and match.
+
+
+These will produce the same results (Spanish names), but are named differently.
+
+    r.demographic("Spain").add_Spanish  
+    r.demographics.keys
+> => ["Spain"]
+
+
+    r.demographic.add_Spanish # the name is handled for you.  
+    r.demographics.keys
+> => ["0"]
+
+But, you can play about a bit with the name files. For example:
+
+    r.demographic("Mix n match").add_Spanish  
+    person = r.generate  
+    puts "#{person.prefix if person.prefix} #{person.first} #{person.last} #{person.suffix if person.suffix}  age: #{person.age} born: #{person.dob.strftime("%d-%b-%Y")}"  
+> => Sra. Enriqueta Sedeno Arbizu   age: 53 born: 22-Nov-1958
+
+That is what we expect, but we can change the prefixes to British, the females' first names to be Finnish, and the males' first names to be French, while keeping the Spanish last names, and an American suffix for good measure!
+
+    r.demographic("Mix n match").add_BritishPrefix.add_SpanishLast.add_FinnishFemaleFirst.add_FrenchMaleFirst.add_AmericanSuffix  
+    person = r.generate  
+    puts "#{person.prefix if person.prefix} #{person.first} #{person.last} #{person.suffix if person.suffix}  age: #{person.age} born: #{person.dob.strftime("%d-%b-%Y")}"  
+> => Miss Johanna Sanchez Questi   age: 94 born: 20-May-1917
+
+and the last 2 lines again:
+
+> => Mr Rémy Escriba Sanroma   age: 103 born: 16-Mar-1908
+
+or:
+
+    r.demographic("French Spaniards").add_SpanishLast.add_French_First  
+    person = r.generate # a couple of times and then puts...  
+    
+> => Denise-Juliette Parrado Heras   age: 80 born: 06-Apr-1931  
+> => Gustav Cordona Belsue   age: 20 born: 27-Oct-1991
+
 
 ## LOADING NAMEFILES
 
@@ -109,8 +213,8 @@ To see a particular one, use its name (it's a hash):
   
 `r.demographic.add_Spanish` would load:
 
-  `SpanishFemaleFirst` into `r.demographic["0"].female`  
-  `SpanishMaleFirst` into `r.demographic["0"].male`  
+  `SpanishFemaleFirst` into `r.demographic["0"].femalefirst`  
+  `SpanishMaleFirst` into `r.demographic["0"].malefirst`  
   `SpanishLast` into `r.demographic["0"].last`  
 
 etc etc
@@ -120,9 +224,9 @@ or you can do things the old fashioned way (but why? anyway...)
 		require 'namefiles/spanishfemalefirst'   
 		#obviously you need to use the path from where you are or where the script will run from
   
-		r.demographic["My fancy demo"].female = RandomPerson::Names::SpanishFemaleFirst.new
+		r.demographic["My fancy demo"].femalefirst = RandomPerson::Names::SpanishFemaleFirst.new
 
-The rule is, put_underscores_between_the_important_words
+The rule is, put\_underscores\_between\_the\_important\_words
 
 _and_
 
@@ -130,7 +234,7 @@ always begin with `add_`
 
 _and_
 
-make sure each word is capitalised, `add_male` will actually pick up Fe_male_ whereas `Female` and `Male` will get what you want.
+make sure each word is capitalised, `add_male` will actually pick up Fe_male_ whereas `add_Female` and `add_Male` will get what you want.
 
 If you want EnglishLast names loaded:
 
@@ -147,11 +251,21 @@ English males:
 
 If you need to check what's loaded, have a look in the instance variables of the demographic:
 
-		r.demographic["Spanish"].male
-		r.demographic["Spanish"].female
-		r.demographic["Spanish"].last
-		r.demographic["Spanish"].prefix
-		r.demographic["Spanish"].suffix
+		r.demographics["Mix n match"].malefirst.class.name  
+> => "RandomPerson::Names::SpanishMaleFirst"
+
+    r.demographics["Mix n match"].femalefirst.class.name  
+> => "RandomPerson::Names::SpanishFemaleFirst"
+
+    r.demographics["Mix n match"].last.class.name  
+> => "RandomPerson::Names::SpanishLast"
+
+    r.demographics["Mix n match"].prefix.class.name  
+> => "RandomPerson::Names::SpanishPrefix"
+    
+    r.demographics["Mix n match"].suffix.class.name  
+> => "NilClass"
+    
   
 ## NEGATIONS
 
@@ -170,6 +284,27 @@ This is an experimental thing. Seems to work, but may change. You cannot do this
 	  r.demographic.notRomanised_add_Thai
   
 **Always** *begin with* `add_`
+
+Here's an example:
+
+    r.demographic("SuperThai").add_Thai_notRomanised  
+    people = [ ]  
+    10.times { people << r.generate( "SuperThai") }  
+    10.times { |i| puts "#{people[i].first} #{people[i].last} age: #{people[i].age} born: #{people[i].dob.strftime("%d-%b-%Y")}" }
+    
+Output:
+    
+> ทักษิณ ชัยภูมิ age: 53 born: 14-May-1958  
+> สุริยา พิษณุโลก age: 47 born: 21-Aug-1964  
+> แก้วเก้า เจริญปุระ age: 61 born: 14-Mar-1950  
+> บัณฑิตา สระบุรี age: 113 born: 06-Nov-1898  
+> วิศิษฏ์ สุโขทัย age: 83 born: 23-Sep-1928  
+> สุประภา โลโซ age: 50 born: 09-Apr-1961  
+> สริตา ตรัง age: 111 born: 27-Jan-1900  
+> ณัฎฐา ลพบุรี age: 86 born: 24-Dec-1925  
+> สุชาย ลพบุรี age: 88 born: 06-Apr-1923  
+> ปราณี สะเมิง age: 85 born: 04-Mar-1926  
+    
 
 ## RATIOS VS ODDS
 
@@ -194,12 +329,12 @@ Each culture has it's own conventions around names. This makes sticking some mon
 
 For example, in the EnglishLast.rb file:
 
-		@formats = {
-			:single =>                      ->(n)   { n.rand },
-			:double_barrelled_hyphenated=>  ->(n)   { n.rand + '-' + n.rand },
-		}
+		@formats = [
+		  ->(n)   { n.rand },
+			->(n)   { n.rand + '-' + n.rand },
+		]
        
-This tells us that there are two ways of formatting last names defined in the file. All formats are described as lambda functions in a hash, the key being a description of what it's trying to achieve.
+This tells us that there are two ways of formatting last names defined in the file. All formats are described as lambda functions in an array.
 
 ## BIT MORE ON RATIOS
 
@@ -207,9 +342,9 @@ Behind the scenes, ratios like this [1,3] are converted to an array of ranges li
 
 In the EnglishLast.rb file:
 
-    @formats_ratiod = [ (0..96), (97..99) ]
+    @formats_ratiod = [ 0..96, 97..99 ]
 
-This says that the chances of a name being single barrelled is 97%, and double barrelled is 3%. I made up those figures from my own experience, but if you disagree with either the ratios or the formatting then you can change it. Either directly in the file or while running the code. It's your choice. Just make sure the numbers are right, length of arrays should be the same ( e.g. four formatting options should have a ratio with four parts like [a,b,c,d]) or it will break.
+This says that the chances of a name being single barrelled is 97%, and double barrelled with a hypen is 3%. I made up those figures from my own experience, but if you disagree with either the ratios or the formatting then you can change it. Either directly in the file or while running the code. It's your choice. Just make sure the numbers are right, length of arrays should be the same ( e.g. four formatting options should have a ratio with four parts like [a,b,c,d]) or it will break.
 
 ## PREFIXES AND SUFFIXES
 
@@ -279,7 +414,7 @@ WelshPrefix
 
 ## ACCURACY OF NAMES AND RATIOS
 
-I've taken bits and pieces from wherever I could get them, so if you see something is wrong then either let me know or produce a patch. I've no idea what the process is for that on GitHub but I'm sure there's a tutorial if you look for it. I'll also add you name to this readme, and worldly fame will be yours.
+I've taken bits and pieces from wherever I could get them, so if you see something is wrong then either let me know or produce a patch, just have a look at the help links on Github for how to do it. I'll also add you name to this readme, and worldly fame will be yours.
 
 ## TODO:
 
