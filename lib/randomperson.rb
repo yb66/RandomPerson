@@ -34,6 +34,8 @@ module RandomPerson
       @generators ||= {}
     end
 
+
+    # little factory
     def demographic( name=nil, opts={} )
       if name.kind_of? Hash
         opts = name
@@ -47,6 +49,7 @@ module RandomPerson
     end
     
     
+    # start afresh
     def clear
       @demos = nil
       @generators = nil
@@ -55,34 +58,84 @@ module RandomPerson
     end
     
     alias :reset :clear
+    attr_accessor :last_demo_name
+
 
     # The last person generated.
     # If a demographic name is given that is different to the last then a new person is generated. If no name is given then the last is used.
     def person( demo_name=nil )
-      @person, @last_demo_name = 
-        if @last_demo_name.nil? || (demo_name && demo_name != @last_demo_name )
-          gen_new( demo_name ) # gen a new person and get back demo name
-        else
-          [@person, @last_demo_name] 
+      person, last_demo_name = 
+        if demo_name.nil? 
+
+          if @person.nil?
+
+            # either generate a new one
+            gen_new( demo_name ) # gen a new person and get back demo name
+          else 
+
+            #  get last one
+            [@person, @last_demo_name]
+          end
+        else # demo name given
+
+          if demographics.has_key? demo_name
+
+            if demo_name == @last_demo_name
+
+              [@person, @last_demo_name]
+            else
+
+              gen_new( demo_name )
+            end
+          else 
+
+            if demographics.nil? || demographics.empty?
+
+              raise "No demographics have been selected yet! Try something like r.demographic.add_Spanish..." 
+            else # that demo name doesn't exist...
+
+              [nil, @last_demo_name] # so preserve the last good demo name
+            end
+          end
         end
+        return nil if person.nil?
+        @person, @last_demo_name = [person, last_demo_name]
+
       @person
     end
+
     
+    # generate a new person
+    # either with the last demographic loaded, or a specific one by passing the name.
     def generate( demo_name=nil )
-      gen_new( demo_name ).first
+      ds = gen_new( demo_name )
+      ds.nil? ? nil : ds.first
     end
 
-    # If not given a demograpic's name then the *last demographic defined* will be used.
+
+    # If not given a demographic's name then the *last demographic defined* will be used.
     def gen_new( demo_name=nil )
-      demo_name, demo = demographics.assoc(demo_name) || demographics.to_a.last # this produces a 2 dimensional array
-
-      unless generators.has_key? demo.name
-        generators[demo.name] = Generator.make_generator( demo )
+      if demographics.nil? || demographics.empty?
+        raise "No demographics have been selected yet! Try something like r.demographic.add_Spanish..." 
       end
-
-      @person = generators[demo_name].call 
-        
-      [@person, demo.name]
+      demo_name, demo = if demo_name.nil?
+        demographics.to_a.last # this produces a 2 dimensional array
+      else
+        demographics.assoc(demo_name)
+      end
+      
+      if demo_name
+        @last_demo_name = demo_name
+        unless generators.has_key? demo.name
+          generators[demo.name] = Generator.make_generator( demo )
+        end
+  
+        @person = generators[@last_demo_name].call 
+          
+        [@person, @last_demo_name]
+      else
+        nil
+      end
     end
 
   end # class
