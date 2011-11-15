@@ -5,6 +5,8 @@ module RandomPerson
   
     attr_accessor :gender, :age, :dob, :first, :last, :prefix, :suffix
     
+    alias :lastname :last
+    
     ## @param [optional,Hash] h A hash of the person's attributes
     # @option h [String] :gender nil Gender, 'm' for male or 'f' for female
     # @option h [Integer] :age nil Age
