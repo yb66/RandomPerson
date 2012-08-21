@@ -69,12 +69,19 @@ module RandomPerson
       end
     end
 
+
+    # @param [Integer] lower
+    # @param [Integer] upper
+    # @todo swap if wrong way round  
     def self.pick_age( lower=0, upper=100 )
       age =  rand(upper - lower).to_i + lower 
     end
-    
-    def self.pick_dob( y=16 )
-      year  = Time.now.year - y
+
+
+    # Create a date of birth relative to today.
+    # @param [Integer] age
+    def self.pick_dob( age=16 )
+      year  = Time.now.year - age
       month = rand(12) + 1;
       day   = rand( Date.days_in_month( year, month ) ) + 1 
       Time.local( year, month, day )

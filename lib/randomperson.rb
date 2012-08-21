@@ -9,12 +9,12 @@ module RandomPerson
   require 'date'
   
   require_relative './randomperson/version.rb'
-  require_relative './randomperson/ext/Array.rb'
-  require_relative './randomperson/ext/Date.rb'
-  require_relative './randomperson/ext/Enumerable.rb'
-  require_relative './randomperson/ext/Hash.rb'
-  require_relative './randomperson/ext/Kernel.rb'
-  require_relative './randomperson/ext/Set.rb'
+  require_relative './randomperson/ext/array.rb'
+  require_relative './randomperson/ext/date.rb'
+  require_relative './randomperson/ext/enumerable.rb'
+  require_relative './randomperson/ext/hash.rb'
+  require_relative './randomperson/ext/kernel.rb'
+  require_relative './randomperson/ext/set.rb'
   
   require_relative './randomperson/demographic.rb'
   require_relative './randomperson/generator.rb'
