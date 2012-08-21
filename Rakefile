@@ -1,16 +1,11 @@
 require 'rake'
-require 'rake/testtask'
+require 'rspec/core/rake_task'
 
-lib_dir = File.expand_path('lib')
-app_dir = File.expand_path('lib/randomperson')
-test_dir = File.expand_path('test')
-ext_dir = File.expand_path('lib/randomperson/ext')
+desc 'Default: run specs.'
+task :default => :spec
 
-
-# desc "Run basic tests"
-Rake::TestTask.new("test") do |t|
-  t.libs = [lib_dir, test_dir, app_dir]
-  t.pattern = 'test/test_*.rb'
-  t.verbose = true
-  t.warning = true
+desc "Run specs"
+RSpec::Core::RakeTask.new do |t|
+  t.pattern = "./spec/**/*_spec.rb" # don't need this, it's default.
+  # Put spec opts in a file named .rspec in root
 end
