@@ -1,3 +1,13 @@
+v1.1.0 Tuesday the 21st of August 2012
+
+* Removed some monkey patches.
+* Added more docs to the code and added Yardoc support.
+* Renamed all the files to use lowercase, and be split by hyphens.
+* Travis-ci support added.
+* Tightened some of the specs, added others.
+
+----
+
 v1.0.0 Lots of breaking changes to API. Lots more specs, for code and namefiles. Some general cleaning of data too.
 
 v0.0.19 Start of some specs.
