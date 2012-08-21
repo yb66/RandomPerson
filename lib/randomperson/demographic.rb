@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-require_relative "./Loader.rb"
+require_relative "./loader.rb"
 
 module RandomPerson
 

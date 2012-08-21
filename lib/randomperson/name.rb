@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
-require_relative "./Outputter.rb"
+require_relative "./ext/array.rb"
+require_relative "./outputter.rb"
 
 
 module RandomPerson
