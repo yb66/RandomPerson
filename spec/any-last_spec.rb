@@ -2,7 +2,7 @@
 
 require "spec_helper"
 require_relative "./support/shared_examples/names.rb"
-require_relative "../lib/randomperson/names/AnyLast.rb"
+require_relative "../lib/randomperson/names/any-last.rb"
 require_relative "../lib/randomperson/person.rb"
 
 module RandomPerson
