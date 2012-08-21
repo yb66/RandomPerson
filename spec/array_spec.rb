@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-require_relative "./rspec_helper.rb"
+require "spec_helper"
 require_relative "../lib/randomperson/ext/array.rb"
 
 describe Array do
