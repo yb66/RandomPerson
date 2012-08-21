@@ -22,10 +22,13 @@ module RandomPerson
          Dir.glob( fulls )
       end
       
-      
+
+      # Requires the file and then returns the name of the class
+      # @param [String] file_name The file to require and extract the class name from.
+      # @return [String] The class name.
       def requiring( file_name )
         require file_name
-        set_of_names = File.basename( file_name, File.extname( file_name ) ) #remove the extension too
+        set_of_names = File.basename( file_name, ".rb" ).split("-").map(&:capitalize).join
       end
       
       def prefix_em( collection, prefix="RandomPerson::Names::" )
