@@ -221,7 +221,7 @@ etc etc
   
 or you can do things the old fashioned way (but why? anyway...)
 
-		require 'namefiles/spanishfemalefirst'   
+		require 'namefiles/spanish-female-first'   
 		#obviously you need to use the path from where you are or where the script will run from
   
 		r.demographic["My fancy demo"].femalefirst = RandomPerson::Names::SpanishFemaleFirst.new
@@ -441,7 +441,7 @@ Special thanks to my agent, all the people at Marvel and DC for such fine comics
 
 It's an MIT Licence, I didn't take any code from the Perl one just names and a slight idea on how to structure things, so this ain't gonna be under the GPL. MIT is better anyway ;)
 
- Copyright (c) 2010 Iain Barnett
+ Copyright (c) 2012 Iain Barnett
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
