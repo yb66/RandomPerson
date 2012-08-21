@@ -1,10 +1,11 @@
-v1.1.0 Tuesday the 21st of August 2012
+v1.1.1 Tuesday the 21st of August 2012
 
 * Removed some monkey patches.
 * Added more docs to the code and added Yardoc support.
 * Renamed all the files to use lowercase, and be split by hyphens.
 * Travis-ci support added.
 * Tightened some of the specs, added others.
+* Updated README for all the above.
 
 ----
 
