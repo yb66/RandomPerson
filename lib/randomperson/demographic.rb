@@ -1,13 +1,12 @@
 # encoding: UTF-8
 
 require_relative "./loader.rb"
+require_relative "./ext/set.rb"
 
 module RandomPerson
 
   class Demographic
     include Loader
-    
-    require 'set'
     
     # the name of this demographic
     attr_accessor :name
@@ -35,29 +34,47 @@ module RandomPerson
 
       Demographic.available_classes.merge Demographic.load_names
     end
-    
 
-    
-    # tribe, gender, position
-    def method_missing( name, *args )
-      return super( name, *args ) unless name.to_s =~ /^add/  
+
+    # @param [String] name
+    # @return [Array<String>]
+    def get_words( name )
       words = name.to_s.split( "_" )
       words.shift #get rid of the "add"
-      
-      #get the negations prepended with "not", then lop it off"
-      nots = words.select{ |w| w =~ /^not/ }.map {|s| s[3..-1] }
+      words
+    end
+
+
+    # Get the negations prepended with "not", then lop it off"
+    # @param [Array<String>] words
+    # @return [Array<String>]
+    def get_nots( words )
+      words.select{ |w| w =~ /^not/ }.map {|s| s[3..-1] }
+    end
+
+
+    # Get the positives.
+    # @param [Array<String>] words
+    # @return [Array<String>]
+    def get_yesses( words )
       #get just the positives
-      words.reject! {|w| w =~ /^not/ }
-      
       #check the beginning of each word has an uc letter
-      words.select! {|w| w =~ /^\p{Upper}/ }
+      words.reject{|w| 
+        w =~ /^not/ 
+      }.select{|w| 
+        w =~ /^\p{Upper}/
+      }
+    end
       
-      #get a set of nots
-      nots = nots.map{|word| Demographic.available_classes.classify_true(word)}.fold(:&)
-      #get a set of wanteds
-      yesses = words.map{|word| Demographic.available_classes.classify_true(word)}.fold(:&)
+    # tribe, gender, position
+    def method_missing( name, *args )
+      return super( name, *args ) unless name.to_s =~ /^add/
       
-      yesses = yesses - nots unless nots.nil? #remove nots from wanteds
+      words = get_words( name )
+      
+      nots = get_nots( words ).map{|word| Demographic.available_classes.classify_true(word)}.fold(:&)
+      
+      yesses = get_yesses( words ).map{|word| Demographic.available_classes.classify_true(word)}.fold(:&)
       
       Demographic.prefix_em( 
         yesses.map do |(file_name)| 
