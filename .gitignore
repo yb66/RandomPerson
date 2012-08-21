@@ -19,3 +19,5 @@ coverage/
 Gemfile.lock
 vendor/
 bin/
+docs/
+.yardoc/
