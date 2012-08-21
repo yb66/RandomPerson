@@ -28,16 +28,7 @@ It also has unicode characters, so it'll give your database a real test. At leas
 
 ## Installation:
 
-You'll need at least Ruby v1.9.1
-
-Get the public key from http://github.com/yb66/RandomPerson/blob/master/gem-public_cert.pem and do:
-
-		gem cert --add /path/to/wherever/you/downloaded/this/to/public_cert.pem
-  
-then install it:
-
-		gem install randomperson -P HighSecurity
-  
+		gem install randomperson
 
 ## USAGE:
 
