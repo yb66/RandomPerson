@@ -9,3 +9,11 @@ RSpec::Core::RakeTask.new do |t|
   t.pattern = "./spec/**/*_spec.rb" # don't need this, it's default.
   # Put spec opts in a file named .rspec in root
 end
+
+
+require 'yard'
+
+YARD::Rake::YardocTask.new do |t|
+  t.files   = ['lib/**/*.rb']   # optional  
+  t.options = ['-odocs/', '--no-private'] # optional
+end
