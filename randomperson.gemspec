@@ -1,24 +1,24 @@
 # -*- encoding: utf-8 -*-
-lib = File.expand_path('../lib/', __FILE__)
-$:.unshift lib unless $:.include?(lib)
-require 'randomperson/version'
+require File.expand_path( '../lib/randomperson/version', __FILE__ )
 
 Gem::Specification.new do |s|
-  s.name           = "randomperson"
-  s.summary        = "A gem for generating random persons :)"
+  s.authors         = ["Iain Barnett"]
+  s.email           = ["iainspeed@gmail.com"]
   s.description = <<-EOF
     RandomPerson is a port to Ruby of Perl's Data::RandomPerson. Use it to generate random persons given various parameters, such as country, age and gender ratio.
   EOF
-  s.version        = RandomPerson::VERSION 
-  s.platform       = Gem::Platform::RUBY
-  s.require_path   = 'lib'
+  s.summary         = "A gem for generating random persons :)"
+  s.homepage        = "http://github.com/yb66/RandomPerson"
+
+  s.files 	        = `git ls-files`.split($\) 
+  s.executables     = s.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  s.test_files      = s.files.grep(%r{^(test|spec|features)/})
+  s.name            = "randomperson"
+  s.require_paths   = ['lib']
+  s.version         = RandomPerson::VERSION
+  s.add_development_dependency( "wirble" )
+  s.add_development_dependency( "rspec" )
+  s.add_development_dependency( "rake" )
+  s.add_development_dependency( "simplecov" )
   s.required_ruby_version    = ">= 1.9.1"
-  s.author         = "Iain Barnett"
-  s.files 	   = `git ls-files`.split("\n") 
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.homepage       = "http://github.com/yb66/RandomPerson"
-  s.email          = "iainspeed @nospam@ gmail.com"
-  s.signing_key    = ENV['HOME'] + '/.ssh/gem-private_key.pem'
-  s.cert_chain     = [ENV['HOME'] + '/.ssh/gem-public_cert.pem']
 end
