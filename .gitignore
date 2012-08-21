@@ -16,3 +16,6 @@ pkg
 rdoc
 *.swp
 coverage/
+Gemfile.lock
+vendor/
+bin/
