@@ -7,6 +7,7 @@ module RandomPerson
 
     class FinnishPrefix < Name
 
+      # @private            
       Names =  %w(herra Dr rouva neiti)
             
       def initialize

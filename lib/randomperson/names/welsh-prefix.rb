@@ -6,7 +6,8 @@ module RandomPerson
   module Names
 
     class WelshPrefix < Name
-            
+
+      # @private            
       Names = %w(Mr Dr Mrs Ms Miss)
 
       def initialize

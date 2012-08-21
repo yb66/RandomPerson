@@ -9,10 +9,5 @@ class Array
     end
     return nil
   end
-
-  # This will randomly select one of the values from the array
-  def rand
-    self[Kernel.rand(length)]
-  end
   
 end

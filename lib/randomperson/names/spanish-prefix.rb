@@ -7,6 +7,7 @@ module RandomPerson
 
     class SpanishPrefix < Name
             
+      # @private            
       Names          = ["Sr.", "Dr.", "Dra.", "Sra.", "Srta."] 
 
       # the way this class is set up is different than usual

@@ -7,6 +7,7 @@ module RandomPerson
 
     class BritishSuffix < Name
 
+      # @private            
       Names = %w( OBE MBE GBE KBE DBE CBE JP GM PhD BSc BA )
       
       def initialize

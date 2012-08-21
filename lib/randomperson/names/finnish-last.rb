@@ -10,12 +10,13 @@ module RandomPerson
       def initialize
         @names = Names
         @formats = [
-          ->(n)   { n.rand }
+          ->(n)   { n.sample }
          ]
         @formats_ratiod = [ (0..99) ]
         super
       end  
       
+      # @private            
       Names = %w( Heikkinen Hämäläinen Järvinen Korhonen Koskinen Laine Mäkelä Mäkinen Nieminen Virtanen )
       
     end 

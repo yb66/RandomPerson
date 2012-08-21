@@ -10,13 +10,14 @@ module RandomPerson
       def initialize
         @names = Names
         @formats = [
-          ->(n){ n.rand + ' ' + n.rand },
+          ->(n){ n.sample + ' ' + n.sample },
          ]
         @formats_ratiod = [ 0..99 ]
         super
       end
       
-        Names = %w{ Agirre Aguirre Alberdi Allende Alsogaray Alurralde Amézaga Arana Aráoz Araya Archuleta Arismendi Armendáriz Arriaga Arrieta Ayala Ayala Azcárraga Azcárate Azua Barrios Bengoechea Bolívar Buenechea Caínzos Camus Cano Caro Carranza Carrera Duhalde Echenique Echevarria Echeverría Elissalde Elizalde Elizondo Esparza Esquivel Etcheverry Etxeberria Eyzaguirre Garay García Garmendia Goicoechea Gorostiaga Goya Goyeneche Ibarra Landa Larraín Loyola Mendieta Mendoza Montoya Mujica Murua Ochoa Oñate Orozco Palacio Salazar Saldívar Solano Ugalde Ugarte Urbina Uribe Urquiza Urrutia Ursúa Velasco Vergara Vizcaino Vizcarra Xavier Ybarra Zabala Zaldívar Zavaleta Zúñiga Zurita }
+      # @private            
+      Names = %w{ Agirre Aguirre Alberdi Allende Alsogaray Alurralde Amézaga Arana Aráoz Araya Archuleta Arismendi Armendáriz Arriaga Arrieta Ayala Ayala Azcárraga Azcárate Azua Barrios Bengoechea Bolívar Buenechea Caínzos Camus Cano Caro Carranza Carrera Duhalde Echenique Echevarria Echeverría Elissalde Elizalde Elizondo Esparza Esquivel Etcheverry Etxeberria Eyzaguirre Garay García Garmendia Goicoechea Gorostiaga Goya Goyeneche Ibarra Landa Larraín Loyola Mendieta Mendoza Montoya Mujica Murua Ochoa Oñate Orozco Palacio Salazar Saldívar Solano Ugalde Ugarte Urbina Uribe Urquiza Urrutia Ursúa Velasco Vergara Vizcaino Vizcarra Xavier Ybarra Zabala Zaldívar Zavaleta Zúñiga Zurita }
     end
   end
 end
