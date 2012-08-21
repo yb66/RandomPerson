@@ -1,4 +1,4 @@
-require 'rspec'
+require "spec_helper"
 require_relative "../lib/randomperson/generator.rb"
 
 

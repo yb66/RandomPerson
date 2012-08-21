@@ -1,18 +1,29 @@
 # encoding: UTF-8
 
 require "rspec"
-require 'simplecov'
-#require_relative "./support/helpers.rb"
+Spec_dir = File.expand_path( File.dirname __FILE__ )
 
-SimpleCov.start
+unless Kernel.respond_to?(:require_relative)
+  module Kernel
+    def require_relative(path)
+      require File.join(File.dirname(caller[0]), path.to_str)
+    end
+  end
+end
+
+require 'simplecov'
+SimpleCov.start do
+  add_filter "/vendor/"
+  add_filter "/bin/"
+  add_filter "/spec/"
+end
 
 RSpec.configure do |c|
 #  c.include RandomPerson::Spec::Helpers
-#  c.treat_symbols_as_metadata_keys_with_true_values = true
+ c.treat_symbols_as_metadata_keys_with_true_values = true
 end
 
-spec_dir = File.expand_path( File.dirname __FILE__ )
-Dir[ File.join( spec_dir, "/support/**/*.rb")].each {|f| require f}
+Dir[ File.join( Spec_dir, "/support/**/*.rb")].each {|f| require f}
 
 require "logger"
 lg = Logger.new STDOUT

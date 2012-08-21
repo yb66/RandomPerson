@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-require_relative "./rspec_helper.rb"
+require "spec_helper"
 require_relative "./support/shared_examples/names.rb"
 require_relative "../lib/randomperson/Names/AmericanSuffix.rb"
 require_relative "../lib/randomperson/person.rb"

@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-require 'rspec'
+require "spec_helper"
 require_relative "../lib/randomperson/name.rb"
 
 module RandomPerson
