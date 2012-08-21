@@ -17,7 +17,7 @@ module RandomPerson
         opts = { patterns: ['*.rb'], lib_dir: File.dirname(__FILE__) }.merge( opts )
         
         fulls = opts[:patterns].map do |pattern|
-          full_pattern = File.join( opts[:lib_dir], 'Names', pattern )
+          full_pattern = File.join( opts[:lib_dir], 'names', pattern )
         end
          Dir.glob( fulls )
       end
