@@ -46,7 +46,7 @@ module RandomPerson
       fixtures["ThaiRomanisedMaleFirst"] = default_fix.merge({ rgx: hypenated_many_rgx} )
       fixtures["ThaiRomanisedFemaleFirst"] = default_fix.merge({ rgx: hypenated_many_rgx} )
       fixtures["AncientGreekLast"] = default_fix.merge(
-        { rgx: /^\bof\b\s(?:\b\p{Alpha}+?\b(?:\s|-)){0,2}\b\p{Alpha}+?\b$/x } )
+        { rgx: /^\bof\b\s(?:\b\p{Alpha}+?\b(?:\s|-)){0,3}\b\p{Alpha}+?\b$/x } )
       
 #PREFIXES
       fix_fixtures = {}
