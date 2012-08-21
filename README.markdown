@@ -1,16 +1,16 @@
 # RandomPerson
 
+A port to Ruby of Perl's Data::RandomPerson.
+
+http://search.cpan.org/~peterhi/Data-RandomPerson-0.4/
+
+## Build status ##
+
 Master branch:  
 [![Build Status for master branch](https://secure.travis-ci.org/yb66/RandomPerson.png?branch=master)](http://travis-ci.org/yb66/RandomPerson)
 
 Development branch:  
 [![Build Status for development branch](https://secure.travis-ci.org/yb66/RandomPerson.png?branch=develop)](http://travis-ci.org/yb66/RandomPerson)
-
-A port to Ruby of Perl's Data::RandomPerson.
-
-http://search.cpan.org/~peterhi/Data-RandomPerson-0.4/
-
-Make sure you're reading the right version of the docs to go with your library! (If you're reading this on Github look for the "Switch Tags" or "Current Branch" -> "Tags" buttons to get the right version.)
 
 ## QUICK NOTE!
 
