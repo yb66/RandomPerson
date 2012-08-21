@@ -1,12 +1,10 @@
 # RandomPerson
 
+Master branch:  
 [![Build Status for master branch](https://secure.travis-ci.org/yb66/RandomPerson.png?branch=master)](http://travis-ci.org/yb66/RandomPerson)
 
-
+Development branch:  
 [![Build Status for development branch](https://secure.travis-ci.org/yb66/RandomPerson.png?branch=develop)](http://travis-ci.org/yb66/RandomPerson)
-
-
-Master branch: https://secure.travis-ci.org/yb66/RandomPerson.png?branch=master
 
 A port to Ruby of Perl's Data::RandomPerson.
 
