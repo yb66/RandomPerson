@@ -1,3 +1,6 @@
+require 'date'
+
+
 module RandomPerson
   class Date < ::Date
 
