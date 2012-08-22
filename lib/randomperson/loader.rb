@@ -24,12 +24,8 @@ module RandomPerson
 
 
       # Changes the file name into a string useable as a constant class name
-      def translate( file_name )
-        File.basename( file_name, ".rb" ).split("-").map(&:capitalize).join
-      end
-      
-      def prefix_it( klass, prefix="RandomPerson::Names::" )
-        "#{prefix}#{klass}"
+      def translate( file_name, prefix="RandomPerson::Names::" )
+        "#{prefix}#{File.basename( file_name, ".rb" ).split("-").map(&:capitalize).join}"
       end
         
     

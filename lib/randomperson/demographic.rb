@@ -87,7 +87,7 @@ module RandomPerson
     def require_and_add( yesses ) 
       yesses.map {|file_name|
         require file_name
-        Constant.new Demographic.prefix_it( Demographic.translate file_name )
+        Constant.new( Demographic.translate file_name )
       }.each do |klass|
         addklass klass
       end

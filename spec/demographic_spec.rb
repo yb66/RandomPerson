@@ -28,7 +28,7 @@ module RandomPerson
     describe "Translating" do
       %w{ancient-greek-female-first german-female-first spanish-male-first welsh-prefix}.each do |name|
         file_name = File.expand_path( File.join( File.dirname(__FILE__),"../lib/randomperson/names", "#{name}.rb") )
-        expected = name.split("-").map(&:capitalize).join
+        expected = "RandomPerson::Names::#{name.split("-").map(&:capitalize).join}"
         it "should require and return the class name" do
           Demographic.translate( file_name ).should == expected
         end
