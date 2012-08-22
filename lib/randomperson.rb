@@ -5,9 +5,6 @@ module RandomPerson
 
   #require all the scaffolding
   
-  require 'set'
-  require 'date'
-  
   require_relative './randomperson/version.rb'
   require_relative './randomperson/ext/array.rb'
   require_relative './randomperson/ext/date.rb'
@@ -63,6 +60,7 @@ module RandomPerson
 
     # The last person generated.
     # If a demographic name is given that is different to the last then a new person is generated. If no name is given then the last is used.
+    # @param [String] demo_name The key of the demographic to use, e.g "American Ladies".
     def person( demo_name=nil )
       person, last_demo_name = 
         if demo_name.nil? 

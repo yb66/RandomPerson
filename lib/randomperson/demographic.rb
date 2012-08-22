@@ -3,7 +3,24 @@
 require_relative "./loader.rb"
 require_relative "./ext/set.rb"
 
+
+
 module RandomPerson
+  class Constant < String
+      
+    def to_constant
+      names = split('::')
+      names.shift if names.empty? || names.first.empty?
+  
+      constant = Object
+      names.each do |name|
+        constant = constant.const_defined?(name) ? constant.const_get(name) : constant.const_missing(name)
+      end
+      constant
+    end
+
+  end
+
 
   class Demographic
     include Loader
@@ -13,8 +30,8 @@ module RandomPerson
 
     attr_accessor :malefirst, :femalefirst, :last, :gender_ratio, :age_lower, :age_upper, :prefix, :suffix #,:age_ratio
     
-    def self.available_classes
-      @available_classes ||= Set.new
+    def self.available_name_files
+      @available_name_files ||= Set.new
     end
     
 
@@ -32,7 +49,7 @@ module RandomPerson
       @age_upper = opts[:age_upper] || 115
       
 
-      Demographic.available_classes.merge Demographic.load_names
+      Demographic.available_name_files.merge Demographic.load_names
     end
 
 
@@ -65,6 +82,16 @@ module RandomPerson
         w =~ /^\p{Upper}/
       }
     end
+
+
+    def require_and_add( yesses ) 
+      yesses.map {|file_name|
+        require file_name
+        Constant.new Demographic.prefix_it( Demographic.translate file_name )
+      }.each do |klass|
+        addklass klass
+      end
+    end
       
     # tribe, gender, position
     def method_missing( name, *args )
@@ -72,17 +99,16 @@ module RandomPerson
       
       words = get_words( name )
       
-      nots = get_nots( words ).map{|word| Demographic.available_classes.classify_true(word)}.fold(:&)
+      nots = get_nots( words ).map{|word|
+        Demographic.available_name_files.classify_true(word)
+      }.fold(:&)
       
-      yesses = get_yesses( words ).map{|word| Demographic.available_classes.classify_true(word)}.fold(:&)
+      yesses = get_yesses( words ).map{|word| 
+          Demographic.available_name_files.classify_true(word)
+      }.fold(:&)
       
-      Demographic.prefix_em( 
-        yesses.map do |(file_name)| 
-          Demographic.requiring( file_name ) 
-        end ).each do |klass|
-          addklass klass
-      end
-      
+      require_and_add yesses
+
       self # just because
     end
     
