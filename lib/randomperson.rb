@@ -5,6 +5,9 @@ module RandomPerson
 
   #require all the scaffolding
   
+  require 'set'
+  require 'date'
+  
   require_relative './randomperson/version.rb'
   require_relative './randomperson/ext/array.rb'
   require_relative './randomperson/ext/date.rb'
@@ -32,7 +35,10 @@ module RandomPerson
     end
 
 
-    # little factory
+    # A little factory
+    # @param [String,Symbol,Integer] name The key for retrieving the demographic.
+    # @param [Hash] opts Option hash to pass to Demographic.new
+    # @see Demographic#initialize
     def demographic( name=nil, opts={} )
       if name.kind_of? Hash
         opts = name
@@ -60,42 +66,40 @@ module RandomPerson
 
     # The last person generated.
     # If a demographic name is given that is different to the last then a new person is generated. If no name is given then the last is used.
-    # @param [String] demo_name The key of the demographic to use, e.g "American Ladies".
-    def person( demo_name=nil )
+    # @param [String,Symbol,Integer] name The key for retrieving the demographic.
+    # @param [#call] block Error handler for when a key is given that does not exist.
+    # @return [RandomPerson::Person]
+    def person( demo_name=nil, &block )
+      warn "Entering person"
       person, last_demo_name = 
         if demo_name.nil? 
-
+          warn 'if demo_name.nil?'
           if @person.nil?
-
+            warn 'if @person.nil?'
             # either generate a new one
-            gen_new( demo_name ) # gen a new person and get back demo name
-          else 
-
+            gen_new( demo_name, &block ) # gen a new person and get back demo name
+          else
+            warn 'else @person.nil?'
             #  get last one
             [@person, @last_demo_name]
           end
         else # demo name given
-
+          warn 'else demo_name.nil?'
           if demographics.has_key? demo_name
-
+            warn 'if demographics.has_key? demo_name'
             if demo_name == @last_demo_name
-
+              warn 'if demo_name == @last_demo_name'
               [@person, @last_demo_name]
             else
-
-              gen_new( demo_name )
+              warn 'else demo_name == @last_demo_name'
+              gen_new( demo_name, &block )
             end
-          else 
-
-            if demographics.nil? || demographics.empty?
-
-              raise "No demographics have been selected yet! Try something like r.demographic.add_Spanish..." 
-            else # that demo name doesn't exist...
-
-              [nil, @last_demo_name] # so preserve the last good demo name
-            end
+          else
+            warn 'else demographics.has_key? demo_name'
+            gen_new( demo_name, &block )
           end
         end
+        warn "person.nil? #{person.nil?}"
         return nil if person.nil?
         @person, @last_demo_name = [person, last_demo_name]
 
@@ -103,37 +107,66 @@ module RandomPerson
     end
 
     
-    # generate a new person
-    # either with the last demographic loaded, or a specific one by passing the name.
+
     def generate( demo_name=nil )
+      warn "Entering generate"
       ds = gen_new( demo_name )
       ds.nil? ? nil : ds.first
     end
 
 
-    # If not given a demographic's name then the *last demographic defined* will be used.
-    def gen_new( demo_name=nil )
-      if demographics.nil? || demographics.empty?
-        raise "No demographics have been selected yet! Try something like r.demographic.add_Spanish..." 
-      end
+    # for when a demo isn't given but you still need one
+    def generate_demo
+      warn "Entering generate_demo"
+      Demographic.load
+      yesses = %w{prefix suffix female male last}.map {|word| 
+        Demographic.available_name_files.classify_true(word).to_a.sample
+      }
+      demo = self.demographic
+      demo.require_and_add yesses
+      [demo.name, demo]
+    end
+
+    DEFAULT_gen_new_BLOCK = ->(error) {
+      warn error.message
+    }
+
+    # If not given a demographic's name then the *last demographic defined* will be used. If there is no demographic already defined a new one will be created. If a key is given but does not exist then the supplied block will be called. If no block is given an exception will be raised.
+    # @param [String,Symbol,Integer] name The key for retrieving the demographic.
+    # @param [#call] block Default for when a key is given that does not exist.
+    def gen_new( demo_name=nil, &block )
+      warn "Entering gen_new"
+      block = DEFAULT_gen_new_BLOCK if block.nil?
       demo_name, demo = if demo_name.nil?
-        demographics.to_a.last # this produces a 2 dimensional array
-      else
-        demographics.assoc(demo_name)
-      end
-      
-      if demo_name
-        @last_demo_name = demo_name
-        unless generators.has_key? demo.name
-          generators[demo.name] = Generator.make_generator( demo )
+        warn 'if demo_name.nil?'
+        if demographics.nil? || demographics.empty?
+          warn 'if demographics.nil? || demographics.empty?'
+          generate_demo
+        else
+          warn 'else demographics.nil? || demographics.empty?'
+          demographics.to_a.last # this produces a 2 dimensional array
         end
-  
-        @person = generators[@last_demo_name].call 
-          
-        [@person, @last_demo_name]
       else
-        nil
+        warn 'else demo_name.nil?'
+        if ds = demographics.assoc(demo_name)
+          warn 'ds = demographics.assoc(demo_name)'
+          ds
+        else
+          warn "should fail now"
+          fail "That demographic does not exist!" 
+        end
       end
+
+      @last_demo_name = demo_name
+      unless generators.has_key? demo_name
+        generators[demo_name] = Generator.make_generator( demo )
+      end
+
+      @person = generators[demo_name].call 
+        
+      [@person, demo_name]
+    rescue => error
+      block.call(error)
     end
 
   end # class

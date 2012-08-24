@@ -30,6 +30,10 @@ module RandomPerson
 
     attr_accessor :malefirst, :femalefirst, :last, :gender_ratio, :age_lower, :age_upper, :prefix, :suffix #,:age_ratio
     
+    alias :lastname :last
+    alias :male_first :malefirst
+    alias :female_first :femalefirst
+    
     def self.available_name_files
       @available_name_files ||= Set.new
     end
@@ -49,7 +53,12 @@ module RandomPerson
       @age_upper = opts[:age_upper] || 115
       
 
-      Demographic.available_name_files.merge Demographic.load_names
+      self.class.load
+    end
+
+    # puts the demo files into the class instance var
+    def self.load
+      self.available_name_files.merge self.load_names if self.available_name_files.empty?
     end
 
 

@@ -63,9 +63,6 @@ shared_examples "clear or reset" do
   specify { r.should be_a_kind_of RandomPerson::Facade }
   specify { r.generators.should be_empty }
   specify { r.demographics.should be_empty }
-  specify { expect { r.person }.to raise_error }
-  specify { expect { r.generate }.to raise_error }
-  specify { expect { r.gen_new }.to raise_error }
 end
 
 
@@ -148,21 +145,32 @@ describe RandomPerson do
         end
       end
     end
+
     context "With no demographic" do
       context "Already loaded" do
+        before { r.demographics.clear }
         subject { r.person }
-        specify { expect { subject }.to raise_error }
-        context "and given a demo name" do
+        it { should be_a_kind_of RandomPerson::Person }
+        context "and given a demo name (that does not exist)" do
           subject { r.person "Not loaded" }
-          specify { expect { subject }.to raise_error }
+          it { should be_nil }
         end
       end
       context "Because they've been cleared" do
+        before { r.demographics.clear }
         subject { r.person }
-        specify { expect { subject }.to raise_error }
-        context "and given a demo name" do
+        it { should be_a_kind_of RandomPerson::Person }
+        context "and given a demo name (that does not exist)" do
           subject { r.person "Been cleared" }
-          specify { expect { subject }.to raise_error }
+          it { should be_nil }
+          context "and given a block with a raise" do
+            subject { 
+              r.person "Does not exist" do
+                fail "This demo name does not exist!"
+              end
+            }
+            specify { expect { subject }.to raise_error }
+          end
         end
       end
     end
@@ -205,7 +213,8 @@ describe RandomPerson do
     let(:r) { RandomPerson() }
     context "Before a demographic has been loaded" do
       subject { r.generate }
-      specify { expect { subject }.to raise_error }
+      it { should_not be_nil }
+      it { should be_a_kind_of RandomPerson::Person }
     end
     context "When there is a demographic loaded" do
       before(:all) {
