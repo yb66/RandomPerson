@@ -1,3 +1,10 @@
+v1.2.0 Wednesday the 22nd of August 2012
+
+* Removed the evil evals.
+* Simplified some of the code.
+
+----
+
 v1.1.1 Tuesday the 21st of August 2012
 
 * Removed some monkey patches.
