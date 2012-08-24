@@ -24,7 +24,8 @@ module RandomPerson
 
           @possibles.each_pair{|k,v| break v if k === r }
         end #
-        
+
+        super
       end # initialize
       
     end # class
