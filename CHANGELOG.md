@@ -1,3 +1,11 @@
+v1.3.0 Tuesday the 11th of September 2012
+
+* Quicker to get data out if you're not bothered about the demographic make up.
+* Better error handling.
+* Much easier to find out which name classes have been loaded.
+
+----
+
 v1.2.0 Wednesday the 22nd of August 2012
 
 * Removed the evil evals.
