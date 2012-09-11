@@ -93,36 +93,26 @@ module RandomPerson
     # @param [#call] block Error handler for when a key is given that does not exist.
     # @return [RandomPerson::Person]
     def person( demo_name=nil, &block )
-      warn "Entering person"
       person, last_demo_name = 
         if demo_name.nil? 
-          warn 'if demo_name.nil?'
           if @person.nil?
-            warn 'if @person.nil?'
             # either generate a new one
             gen_new( demo_name, &block ) # gen a new person and get back demo name
           else
-            warn 'else @person.nil?'
             #  get last one
             [@person, @last_demo_name]
           end
         else # demo name given
-          warn 'else demo_name.nil?'
           if demographics.has_key? demo_name
-            warn 'if demographics.has_key? demo_name'
             if demo_name == @last_demo_name
-              warn 'if demo_name == @last_demo_name'
               [@person, @last_demo_name]
             else
-              warn 'else demo_name == @last_demo_name'
               gen_new( demo_name, &block )
             end
           else
-            warn 'else demographics.has_key? demo_name'
             gen_new( demo_name, &block )
           end
         end
-        warn "person.nil? #{person.nil?}"
         return nil if person.nil?
         @person, @last_demo_name = [person, last_demo_name]
 
@@ -140,7 +130,6 @@ module RandomPerson
 
     # for when a demo isn't given but you still need one
     def generate_demo
-      warn "Entering generate_demo"
       Demographic.load
       yesses = %w{prefix suffix female male last}.map {|word| 
         Demographic.available_name_files.classify_true(word).to_a.sample
@@ -158,24 +147,17 @@ module RandomPerson
     # @param [String,Symbol,Integer] name The key for retrieving the demographic.
     # @param [#call] block Default for when a key is given that does not exist.
     def gen_new( demo_name=nil, &block )
-      warn "Entering gen_new"
       block = DEFAULT_gen_new_BLOCK if block.nil?
       demo_name, demo = if demo_name.nil?
-        warn 'if demo_name.nil?'
         if demographics.nil? || demographics.empty?
-          warn 'if demographics.nil? || demographics.empty?'
           generate_demo
         else
-          warn 'else demographics.nil? || demographics.empty?'
           demographics.to_a.last # this produces a 2 dimensional array
         end
       else
-        warn 'else demo_name.nil?'
         if ds = demographics.assoc(demo_name)
-          warn 'ds = demographics.assoc(demo_name)'
           ds
         else
-          warn "should fail now"
           fail "That demographic does not exist!" 
         end
       end
