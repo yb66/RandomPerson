@@ -50,6 +50,9 @@ module RandomPerson
       @demos ||= DemoHash.new
     end
 
+    # @return [Hash]
+    def loaded_classes
+      demographics.loaded_classes
     end
 
     #class instance variable to keep track of generators
