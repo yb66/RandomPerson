@@ -130,10 +130,11 @@ module RandomPerson
     end
 
 
-    # for when a demo isn't given but you still need one
+    # For when a demo isn't given but you still need one.
+    # @return [String, RandomPerson::Demographic]
     def generate_demo
       Demographic.load
-      yesses = %w{prefix suffix female male last}.map {|word| 
+      yesses = %w{prefix suffix female -male last}.map {|word|
         Demographic.available_name_files.classify_true(word).to_a.sample
       }
       demo = self.demographic
