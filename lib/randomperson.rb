@@ -22,11 +22,34 @@ module RandomPerson
   require_relative './randomperson/person.rb'
   #require_relative './randomperson/ratio.rb'
 
+  class DemoHash < Hash
+    def loaded_classes
+      if @loaded_classes.nil?
+        @loaded_classes = Hash.new
+        self.each do |key,demographic|
+          @loaded_classes[key] = demographic.loaded_classes
+        end
+      end
+      @loaded_classes
+    end
+
+    alias :old_store :store
+    alias :"[]=" :store
+
+    def store( key, value )
+      @loaded_classes ||= Hash.new
+      @loaded_classes[key] = value
+      old_store key, value
+    end
+  end
 
   class Facade
 
+    # @return [Hash{String => RandomPerson::Demographic}]
     def demographics
-      @demos ||= {}
+      @demos ||= DemoHash.new
+    end
+
     end
 
     #class instance variable to keep track of generators
