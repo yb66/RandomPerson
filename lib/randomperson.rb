@@ -124,9 +124,8 @@ module RandomPerson
 
     
 
-    def generate( demo_name=nil )
-      warn "Entering generate"
-      ds = gen_new( demo_name )
+    def generate( demo_name=nil, &block )
+      ds = gen_new( demo_name, &block )
       ds.nil? ? nil : ds.first
     end
 
