@@ -44,6 +44,7 @@ module RandomPerson
         patterns.each do |ps|
           if ps.all?{|p| klass =~ /#{p}/ }
             instance_variable_set( "@#{ps.join.downcase}", klass.to_constant.new)
+            instance_variable_get( :@loaded_classes ).store ps.join.downcase.to_sym, klass.to_s.split("::").last.scan( /([A-Z][a-z]+)/ ).flatten.join("_")
           end # if
         end
         klass

@@ -17,7 +17,7 @@ module RandomPerson
         @possibles = Hash[ @formats_ratiod.zip @names ]
         
         @on_execute = for_prefixes( @names[3], @names.first )
-        
+        super
       end # initialize
       
 
