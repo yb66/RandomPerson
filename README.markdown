@@ -260,24 +260,21 @@ English males:
     r.demographic.add_English_Male
 
 
-If you need to check what's loaded, have a look in the instance variables of the demographic:
+If you need to check what's loaded, use `loaded_classes`
 
-		r.demographics["Mix n match"].malefirst.class.name  
-> => "RandomPerson::Names::SpanishMaleFirst"
+		r.demographics["French"].loaded_classes
 
-    r.demographics["Mix n match"].femalefirst.class.name  
-> => "RandomPerson::Names::SpanishFemaleFirst"
+> # => {:femalefirst=>"French_Female_First", :last=>"French_Last", :malefirst=>"French_Male_First"}
 
-    r.demographics["Mix n match"].last.class.name  
-> => "RandomPerson::Names::SpanishLast"
+Or, see all the demographics' loaded classes:
 
-    r.demographics["Mix n match"].prefix.class.name  
-> => "RandomPerson::Names::SpanishPrefix"
+    r.demographics.loaded_classes
     
-    r.demographics["Mix n match"].suffix.class.name  
-> => "NilClass"
-    
-  
+And (because I'm really lazy and like convenience), this does the same:
+
+    r.loaded_classes
+
+
 ## NEGATIONS
 
 Sometimes you'll want to load something but not another, you can do this by prepending _not_ to the things you don't want. For example, to get the Thai names that are in Thai script and not romanised:
@@ -427,6 +424,35 @@ Welsh\_Prefix
 
 I've taken bits and pieces from wherever I could get them, so if you see something is wrong then either let me know or produce a patch, just have a look at the help links on Github for how to do it. I'll also add you name to this readme, and worldly fame will be yours.
 
+## PASS A BLOCK TO HANDLE ERRORS ##
+
+If you try calling a demographic that doesn't exist yet, an error will be raised. There is a default handler for this, and it will output a warning, and the result returned will be nil. If you wish, you may supply a block to handle the error.
+
+e.g.
+
+    r.person # => this will produce a person, with a randomised demographic
+    r.demographic("French").add_French 
+    r.person # => this will produce a person too, with a French demographic
+    r.person "French" # => French again
+    
+    # This raises an error, caught by the default block
+    # which prints a warning to stdout
+    r.person "British" # => That demographic does not exist!
+    
+    r.person "British" do |error|
+      warn "There are no British people here, this is Scotland!"
+    end
+    # => "There are no British people here, this is Scotland!"
+    
+The default block can be set via:
+
+    RandomPerson::Facade.default_error_block= #... put your block here, e.g
+    RandomPerson::Facade.default_error_block= ->(error){ warn "-> #{error}" }
+
+Or if you're lazy like me and have an instance floating around:
+
+    r.class.default_error_block= ->(error){ warn "-> #{error}" }
+
 ## TODO:
 
 There's lots to do. Lot of repetition and ugly bits here and there, but it works so I'll get round to it when I can.
@@ -435,7 +461,7 @@ There's lots to do. Lot of repetition and ugly bits here and there, but it works
 
 Peter Hickman for writing the original library in Perl that inspired this on in Ruby.
 
-My good friends:
+My good friends:  
 Johan Bergsten for helping me out with the Swedish names.  
 HALLOJULIA (hayl yeah!) for helping me with the German names.  
 Aino Rissanen for helping me with the Finnish names.  
