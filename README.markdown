@@ -14,7 +14,7 @@ Development branch:
 
 ## QUICK NOTE!
 
-This was the first Ruby library I wrote. I'm adding specs and improving the code now I've half an idea of what I should be doing, but I'd really, *really* appreciate it that if you do see something is wrong or doesn't work for you or you've an idea for improvement **let me know**. Wow, Github makes this so easy, just go for it! I'll be happy to help and happy for the help.
+I'd really, *really* appreciate it that if you see something is wrong or doesn't work for you or you've an idea for improvement **let me know**. Wow, Github makes this so easy, just go for it! I'll be happy to help and happy for the help. Bonus points for a topic branch too!
 
 
 ## Why did I write this?
@@ -29,8 +29,21 @@ It also has unicode characters, so it'll give your database a real test. At leas
 ## Installation:
 
 		gem install randomperson
+		
+## Super quick start! ##
 
-## USAGE:
+For those with a short attention span:
+
+		require 'randomperson'
+
+		r = RandomPerson() # don't forget the brackets!
+		r.generate  # => each time this will generate a new person.
+		
+The demographics will be randomly selected.
+
+## USAGE: ##
+
+For those with more willpower:
 
 The original API (if you can call it that) was very clunky so I've endeavoured to improve it by adding a nice facade over the top. I'll start off using that but as the examples move along I might do some things "the old fashioned way" by using some of the classes underlying everything directly, just so you know what's going on under there. If you see several ways of doing the same thing don't freak out! You're probably best using the stuff just below here.
 
@@ -49,7 +62,7 @@ So, to generate 1000 random people with Spanish names, between the ages of 16 an
 
 Output:  
 
-  Bartolomé Andrés de Elixaeberna age: 20 born: 28-Apr-1990  
+>  Bartolomé Andrés de Elixaeberna age: 20 born: 28-Apr-1990  
   Fabiana Cordero Balmaceda age: 21 born: 14-Jun-1989  
   Jorge Alas Albarracin age: 29 born: 16-Apr-1981  
   Eufemia Berlanga de Sergi age: 33 born: 25-Jan-1977  
@@ -69,7 +82,7 @@ Here's an example using the Thai Romanised data:
 
 Output:  
  
-  Yongchaiyuth Sripituksakul Puntasrima age: 39 born: 29-Mar-1971  
+>  Yongchaiyuth Sripituksakul Puntasrima age: 39 born: 29-Mar-1971  
   Sri-Patana Wattanasin age: 77 born: 04-Feb-1933  
   Wattana Rojjanasukchai age: 7 born: 27-Jun-2003  
   Ban Sukbunsung age: 85 born: 07-Sep-1925  
@@ -219,7 +232,8 @@ etc etc
 or you can do things the old fashioned way (but why? anyway...)
 
 		require 'namefiles/spanish-female-first'   
-		#obviously you need to use the path from where you are or where the script will run from
+		# obviously you need to use the path from where you are 
+		# or where the script will run from
   
 		r.demographic["My fancy demo"].femalefirst = RandomPerson::Names::SpanishFemaleFirst.new
 
@@ -357,56 +371,56 @@ If you do make your own name file then fork this project and send me a pull requ
 
 These are current name files in the library:
 
-AmericanFemaleFirst  
-AmericanLast  
-AmericanMaleFirst  
-AmericanPrefix  
-AmericanSuffix  
-AncientGreekFemaleFirst  
-AncientGreekLast  
-AncientGreekMaleFirst  
-AnyLast  
-BasqueFemaleFirst  
-BasqueLast  
-BasqueMaleFirst  
-BritishPrefix  
-BritishSuffix  
-EnglishFemaleFirst  
-EnglishLast  
-EnglishMaleFirst  
-EnglishPrefix  
-FinnishFemaleFirst  
-FinnishLast  
-FinnishMaleFirst  
-FinnishPrefix  
-FrenchFemaleFirst  
-FrenchLast  
-FrenchMaleFirst  
-GermanFemaleFirst  
-GermanLast  
-GermanMaleFirst  
-ScottishFemaleFirst  
-ScottishLast  
-ScottishMaleFirst  
-ScottishPrefix  
-SpanishFemaleFirst  
-SpanishLast  
-SpanishMaleFirst  
-SpanishPrefix  
-SwedishFemaleFirst  
-SwedishLast  
-SwedishMaleFirst  
-ThaiFemaleFirst  
-ThaiFirst  
-ThaiLast  
-ThaiMaleFirst  
-ThaiRomanisedFemaleFirst  
-ThaiRomanisedLast  
-ThaiRomanisedMaleFirst  
-WelshFemaleFirst  
-WelshLast  
-WelshMaleFirst  
-WelshPrefix  
+American\_Female\_First  
+American\_Last  
+American\_Male\_First  
+American\_Prefix  
+American\_Suffix  
+Ancient\_Greek\_Female\_First  
+Ancient\_Greek\_Last  
+Ancient\_Greek\_Male\_First  
+Any\_Last  
+Basque\_Female\_First  
+Basque\_Last  
+Basque\_Male\_First  
+British\_Prefix  
+British\_Suffix  
+English\_Female\_First  
+English\_Last  
+English\_Male\_First  
+English\_Prefix  
+Finnish\_Female\_First  
+Finnish\_Last  
+Finnish\_Male\_First  
+Finnish\_Prefix  
+French\_Female\_First  
+French\_Last  
+French\_Male\_First  
+German\_Female\_First  
+German\_Last  
+German\_Male\_First  
+Scottish\_Female\_First  
+Scottish\_Last  
+Scottish\_Male\_First  
+Scottish\_Prefix  
+Spanish\_Female\_First  
+Spanish\_Last  
+Spanish\_Male\_First  
+Spanish\_Prefix  
+Swedish\_Female\_First  
+Swedish\_Last  
+Swedish\_Male\_First  
+Thai\_Female\_First  
+Thai\_First  
+Thai\_Last  
+Thai\_Male\_First  
+Thai\_Romanised\_Female\_First  
+Thai\_Romanised\_Last  
+Thai\_Romanised\_Male\_First  
+Welsh\_Female\_First  
+Welsh\_Last  
+Welsh\_Male\_First  
+Welsh\_Prefix  
 
 
 ## ACCURACY OF NAMES AND RATIOS
