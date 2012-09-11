@@ -146,11 +146,21 @@ module RandomPerson
       warn error.message
     }
 
+
+    def self.default_error_block
+      @default_gen_new_error_block ||= DEFAULT_gen_new_BLOCK
+    end
+
+    def self.default_error_block=( block )
+      @default_gen_new_error_block = block
+    end
+
+
     # If not given a demographic's name then the *last demographic defined* will be used. If there is no demographic already defined a new one will be created. If a key is given but does not exist then the supplied block will be called. If no block is given an exception will be raised.
     # @param [String,Symbol,Integer] name The key for retrieving the demographic.
     # @param [#call] block Default for when a key is given that does not exist.
     def gen_new( demo_name=nil, &block )
-      block = DEFAULT_gen_new_BLOCK if block.nil?
+      block = self.class.default_error_block if block.nil?
       demo_name, demo = if demo_name.nil?
         if demographics.nil? || demographics.empty?
           generate_demo
