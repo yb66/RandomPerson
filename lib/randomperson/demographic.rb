@@ -28,16 +28,24 @@ module RandomPerson
     # the name of this demographic
     attr_accessor :name
 
+
+    def loaded_classes
+      @loaded_classes ||= {}
+    end
+
+
     attr_accessor :malefirst, :femalefirst, :last, :gender_ratio, :age_lower, :age_upper, :prefix, :suffix #,:age_ratio
-    
+
+
     alias :lastname :last
     alias :male_first :malefirst
     alias :female_first :femalefirst
-    
+
+
     def self.available_name_files
       @available_name_files ||= Set.new
     end
-    
+
 
     # Initialize the class with the parameters for the population you want.
     # @example 
@@ -51,7 +59,7 @@ module RandomPerson
       @gender_ratio = opts[:gender_ratio] || [1,1] #default
       @age_lower = opts[:age_lower] || 0
       @age_upper = opts[:age_upper] || 115
-      
+      @loaded_classes ||= {}
 
       self.class.load
     end
