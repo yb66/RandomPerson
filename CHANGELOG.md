@@ -1,3 +1,9 @@
+v.1.3.1 Tuesday the 24th of January 2017
+
+* Moved the licence file to its own file for clarity. Thanks to Chad Perrin for asking for this, it was definitely needed.
+
+----
+
 v1.3.0 Tuesday the 11th of September 2012
 
 * Quicker to get data out if you're not bothered about the demographic make up.
