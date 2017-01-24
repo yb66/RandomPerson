@@ -1,6 +1,7 @@
 *.old
 .rvmrc
 *.tmproj
+.DS_Store
 
 *.gem
 
@@ -18,7 +19,9 @@ rdoc
 coverage/
 Gemfile.lock
 vendor/
+vendor.noindex/
 bin/
 docs/
 .yardoc/
 .rbx/
+.bundle/
