@@ -264,7 +264,7 @@ If you need to check what's loaded, use `loaded_classes`
 
 		r.demographics["French"].loaded_classes
 
-> # => {:femalefirst=>"French_Female_First", :last=>"French_Last", :malefirst=>"French_Male_First"}
+    # => {:femalefirst=>"French_Female_First", :last=>"French_Last", :malefirst=>"French_Male_First"}
 
 Or, see all the demographics' loaded classes:
 
