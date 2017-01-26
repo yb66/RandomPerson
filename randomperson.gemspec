@@ -4,6 +4,7 @@ require File.expand_path( '../lib/randomperson/version', __FILE__ )
 Gem::Specification.new do |s|
   s.authors         = ["Iain Barnett"]
   s.email           = ["iainspeed@gmail.com"]
+  s.license         = "MIT"
   s.description = <<-EOF
     RandomPerson is a port to Ruby of Perl's Data::RandomPerson. Use it to generate random persons given various parameters, such as country, age and gender ratio.
   EOF
