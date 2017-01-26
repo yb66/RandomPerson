@@ -22,7 +22,11 @@ module RandomPerson
   require_relative './randomperson/person.rb'
   #require_relative './randomperson/ratio.rb'
 
+
+  # A slightly modified Hash to keep track of loaded classes.
   class DemoHash < Hash
+
+    # @return [Hash]
     def loaded_classes
       if @loaded_classes.nil?
         @loaded_classes = Hash.new
@@ -33,16 +37,21 @@ module RandomPerson
       @loaded_classes
     end
 
-    alias :old_store :store
+
+    # @see Hash#store
     alias :"[]=" :store
 
+
+    # @see Hash#store
     def store( key, value )
       @loaded_classes ||= Hash.new
       @loaded_classes[key] = value
-      old_store key, value
+      old_store.bind(self).call key, value
     end
   end
 
+
+  # Wrapper for convenience.
   class Facade
 
     # @return [Hash{String => RandomPerson::Demographic}]
@@ -50,10 +59,12 @@ module RandomPerson
       @demos ||= DemoHash.new
     end
 
+
     # @return [Hash]
     def loaded_classes
       demographics.loaded_classes
     end
+
 
     #class instance variable to keep track of generators
     def generators
@@ -85,7 +96,8 @@ module RandomPerson
       @person = nil
       @last_demo_name = nil
     end
-    
+
+ 
     alias :reset :clear
     attr_accessor :last_demo_name
 
@@ -157,6 +169,7 @@ module RandomPerson
       @default_gen_new_error_block ||= DEFAULT_gen_new_BLOCK
     end
 
+
     # Set the default error block
     # @param [#call] block
     def self.default_error_block=( block )
@@ -200,6 +213,12 @@ module RandomPerson
 
 end
 
+# Convenience method.
+# @example
+#   require 'randomperson'
+#   r = RandomPerson() # don't forget the brackets!
+#   r.generate  # => each time this will generate a new person.
+# @return [RandomPerson::Facade]
 def RandomPerson
   RandomPerson::Facade.new
 end

@@ -1,5 +1,7 @@
 module RandomPerson
 
+  # Handles the generation of a new person.
+  # It's not as fun as the way humans handle this :)
   module Generator
     
     require_relative './person.rb'
@@ -86,9 +88,5 @@ module RandomPerson
       day   = rand( Date.days_in_month( year, month ) ) + 1 
       Time.local( year, month, day )
     end
-
-
-  
   end
-
 end

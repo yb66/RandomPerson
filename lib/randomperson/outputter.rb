@@ -3,20 +3,36 @@
 # uses the @on_execute block of the including class
 module Outputter
 
+  # ClassMethods
   # @api private
   module ClassMethods
     
   end # ClassMethods
 
-  
+
+  # Instance methods
   # @api private
   module InstanceMethods
 
+    # Block to execute when instance is ready.
+    # @example
+    #   # In the AmericanSuffix constructor
+    #   # Some help to make sure suffixes are age appropriate.
+    #   on_execute do |person|
+    #     r = rand(99)      
+    #     if person.age > 17
+    #       r += 1 #Jr can't happen and Snr can
+    #     end
+    #     #
+    #     @possibles.each_pair{|k,v| break v if k === r }
+    #   end
     # @api private
     def on_execute( &block )
       @on_execute = block
     end
 
+
+    # Command pattern
     # @api private
     def execute( person=nil )
       @on_execute.call( person )
@@ -59,6 +75,7 @@ module Outputter
   end
 
 
+  # Classic hooking in.
   # @api private
   def self.included(receiver)
     receiver.extend         ClassMethods

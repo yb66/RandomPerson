@@ -10,6 +10,7 @@ module RandomPerson
   module Loader
   
 
+    # Class methods
     # @api private
     module ClassMethods
       
@@ -35,6 +36,7 @@ module RandomPerson
     end # ClassMethods
 
 
+    # Instance methods
     # @api private
     module InstanceMethods
 
@@ -63,7 +65,7 @@ module RandomPerson
 
 
     # Classic hooking
-    # @param [Class]
+    # @param [Class] receiver
     # @api private
     def self.included(receiver)
       receiver.extend         ClassMethods
