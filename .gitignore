@@ -21,6 +21,7 @@ Gemfile.lock
 vendor/
 vendor.noindex/
 bin/
+doc/
 docs/
 .yardoc/
 .rbx/
