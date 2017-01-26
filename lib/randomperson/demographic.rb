@@ -1,9 +1,6 @@
 # encoding: UTF-8
 
 require_relative "./loader.rb"
-require_relative "./ext/set.rb"
-
-
 
 module RandomPerson
 
@@ -29,8 +26,18 @@ module RandomPerson
     alias :female_first :femalefirst
 
 
-    def self.available_name_files
-      @available_name_files ||= Set.new
+    class << self
+      def available_name_files
+        @available_name_files ||= Set.new
+      end
+
+      # @todo handle failure
+      # @return [Set] The set for which the pattern matches.
+      def classify_true( pattern )
+        available_name_files.classify{|s|
+          true if s =~ %r{^.*/[^/]*#{pattern}[^/]*$}i
+        }[true]
+      end
     end
 
 
@@ -105,12 +112,12 @@ module RandomPerson
       words = get_words( name )
       
       nots = get_nots( words ).map{|word|
-        Demographic.available_name_files.classify_true(word)
-      }.fold(:&)
+        self.class.classify_true word
+      }.inject(:&)
       
       yesses = get_yesses( words ).map{|word| 
-          Demographic.available_name_files.classify_true(word)
-      }.fold(:&)
+        self.class.classify_true word
+      }.inject(:&)
       
       require_and_add yesses
 

@@ -9,12 +9,6 @@ module RandomPerson
   require 'date'
   
   require_relative './randomperson/version.rb'
-  require_relative './randomperson/ext/array.rb'
-  require_relative './randomperson/ext/date.rb'
-  require_relative './randomperson/ext/enumerable.rb'
-  require_relative './randomperson/ext/hash.rb'
-  require_relative './randomperson/ext/kernel.rb'
-  require_relative './randomperson/ext/set.rb'
   
   require_relative './randomperson/demographic.rb'
   require_relative './randomperson/generator.rb'
@@ -150,7 +144,7 @@ module RandomPerson
     def generate_demo
       Demographic.load
       yesses = %w{prefix suffix female -male last}.map {|word|
-        Demographic.available_name_files.classify_true(word).to_a.sample
+        Demographic.classify_true(word).to_a.sample
       }
       demo = self.demographic
       demo.require_and_add yesses

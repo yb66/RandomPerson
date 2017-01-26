@@ -85,8 +85,16 @@ module RandomPerson
     def self.pick_dob( age=16 )
       year  = Time.now.year - age
       month = rand(12) + 1;
-      day   = rand( Date.days_in_month( year, month ) ) + 1 
+      day   = rand( days_in_month( year, month ) ) + 1
       Time.local( year, month, day )
+    end
+
+    # Convenience function
+    # @param [Integer] year
+    # @param [Integer] month
+    # @return [Integer]
+    def self.days_in_month( year, month )
+      ::Date.civil(year, month, -1).day
     end
   end
 end

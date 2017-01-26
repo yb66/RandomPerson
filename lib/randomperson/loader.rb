@@ -1,8 +1,5 @@
 # encoding: UTF-8
 
-require_relative "./ext/kernel.rb"
-
-
 module RandomPerson
   
   # This module is here to do the loading of data into a demographic class
