@@ -27,9 +27,13 @@ module RandomPerson
 
 
     class << self
+
+      # The available name files!
+      # @return [Set]
       def available_name_files
         @available_name_files ||= Set.new
       end
+
 
       # @todo handle failure
       # @return [Set] The set for which the pattern matches.
@@ -95,6 +99,7 @@ module RandomPerson
     end
 
 
+    # Requires the name files and adds them to the loaded file hash.
     # @api private
     def require_and_add( yesses ) 
       yesses.each {|file_name|

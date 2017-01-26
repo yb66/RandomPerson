@@ -1,11 +1,11 @@
 # encoding: UTF-8
 
-require_relative "./ext/array.rb"
 require_relative "./outputter.rb"
 
 
 module RandomPerson
 
+  # The base class for a name-data class.
   class Name
     include Outputter
     
