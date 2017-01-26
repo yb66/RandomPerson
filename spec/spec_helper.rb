@@ -16,6 +16,12 @@ SimpleCov.start do
   add_filter "/vendor/"
   add_filter "/bin/"
   add_filter "/spec/"
+  add_filter "/vendor.noindex/"
+end
+
+if ENV["DEBUG"]
+  require 'pry-byebug'
+  binding.pry
 end
 
 
