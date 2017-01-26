@@ -86,6 +86,7 @@ module RandomPerson
     end
 
 
+    # @api private
     def require_and_add( yesses ) 
       yesses.each {|file_name|
         require file_name
@@ -93,7 +94,8 @@ module RandomPerson
         addklass klass
       }
     end
-      
+
+
     # tribe, gender, position
     def method_missing( name, *args )
       return super( name, *args ) unless name.to_s =~ /^add/

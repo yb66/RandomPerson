@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-
+# A library for generating random names
 module RandomPerson
 
   #require all the scaffolding
@@ -92,7 +92,7 @@ module RandomPerson
 
     # The last person generated.
     # If a demographic name is given that is different to the last then a new person is generated. If no name is given then the last is used.
-    # @param [String,Symbol,Integer] name The key for retrieving the demographic.
+    # @param [String,Symbol,Integer] demo_name The key for retrieving the demographic.
     # @param [#call] block Error handler for when a key is given that does not exist.
     # @return [RandomPerson::Person]
     def person( demo_name=nil, &block )
@@ -123,7 +123,10 @@ module RandomPerson
     end
 
     
-
+    # Generate a new demographic
+    # @param [#to_s] demo_name A name for the demographic.
+    # @param [#call] block
+    # @return [RandomPerson::Demographic]
     def generate( demo_name=nil, &block )
       ds = gen_new( demo_name, &block )
       ds.nil? ? nil : ds.first
@@ -142,22 +145,27 @@ module RandomPerson
       [demo.name, demo]
     end
 
+
+    # The default default error block :)
     DEFAULT_gen_new_BLOCK = ->(error) {
       warn error.message
     }
 
 
+    # This holds the default error block
     def self.default_error_block
       @default_gen_new_error_block ||= DEFAULT_gen_new_BLOCK
     end
 
+    # Set the default error block
+    # @param [#call] block
     def self.default_error_block=( block )
       @default_gen_new_error_block = block
     end
 
 
     # If not given a demographic's name then the *last demographic defined* will be used. If there is no demographic already defined a new one will be created. If a key is given but does not exist then the supplied block will be called. If no block is given an exception will be raised.
-    # @param [String,Symbol,Integer] name The key for retrieving the demographic.
+    # @param [String,Symbol,Integer] demo_name The key for retrieving the demographic.
     # @param [#call] block Default for when a key is given that does not exist.
     def gen_new( demo_name=nil, &block )
       block = self.class.default_error_block if block.nil?
