@@ -10,9 +10,11 @@ module RandomPerson
   module Loader
   
 
+    # @api private
     module ClassMethods
       
-      
+      # Loads the names, unsurprisingly.
+      # @api private
       def load_names( opts={} )
         opts = { patterns: ['*.rb'], lib_dir: File.dirname(__FILE__) }.merge( opts )
         
@@ -31,8 +33,9 @@ module RandomPerson
     
       
     end # ClassMethods
-  
-  
+
+
+    # @api private
     module InstanceMethods
 
       # The patterns are there to stop other files being added by accident.
@@ -57,7 +60,11 @@ module RandomPerson
       end # addklass
 
     end # InstanceMethods
-  
+
+
+    # Classic hooking
+    # @param [Class]
+    # @api private
     def self.included(receiver)
       receiver.extend         ClassMethods
       receiver.send :include, InstanceMethods

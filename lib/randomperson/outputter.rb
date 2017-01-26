@@ -2,22 +2,31 @@
 
 # uses the @on_execute block of the including class
 module Outputter
+
+  # @api private
   module ClassMethods
     
   end # ClassMethods
+
   
+  # @api private
   module InstanceMethods
+
+    # @api private
     def on_execute( &block )
       @on_execute = block
     end
 
+    # @api private
     def execute( person=nil )
       @on_execute.call( person )
     end
     
     private 
-    
-#TODO rename this as other classes are using it too
+
+    # Handles the outputting of prefixes like Mr, Mrs etc.
+    #TODO rename this as other classes are using it too
+    # @api private
     def for_prefixes( for_females, for_males,  male_upper_bound=50, child_age_upper_bound=16, female_lower_bound=50)
       
       ->(person){
@@ -32,7 +41,10 @@ module Outputter
         name
       }
     end # prefixes
-    
+
+
+    # Handles the outputting for the rest of the name.
+    # @api private
     def for_standard
       ->(person=nil){
         f = if @formats.length > 1
@@ -45,7 +57,9 @@ module Outputter
       }
     end
   end
-  
+
+
+  # @api private
   def self.included(receiver)
     receiver.extend         ClassMethods
     receiver.send :include, InstanceMethods
