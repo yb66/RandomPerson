@@ -72,11 +72,12 @@ describe RandomPerson do
     let(:r) { RandomPerson() }
     context "Given a demographic" do
       context "With a name" do
-        context "and one demographic specified" do
+        demo_name = "Spain"
+        context "and one demographic specified, that of #{demo_name}," do
           before(:all) {
-            r.demographic("Spain").add_Spanish
+            r.demographic(demo_name).add_Spanish
           }
-          let(:first_run) { r.person "Spain" }
+          let(:first_run) { r.person demo_name }
           subject{ first_run }
           it_behaves_like "a Person"
           context "on next run" do

@@ -15,5 +15,5 @@ require 'yard'
 
 YARD::Rake::YardocTask.new do |t|
   t.files   = ['lib/**/*.rb']   # optional  
-  t.options = ['-odocs/', '--no-private'] # optional
+  t.options = ['-odoc/', '--no-private'] # optional
 end

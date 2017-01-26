@@ -1,5 +1,6 @@
 module RandomPerson #namespace
 
+  # Handles ratios for demographics e.g. 1 male for 1 female.
   module Ratio
   
     #create a ratio that is made up of ranges
@@ -12,7 +13,8 @@ module RandomPerson #namespace
       new_ratio.shift #get rid of 0..0
       return new_ratio
     end 
-    
+
+
     #find the order of magnitude of a number for use with this module
     def ordmag( n )
       m = 10
@@ -22,8 +24,11 @@ module RandomPerson #namespace
       end
       m
     end
-    
+
+
     #use this method if you don't have a ratio at all for an array and, hey presto! It'll make one for you
+    # @param [Integer] len Length
+    # @param [Integer] mag Magnitude
     def presto_rangio( len, mag )
       return [ ] unless len >= 1
       l, m = len, mag

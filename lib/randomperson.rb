@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-
+# A library for generating random names
 module RandomPerson
 
   #require all the scaffolding
@@ -9,12 +9,6 @@ module RandomPerson
   require 'date'
   
   require_relative './randomperson/version.rb'
-  require_relative './randomperson/ext/array.rb'
-  require_relative './randomperson/ext/date.rb'
-  require_relative './randomperson/ext/enumerable.rb'
-  require_relative './randomperson/ext/hash.rb'
-  require_relative './randomperson/ext/kernel.rb'
-  require_relative './randomperson/ext/set.rb'
   
   require_relative './randomperson/demographic.rb'
   require_relative './randomperson/generator.rb'
@@ -22,7 +16,11 @@ module RandomPerson
   require_relative './randomperson/person.rb'
   #require_relative './randomperson/ratio.rb'
 
+
+  # A slightly modified Hash to keep track of loaded classes.
   class DemoHash < Hash
+
+    # @return [Hash]
     def loaded_classes
       if @loaded_classes.nil?
         @loaded_classes = Hash.new
@@ -33,16 +31,21 @@ module RandomPerson
       @loaded_classes
     end
 
-    alias :old_store :store
+
+    # @see Hash#store
     alias :"[]=" :store
 
+
+    # @see Hash#store
     def store( key, value )
       @loaded_classes ||= Hash.new
       @loaded_classes[key] = value
-      old_store key, value
+      old_store.bind(self).call key, value
     end
   end
 
+
+  # Wrapper for convenience.
   class Facade
 
     # @return [Hash{String => RandomPerson::Demographic}]
@@ -50,10 +53,12 @@ module RandomPerson
       @demos ||= DemoHash.new
     end
 
+
     # @return [Hash]
     def loaded_classes
       demographics.loaded_classes
     end
+
 
     #class instance variable to keep track of generators
     def generators
@@ -85,14 +90,15 @@ module RandomPerson
       @person = nil
       @last_demo_name = nil
     end
-    
+
+ 
     alias :reset :clear
     attr_accessor :last_demo_name
 
 
     # The last person generated.
     # If a demographic name is given that is different to the last then a new person is generated. If no name is given then the last is used.
-    # @param [String,Symbol,Integer] name The key for retrieving the demographic.
+    # @param [String,Symbol,Integer] demo_name The key for retrieving the demographic.
     # @param [#call] block Error handler for when a key is given that does not exist.
     # @return [RandomPerson::Person]
     def person( demo_name=nil, &block )
@@ -123,7 +129,10 @@ module RandomPerson
     end
 
     
-
+    # Generate a new demographic
+    # @param [#to_s] demo_name A name for the demographic.
+    # @param [#call] block
+    # @return [RandomPerson::Demographic]
     def generate( demo_name=nil, &block )
       ds = gen_new( demo_name, &block )
       ds.nil? ? nil : ds.first
@@ -135,29 +144,35 @@ module RandomPerson
     def generate_demo
       Demographic.load
       yesses = %w{prefix suffix female -male last}.map {|word|
-        Demographic.available_name_files.classify_true(word).to_a.sample
+        Demographic.classify_true(word).to_a.sample
       }
       demo = self.demographic
       demo.require_and_add yesses
       [demo.name, demo]
     end
 
+
+    # The default default error block :)
     DEFAULT_gen_new_BLOCK = ->(error) {
       warn error.message
     }
 
 
+    # This holds the default error block
     def self.default_error_block
       @default_gen_new_error_block ||= DEFAULT_gen_new_BLOCK
     end
 
+
+    # Set the default error block
+    # @param [#call] block
     def self.default_error_block=( block )
       @default_gen_new_error_block = block
     end
 
 
     # If not given a demographic's name then the *last demographic defined* will be used. If there is no demographic already defined a new one will be created. If a key is given but does not exist then the supplied block will be called. If no block is given an exception will be raised.
-    # @param [String,Symbol,Integer] name The key for retrieving the demographic.
+    # @param [String,Symbol,Integer] demo_name The key for retrieving the demographic.
     # @param [#call] block Default for when a key is given that does not exist.
     def gen_new( demo_name=nil, &block )
       block = self.class.default_error_block if block.nil?
@@ -192,6 +207,12 @@ module RandomPerson
 
 end
 
+# Convenience method.
+# @example
+#   require 'randomperson'
+#   r = RandomPerson() # don't forget the brackets!
+#   r.generate  # => each time this will generate a new person.
+# @return [RandomPerson::Facade]
 def RandomPerson
   RandomPerson::Facade.new
 end

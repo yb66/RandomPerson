@@ -40,7 +40,7 @@ shared_examples "a Name class", :parent => "Name" do
     it { should respond_to( :formats_ratiod ) }
     it { should respond_to(:names)} 
     it { should respond_to(:possibles)}
-    specify { subject.qualified_const_get( "Names" ).should_not be_empty }
+    specify { subject.class.constants.should_not be_empty }
   end
 
 
