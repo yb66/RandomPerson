@@ -6,21 +6,6 @@ require_relative "./ext/set.rb"
 
 
 module RandomPerson
-  class Constant < String
-      
-    def to_constant
-      names = split('::')
-      names.shift if names.empty? || names.first.empty?
-  
-      constant = Object
-      names.each do |name|
-        constant = constant.const_defined?(name) ? constant.const_get(name) : constant.const_missing(name)
-      end
-      constant
-    end
-
-  end
-
 
   class Demographic
     include Loader
@@ -102,12 +87,11 @@ module RandomPerson
 
 
     def require_and_add( yesses ) 
-      yesses.map {|file_name|
+      yesses.each {|file_name|
         require file_name
-        Constant.new( Demographic.translate file_name )
-      }.each do |klass|
+        klass = Kernel.const_get( Demographic.translate file_name )
         addklass klass
-      end
+      }
     end
       
     # tribe, gender, position
@@ -127,6 +111,15 @@ module RandomPerson
       require_and_add yesses
 
       self # just because
+    end
+
+
+    # Be nice.
+    # @api private
+    def respond_to_missing?(name, include_private = false)
+      self.class.method_defined?(name) or
+      name.to_s =~ /^add/ or
+      super
     end
     
     
