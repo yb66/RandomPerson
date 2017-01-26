@@ -7,6 +7,7 @@ require_relative "./ext/set.rb"
 
 module RandomPerson
 
+  # Handles the demographics
   class Demographic
     include Loader
     
@@ -14,6 +15,7 @@ module RandomPerson
     attr_accessor :name
 
 
+    # A hash of all the loaded classes.
     def loaded_classes
       @loaded_classes ||= {}
     end
