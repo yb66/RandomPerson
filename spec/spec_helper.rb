@@ -1,6 +1,9 @@
 # encoding: UTF-8
 
 require "rspec"
+require "rspec/its"
+require "rspec-given"
+
 Spec_dir = File.expand_path( File.dirname __FILE__ )
 
 unless Kernel.respond_to?(:require_relative)
@@ -25,8 +28,8 @@ if ENV["DEBUG"]
 end
 
 
-RSpec.configure do |c|
- c.treat_symbols_as_metadata_keys_with_true_values = true
+RSpec.configure do |config|
+  config.expect_with(:rspec) { |c| c.syntax = [:should,:expect] }
 end
 
 Dir[ File.join( Spec_dir, "/support/**/*.rb")].each {|f| require f}

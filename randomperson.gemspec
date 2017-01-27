@@ -17,11 +17,5 @@ Gem::Specification.new do |s|
   s.name            = "randomperson"
   s.require_paths   = ['lib']
   s.version         = RandomPerson::VERSION
-  s.add_development_dependency( "wirble" )
-  s.add_development_dependency( "rspec" )
-  s.add_development_dependency( "rake" )
-  s.add_development_dependency( "simplecov" )
-  s.add_development_dependency( "yard" )
-  s.add_development_dependency( "kramdown" ) # for yard
-  s.required_ruby_version    = ">= 1.9.1"
+  s.required_ruby_version    = ">= 2.0.0"
 end

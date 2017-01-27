@@ -48,7 +48,7 @@ shared_examples "a Name class", :parent => "Name" do
     subject { instance.formats_ratiod }
     it { should be_a_kind_of Array }
     it { should all_be_a_kind_of Range }
-    specify { (0..99).all?{|i| subject.index_in_range( i ).kind_of? Fixnum }.should be_true } # this should make sure that format ratios are specified properly
+    specify { (0..99).all?{|i| subject.index_in_range( i ).kind_of? Fixnum }.should be true } # this should make sure that format ratios are specified properly
   end
 
   describe :names do
