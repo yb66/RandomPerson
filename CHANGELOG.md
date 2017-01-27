@@ -1,3 +1,13 @@
+v 1.4.0 Friday the 27th of January 2017
+
+* Moved officially to >= Ruby v2.0.0
+* Fixed the specs to work with RSpec 3.5 and thus Travis.
+* Added a lot more yard docs.
+* Removed the monkey patches.
+* Pruned a few internals here and there.
+
+----
+
 v.1.3.1 Tuesday the 24th of January 2017
 
 * Moved the licence file to its own file for clarity. Thanks to Chad Perrin for asking for this, it was definitely needed.
